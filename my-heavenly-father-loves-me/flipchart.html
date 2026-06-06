@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>if(localStorage.getItem('fc_auth')!=='ok'){window.location.href='/login.html';}</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="theme-color" content="#ffd34f">
+    <title>My Heavenly Father Loves Me - Primary Flipchart</title>
+    <style>
+        :root { --accent: #7bdff2; --bg1: #17324d; --bg2: #4c9fc4; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; font-family: Georgia, 'Times New Roman', serif; height: 100vh; width: 100vw; overflow: hidden; }
+        .aspect-wrapper { position: fixed; inset: 0; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #000; }
+        .screen { position: relative; width: min(100vw, 177.78vh); height: min(100vh, 56.25vw); background: linear-gradient(135deg, var(--bg1), var(--bg2)); overflow: hidden; }
+        .slideshow { width: 100%; height: 100%; position: relative; }
+        .slide { display: none; position: absolute; inset: 0; }
+        .slide.active { display: flex; flex-direction: column; }
+        .slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.72) saturate(1.12); }
+        .slide-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; padding: 42px 70px 104px; text-align: left; }
+        .slide-section { font-size: clamp(0.7rem, 1.4vw, 0.95rem); letter-spacing: 3px; text-transform: uppercase; color: color-mix(in srgb, var(--accent) 72%, white); margin-bottom: 22px; text-shadow: 0 2px 12px rgba(0,0,0,0.7); }
+        .slide-line { font-size: clamp(1.75rem, 4.7vw, 3.35rem); font-weight: 700; color: #fffdf7; line-height: 1.35; text-shadow: 0 3px 25px rgba(0,0,0,0.95), 0 1px 8px rgba(0,0,0,1); max-width: 1080px; }
+        .slide-line.keywords { font-size: clamp(2.25rem, 6.7vw, 5rem); color: var(--accent); letter-spacing: 0; }
+        .title-main { font-size: clamp(2.4rem, 6.2vw, 5rem); font-weight: bold; color: #fffdf7; text-shadow: 0 4px 30px rgba(0,0,0,0.95); margin-bottom: 16px; max-width: 1100px; }
+        .title-sub { font-size: clamp(0.95rem, 2.1vw, 1.35rem); color: rgba(255,255,255,0.76); letter-spacing: 1px; text-shadow: 0 2px 14px rgba(0,0,0,0.85); }
+        .nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100vw, 177.78vh); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: rgba(0,0,0,0.52); backdrop-filter: blur(8px); }
+        .nav-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; padding: 10px 32px; border-radius: 30px; font-size: 1.1rem; cursor: pointer; transition: all 0.2s; font-family: Georgia, serif; -webkit-tap-highlight-color: transparent; }
+        .nav-btn:active { background: rgba(255,255,255,0.35); transform: scale(0.97); }
+        .nav-btn:disabled { opacity: 0.25; cursor: default; }
+        .nav-counter { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
+        .mode-toggle { position: fixed; top: 14px; right: calc(50% - min(50vw, 88.89vh) + 14px); z-index: 100; display: flex; gap: 8px; }
+        .mode-btn { background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3); color: white; width: 36px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 20px; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent; }
+        .mode-btn.active { background: var(--accent); color: #15120a; border-color: var(--accent); font-weight: 600; }
+        .jump-nav { position: fixed; top: 14px; left: calc(50% - min(50vw, 88.89vh) + 14px); z-index: 100; display: flex; gap: 6px; }
+        .jump-btn { background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3); color: white; width: 34px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 20px; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent; white-space: nowrap; }
+        .jump-btn.home-btn { background: color-mix(in srgb, var(--accent) 25%, transparent); border-color: var(--accent); color: var(--accent); }
+        .jump-nav, .mode-toggle { opacity: 0.62; transition: opacity 0.2s ease; }
+        .jump-nav:hover, .jump-nav:focus-within, .mode-toggle:hover, .mode-toggle:focus-within { opacity: 0.95; }
+        .jump-btn, .mode-btn { touch-action: manipulation; }
+        @media (pointer: coarse) { .jump-nav, .mode-toggle { opacity: 0.7; } .jump-btn { width: 40px; height: 36px; font-size: 1rem; } .mode-btn { width: 42px; height: 36px; font-size: 1rem; } }
+        #slideshow.photo-mode .slide-line, #slideshow.photo-mode .slide-section, #slideshow.photo-mode .title-main, #slideshow.photo-mode .title-sub { opacity: 0 !important; transition: opacity 0.3s; }
+        #slideshow.photo-mode .slide-bg { filter: brightness(0.9) saturate(1.12) !important; }
+        .progress-bar { position: fixed; top: 0; left: 50%; transform: translateX(-50%); height: 4px; background: var(--accent); transition: width 0.3s ease; z-index: 200; max-width: min(100vw, 177.78vh); }
+        @media (max-width: 768px) { .slide-content { padding: 30px 30px 90px; } .slide-line { font-size: clamp(1.45rem, 6.2vw, 2.45rem); } .nav-btn { padding: 10px 24px; font-size: 1rem; } }
+    </style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="jump-nav" id="jumpNav"></div>
+<div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics to Guess to Keywords to Photo" aria-label="Cycle display mode">📝</button></div>
+<div class="aspect-wrapper"><div class="screen"><div class="slideshow" id="slideshow">
+    <div class="slide active" data-type="title">
+        <img class="slide-bg" src="images/title.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content">
+            <div class="title-main">My Heavenly Father Loves Me</div>
+            <div class="title-sub">Clara W. McMaster · Primary Flipchart</div>
+        </div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="Whenever I hear the song of a bird" data-key="BIRD · SONG">
+        <img class="slide-bg" src="images/slide-01.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section">Verse 1</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="Or look at the blue, blue sky," data-key="BLUE SKY">
+        <img class="slide-bg" src="images/slide-02.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="Whenever I feel the rain on my face" data-key="RAIN · FACE">
+        <img class="slide-bg" src="images/slide-03.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="Or the wind as it rushes by," data-key="WIND">
+        <img class="slide-bg" src="images/slide-04.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="Whenever I touch a velvet rose" data-key="VELVET ROSE">
+        <img class="slide-bg" src="images/slide-05.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="Or walk by our lilac tree," data-key="LILAC TREE">
+        <img class="slide-bg" src="images/slide-06.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="I’m glad that I live in this beautiful world" data-key="BEAUTIFUL WORLD">
+        <img class="slide-bg" src="images/slide-07.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 1" data-full="Heav’nly Father created for me." data-key="CREATED FOR ME">
+        <img class="slide-bg" src="images/slide-08.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="He gave me my eyes that I might see" data-key="EYES · SEE">
+        <img class="slide-bg" src="images/slide-09.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section">Verse 2</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="The color of butterfly wings." data-key="BUTTERFLY WINGS">
+        <img class="slide-bg" src="images/slide-10.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="He gave me my ears that I might hear" data-key="EARS · HEAR">
+        <img class="slide-bg" src="images/slide-11.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="The magical sound of things." data-key="MAGICAL SOUND">
+        <img class="slide-bg" src="images/slide-12.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="He gave me my life, my mind, my heart:" data-key="LIFE · MIND · HEART">
+        <img class="slide-bg" src="images/slide-13.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="I thank him rev’rently" data-key="THANK · REVERENTLY">
+        <img class="slide-bg" src="images/slide-14.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="For all his creations, of which I’m a part." data-key="CREATIONS · PART">
+        <img class="slide-bg" src="images/slide-15.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide" data-section="Verse 2" data-full="Yes, I know Heav’nly Father loves me." data-key="FATHER LOVES ME">
+        <img class="slide-bg" src="images/slide-16.jpg?v=20260606" alt="" aria-hidden="true">
+        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+    </div>
+</div></div></div>
+<div class="nav">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>Back</button>
+    <span class="nav-counter" id="counter">1 / 17</span>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next</button>
+</div>
+<script>
+    let current = 0;
+    let mode = 'full';
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+
+    function updateSlideContent() {
+        slides.forEach(slide => {
+            const el = slide.querySelector('.slide-line');
+            if (!el) return;
+            const full = slide.dataset.full;
+            const key = slide.dataset.key;
+            if (!full) return;
+            if (mode === 'full') {
+                el.classList.remove('keywords', 'guess-mode');
+                el.innerHTML = full;
+            } else if (mode === 'guess') {
+                el.classList.remove('keywords');
+                el.classList.add('guess-mode');
+                const keyWords = new Set((key || '').toUpperCase().split(/[\s·]+/).filter(w => w.replace(/[^A-Z]/g,'').length > 2));
+                const fullWords = full.split(' ');
+                el.innerHTML = fullWords.map(w => {
+                    const clean = w.replace(/[^a-zA-Z0-9']/g, '').toUpperCase();
+                    const isKey = keyWords.has(clean);
+                    if (isKey) {
+                        const width = Math.max(clean.length * 16, 40);
+                        return '<span style="display:inline-block;border-bottom:3px solid rgba(255,255,255,0.85);min-width:' + width + 'px;margin:0 3px;vertical-align:bottom;height:1.1em;"></span>';
+                    }
+                    return w;
+                }).join(' ');
+            } else if (mode === 'keywords') {
+                el.classList.add('keywords');
+                el.classList.remove('guess-mode');
+                el.textContent = key || full;
+            } else {
+                el.classList.remove('keywords', 'guess-mode');
+                el.innerHTML = full;
+            }
+        });
+    }
+    function changeSlide(dir) { slides[current].classList.remove('active'); current = Math.max(0, Math.min(total - 1, current + dir)); slides[current].classList.add('active'); updateNav(); }
+    function changeSlideAbsolute(idx) { slides[current].classList.remove('active'); current = idx; slides[current].classList.add('active'); updateNav(); }
+    function updateNav() { document.getElementById('counter').textContent = `${current + 1} / ${total}`; document.getElementById('prevBtn').disabled = current === 0; document.getElementById('nextBtn').disabled = current === total - 1; document.getElementById('progressBar').style.width = `${((current + 1) / total) * 100}%`; }
+    const modeOrder = ['full', 'guess', 'keywords', 'photo'];
+    const modeIcons = {'full': '📝', 'guess': '❓', 'keywords': '🔑', 'photo': '📷'};
+    function cycleMode() { const idx = modeOrder.indexOf(mode); mode = modeOrder[(idx + 1) % modeOrder.length]; const btn = document.getElementById('modeBtn'); if (btn) { btn.textContent = modeIcons[mode]; btn.title = `Mode: ${mode}`; btn.setAttribute('aria-label', `Mode: ${mode}`); btn.classList.toggle('active', true); } document.getElementById('slideshow').classList.toggle('photo-mode', mode === 'photo'); updateSlideContent(); }
+    function buildJumpNav() { const nav = document.getElementById('jumpNav'); const homeBtn = document.createElement('button'); homeBtn.className = 'jump-btn home-btn'; homeBtn.textContent = '↺'; homeBtn.title = 'Back to beginning'; homeBtn.setAttribute('aria-label', 'Back to beginning'); homeBtn.onclick = () => changeSlideAbsolute(0); nav.appendChild(homeBtn); const libBtn = document.createElement('button'); libBtn.className = 'jump-btn'; libBtn.textContent = '🎵'; libBtn.title = 'Song library'; libBtn.setAttribute('aria-label', 'Song library'); libBtn.onclick = () => window.location.href = '/index.html'; nav.appendChild(libBtn); }
+    buildJumpNav();
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+    document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); });
+    document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); } });
+    updateSlideContent(); updateNav();
+</script>
+</body>
+</html>
