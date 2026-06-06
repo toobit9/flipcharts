@@ -176,9 +176,9 @@
             background: rgba(0,0,0,0.55);
             border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            padding: 7px 12px;
+            width: 34px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s;
             -webkit-tap-highlight-color: transparent;
@@ -191,16 +191,16 @@
 
         @media (max-width: 768px) {
             .jump-nav { max-width: 60%; gap: 4px; }
-            .jump-btn { padding: 5px 9px; font-size: 0.7rem; }
+            .jump-btn { width: 32px; height: 30px; padding: 0; font-size: 0.9rem; }
         }
 
         .mode-btn {
             background: rgba(0,0,0,0.55);
             border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            padding: 7px 16px;
+            width: 36px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.2s;
             -webkit-tap-highlight-color: transparent;
@@ -210,6 +210,23 @@
 
         
         
+
+
+        /* iPad teaching controls */
+        .jump-nav,
+        .mode-toggle { opacity: 0.62; transition: opacity 0.2s ease; }
+        .jump-nav:hover,
+        .jump-nav:focus-within,
+        .mode-toggle:hover,
+        .mode-toggle:focus-within { opacity: 0.95; }
+        .jump-btn,
+        .mode-btn { touch-action: manipulation; }
+        @media (pointer: coarse) {
+            .jump-nav,
+            .mode-toggle { opacity: 0.7; }
+            .jump-btn { width: 40px; height: 36px; font-size: 1rem; }
+            .mode-btn { width: 42px; height: 36px; font-size: 1rem; }
+        }
 
         /* Photo mode */
         #slideshow.photo-mode .slide-line,
@@ -243,7 +260,7 @@
 
 <div class="jump-nav" id="jumpNav"></div>
 
-<div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics → Keywords → Photo">📝</button></div>
+<div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics to Guess to Keywords to Photo" aria-label="Cycle display mode">📝</button></div>
 
 <div class="aspect-wrapper"><div class="screen"><div class="slideshow" id="slideshow">
 
@@ -508,7 +525,7 @@
         const idx = modeOrder.indexOf(mode);
         mode = modeOrder[(idx + 1) % modeOrder.length];
         const btn = document.getElementById('modeBtn');
-        if (btn) { btn.textContent = modeIcons[mode]; btn.classList.toggle('active', true); }
+        if (btn) { btn.textContent = modeIcons[mode]; btn.title = `Mode: ${mode}`; btn.setAttribute('aria-label', `Mode: ${mode}`); btn.classList.toggle('active', true); }
         document.getElementById('slideshow').classList.toggle('photo-mode', mode === 'photo');
         updateSlideContent();
     }
@@ -518,11 +535,15 @@
         const homeBtn = document.createElement('button');
         homeBtn.className = 'jump-btn home-btn';
         homeBtn.textContent = '↺';
+        homeBtn.title = 'Back to beginning';
+        homeBtn.setAttribute('aria-label', 'Back to beginning');
         homeBtn.onclick = () => changeSlideAbsolute(0);
         nav.appendChild(homeBtn);
         const libBtn = document.createElement('button');
         libBtn.className = 'jump-btn';
         libBtn.textContent = '🎵';
+        libBtn.title = 'Song library';
+        libBtn.setAttribute('aria-label', 'Song library');
         libBtn.onclick = () => window.location.href = '/index.html';
         nav.appendChild(libBtn);
     }

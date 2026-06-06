@@ -33,13 +33,30 @@
         .nav-btn:disabled { opacity: 0.25; cursor: default; }
         .nav-counter { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
         .mode-toggle { position: fixed; top: 14px; right: calc(50% - min(50vw, 88.89vh) + 14px); z-index: 100; display: flex; gap: 8px; }
-        .mode-btn { background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 7px 16px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+        .mode-btn { background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3); color: white; width: 36px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 20px; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; }
         .mode-btn.active { background: #c9a0dc; color: #000; border-color: #c9a0dc; font-weight: 600; }
         .jump-nav { position: fixed; top: 14px; left: calc(50% - min(50vw, 88.89vh) + 14px); z-index: 100; display: flex; gap: 6px; }
-        .jump-btn { background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 7px 12px; border-radius: 20px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .jump-btn { background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.3); color: white; width: 34px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 20px; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
         .jump-btn.home-btn { background: rgba(201,160,220,0.3); border-color: #c9a0dc; color: #c9a0dc; }
         
         
+
+
+        /* iPad teaching controls */
+        .jump-nav,
+        .mode-toggle { opacity: 0.62; transition: opacity 0.2s ease; }
+        .jump-nav:hover,
+        .jump-nav:focus-within,
+        .mode-toggle:hover,
+        .mode-toggle:focus-within { opacity: 0.95; }
+        .jump-btn,
+        .mode-btn { touch-action: manipulation; }
+        @media (pointer: coarse) {
+            .jump-nav,
+            .mode-toggle { opacity: 0.7; }
+            .jump-btn { width: 40px; height: 36px; font-size: 1rem; }
+            .mode-btn { width: 42px; height: 36px; font-size: 1rem; }
+        }
 
         /* Photo mode */
         #slideshow.photo-mode .slide-line,
@@ -54,7 +71,7 @@
 <body>
 <div class="progress-bar" id="progressBar"></div>
 <div class="jump-nav" id="jumpNav"></div>
-<div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics → Keywords → Photo">📝</button></div>
+<div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics to Guess to Keywords to Photo" aria-label="Cycle display mode">📝</button></div>
 <div class="aspect-wrapper"><div class="screen"><div class="slideshow" id="slideshow">
     <div class="slide active" data-type="title">
         <div class="slide-bg" style="background-image: url('images/title.jpg')"></div>
@@ -188,12 +205,12 @@
         const idx = modeOrder.indexOf(mode);
         mode = modeOrder[(idx + 1) % modeOrder.length];
         const btn = document.getElementById('modeBtn');
-        if (btn) { btn.textContent = modeIcons[mode]; btn.classList.toggle('active', true); }
+        if (btn) { btn.textContent = modeIcons[mode]; btn.title = `Mode: ${mode}`; btn.setAttribute('aria-label', `Mode: ${mode}`); btn.classList.toggle('active', true); }
         document.getElementById('slideshow').classList.toggle('photo-mode', mode === 'photo');
         updateSlideContent();
     }
     
-    function buildJumpNav() { const nav = document.getElementById('jumpNav'); const btn = document.createElement('button'); btn.className='jump-btn home-btn'; btn.textContent='↺'; btn.onclick=()=>changeSlideAbsolute(0); nav.appendChild(btn); const libBtn = document.createElement('button'); libBtn.className='jump-btn'; libBtn.textContent='🎵'; libBtn.onclick=()=>window.location.href='/index.html'; nav.appendChild(libBtn); }
+    function buildJumpNav() { const nav = document.getElementById('jumpNav'); const btn = document.createElement('button'); btn.className='jump-btn home-btn'; btn.textContent='↺'; btn.title='Back to beginning'; btn.setAttribute('aria-label','Back to beginning'); btn.onclick=()=>changeSlideAbsolute(0); nav.appendChild(btn); const libBtn = document.createElement('button'); libBtn.className='jump-btn'; libBtn.textContent='🎵'; libBtn.title='Song library'; libBtn.setAttribute('aria-label','Song library'); libBtn.onclick=()=>window.location.href='/index.html'; nav.appendChild(libBtn); }
     buildJumpNav();
     let touchStartX = 0;
     document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
