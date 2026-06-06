@@ -187,7 +187,7 @@
         updateSlideContent();
     }
     
-    function buildJumpNav() { const nav = document.getElementById('jumpNav'); const btn = document.createElement('button'); btn.className='jump-btn home-btn'; btn.textContent='←'; btn.onclick=()=>changeSlideAbsolute(0); nav.appendChild(btn); const libBtn = document.createElement('button'); libBtn.className='jump-btn'; libBtn.textContent='🎵'; libBtn.onclick=()=>window.location.href='/flipcharts/'; nav.appendChild(libBtn); }
+    function buildJumpNav() { const nav = document.getElementById('jumpNav'); const btn = document.createElement('button'); btn.className='jump-btn home-btn'; btn.textContent='←'; btn.onclick=()=>changeSlideAbsolute(0); nav.appendChild(btn); const libBtn = document.createElement('button'); libBtn.className='jump-btn'; libBtn.textContent='🎵'; libBtn.onclick=()=>window.location.href='/index.html'; nav.appendChild(libBtn); }
     buildJumpNav();
     let touchStartX = 0;
     document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});

@@ -159,7 +159,7 @@
         updateSlideContent();
     }
     
-    function buildJumpNav(){const nav=document.getElementById('jumpNav');const b=document.createElement('button');b.className='jump-btn home-btn';b.textContent='←';b.onclick=()=>changeSlideAbsolute(0);nav.appendChild(b);const lb=document.createElement('button');lb.className='jump-btn';lb.textContent='🎵';lb.onclick=()=>window.location.href='/flipcharts/';nav.appendChild(lb);}
+    function buildJumpNav(){const nav=document.getElementById('jumpNav');const b=document.createElement('button');b.className='jump-btn home-btn';b.textContent='←';b.onclick=()=>changeSlideAbsolute(0);nav.appendChild(b);const lb=document.createElement('button');lb.className='jump-btn';lb.textContent='🎵';lb.onclick=()=>window.location.href='/index.html';nav.appendChild(lb);}
     buildJumpNav();
     let tx=0;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
     document.addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50)changeSlide(d>0?1:-1);});
