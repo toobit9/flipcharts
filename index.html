@@ -141,6 +141,42 @@
 
         .song-card:hover .arrow { color: rgba(255,255,255,0.6); }
 
+        .song-card.with-actions {
+            align-items: stretch;
+            gap: 16px;
+        }
+
+        .song-card.with-actions .song-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: inherit;
+            text-decoration: none;
+            min-width: 0;
+        }
+
+        .game-link {
+            align-self: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(255,217,61,0.45);
+            background: rgba(255,217,61,0.12);
+            color: #ffd93d;
+            border-radius: 999px;
+            padding: 9px 12px;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .game-link:hover {
+            background: rgba(255,217,61,0.22);
+            border-color: rgba(255,217,61,0.72);
+        }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -179,15 +215,18 @@
     <div class="section-title">✅ Ready</div>
     <div class="song-grid">
 
-        <a href="/david-and-goliath/flipchart.html" class="song-card" style="--card-color: #ffd93d;">
-            <div class="song-emoji">🪨</div>
-            <div class="song-info">
-                <div class="song-title">David &amp; Goliath</div>
-                <div class="song-artist">Shawna Edwards</div>
-                <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">18 slides</span></div>
-            </div>
-            <div class="arrow">›</div>
-        </a>
+        <div class="song-card with-actions" style="--card-color: #ffd93d;">
+            <a href="/david-and-goliath/flipchart.html" class="song-main">
+                <div class="song-emoji">🪨</div>
+                <div class="song-info">
+                    <div class="song-title">David &amp; Goliath</div>
+                    <div class="song-artist">Shawna Edwards</div>
+                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">18 slides</span></div>
+                </div>
+                <div class="arrow">›</div>
+            </a>
+            <a href="/david-and-goliath/flipchart.html?mode=gameshow" class="game-link">Game Show Mode</a>
+        </div>
 
         <a href="/faith-in-every-footstep/flipchart.html" class="song-card" style="--card-color: #4ecdc4;">
             <div class="song-emoji">🦶</div>

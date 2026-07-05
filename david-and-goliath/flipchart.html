@@ -65,11 +65,69 @@
         #slideshow.photo-mode .title-sub { opacity: 0 !important; transition: opacity 0.3s; }
         #slideshow.photo-mode .slide-bg { filter: brightness(0.85) !important; }
         .progress-bar { position: fixed; top: 0; left: 50%; transform: translateX(-50%); height: 4px; background: #ffd93d; transition: width 0.3s ease; z-index: 200; max-width: min(100vw, 177.78vh); }
+
+        .gameshow-intro {
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at top, rgba(255,217,61,0.24), transparent 34%), linear-gradient(135deg, #110600, #2d1000 58%, #090301);
+            overflow: hidden;
+        }
+
+        .gameshow-intro.active { display: flex; }
+
+        .gameshow-panel {
+            width: min(84vw, 900px);
+            text-align: center;
+            padding: 44px 32px 52px;
+            border: 2px solid rgba(255,217,61,0.48);
+            background: rgba(0,0,0,0.36);
+            box-shadow: 0 0 80px rgba(255,107,53,0.18), inset 0 0 48px rgba(255,217,61,0.08);
+        }
+
+        .gameshow-kicker {
+            color: #ffd93d;
+            font-family: Georgia, serif;
+            font-size: clamp(0.95rem, 2vw, 1.35rem);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .gameshow-logo {
+            color: #fff;
+            font-size: clamp(3.6rem, 10vw, 8rem);
+            line-height: 0.95;
+            text-transform: uppercase;
+            text-shadow: 0 4px 0 #8f2c09, 0 0 36px rgba(255,217,61,0.46);
+        }
+
+        .gameshow-song {
+            margin-top: 18px;
+            color: rgba(255,255,255,0.78);
+            font-family: Georgia, serif;
+            font-size: clamp(1rem, 2.6vw, 1.55rem);
+            letter-spacing: 1px;
+        }
+
+        body.gameshow-active .mode-toggle { display: none; }
+        body.gameshow-active .slide-bg { filter: brightness(0.9) saturate(1.08); }
+        body.gameshow-active .slide-line.guess-mode { color: #fffdf2; }
         @media (max-width: 768px) { .slide-content { padding: 30px 30px 90px; } .slide-line { font-size: clamp(1.5rem, 6.5vw, 2.5rem); } .nav-btn { padding: 10px 24px; font-size: 1rem; } }
     </style>
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
+<div class="gameshow-intro" id="gameshowIntro" aria-hidden="true">
+    <div class="gameshow-panel">
+        <div class="gameshow-kicker">Primary Flipcharts Presents</div>
+        <div class="gameshow-logo">Game Show</div>
+        <div class="gameshow-song">David &amp; Goliath</div>
+    </div>
+</div>
 <div class="jump-nav" id="jumpNav"></div>
 <div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics to Guess to Keywords to Photo" aria-label="Cycle display mode">📝</button></div>
 <div class="aspect-wrapper"><div class="screen"><div class="slideshow" id="slideshow">
@@ -158,6 +216,19 @@
     let current = 0, mode = 'full';
     const slides = document.querySelectorAll('.slide');
     const total = slides.length;
+    const gameShow = {
+        active: new URLSearchParams(window.location.search).get('mode') === 'gameshow',
+        intro: false,
+        complete: false,
+        showingClue: false,
+        cursor: -1,
+        order: []
+    };
+    const gameShowAudioFiles = {
+        start: 'audio/gameshow-start.mp3',
+        clue: 'audio/gameshow-clue.mp3',
+        complete: 'audio/gameshow-complete.mp3'
+    };
     
     function updateSlideContent() {
         slides.forEach(slide => {
@@ -198,9 +269,155 @@
             }
         });
     }
-    function changeSlide(dir) { slides[current].classList.remove('active'); current = Math.max(0, Math.min(total-1, current+dir)); slides[current].classList.add('active'); updateNav(); }
-    function changeSlideAbsolute(idx) { slides[current].classList.remove('active'); current = idx; slides[current].classList.add('active'); updateNav(); }
-    function updateNav() { document.getElementById('counter').textContent = (current+1)+' / '+total; document.getElementById('prevBtn').disabled = current===0; document.getElementById('nextBtn').disabled = current===total-1; document.getElementById('progressBar').style.width = ((current+1)/total*100)+'%'; }
+    function changeSlide(dir) {
+        if (gameShow.active) { advanceGameShow(); return; }
+        slides[current].classList.remove('active');
+        current = Math.max(0, Math.min(total-1, current+dir));
+        slides[current].classList.add('active');
+        updateNav();
+    }
+
+    function changeSlideAbsolute(idx) {
+        if (gameShow.active && idx === 0) { initGameShow(); return; }
+        slides[current].classList.remove('active');
+        current = idx;
+        slides[current].classList.add('active');
+        updateNav();
+    }
+
+    function shuffle(values) {
+        const arr = values.slice();
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    function setActiveSlide(idx) {
+        slides[current].classList.remove('active');
+        current = idx;
+        slides[current].classList.add('active');
+    }
+
+    function playGameShowCue(name) {
+        const src = gameShowAudioFiles[name];
+        if (!src) return;
+        const cue = new Audio(src);
+        cue.volume = 0.55;
+        cue.play().catch(() => {});
+    }
+
+    function setGameShowIntroText(kicker, logo, song) {
+        const intro = document.getElementById('gameshowIntro');
+        if (!intro) return;
+        intro.querySelector('.gameshow-kicker').textContent = kicker;
+        intro.querySelector('.gameshow-logo').textContent = logo;
+        intro.querySelector('.gameshow-song').textContent = song;
+    }
+
+    function initGameShow() {
+        gameShow.active = true;
+        gameShow.intro = true;
+        gameShow.complete = false;
+        gameShow.showingClue = false;
+        gameShow.cursor = -1;
+        gameShow.order = shuffle([...slides].map((_, idx) => idx).filter(idx => idx > 0 && slides[idx].dataset.full));
+        mode = 'photo';
+        setGameShowIntroText('Primary Flipcharts Presents', 'Game Show', 'David & Goliath');
+        document.body.classList.add('gameshow-active');
+        document.getElementById('slideshow').classList.add('photo-mode');
+        const intro = document.getElementById('gameshowIntro');
+        if (intro) { intro.classList.add('active'); intro.setAttribute('aria-hidden', 'false'); }
+        updateSlideContent();
+        updateNav();
+    }
+
+    function showGamePhoto() {
+        const intro = document.getElementById('gameshowIntro');
+        if (intro) { intro.classList.remove('active'); intro.setAttribute('aria-hidden', 'true'); }
+        gameShow.intro = false;
+        gameShow.complete = false;
+        gameShow.showingClue = false;
+        mode = 'photo';
+        document.getElementById('slideshow').classList.add('photo-mode');
+        setActiveSlide(gameShow.order[gameShow.cursor]);
+        updateSlideContent();
+        updateNav();
+    }
+
+    function revealGameClue() {
+        gameShow.showingClue = true;
+        playGameShowCue('clue');
+        mode = 'guess';
+        document.getElementById('slideshow').classList.remove('photo-mode');
+        updateSlideContent();
+        updateNav();
+    }
+
+    function finishGameShow() {
+        gameShow.complete = true;
+        gameShow.intro = true;
+        const intro = document.getElementById('gameshowIntro');
+        if (intro) {
+            intro.classList.add('active');
+            intro.setAttribute('aria-hidden', 'false');
+            intro.querySelector('.gameshow-kicker').textContent = 'Game Complete';
+            intro.querySelector('.gameshow-logo').textContent = 'Final Score';
+            intro.querySelector('.gameshow-song').textContent = 'Back to beginning to play again';
+            playGameShowCue('complete');
+        }
+        updateNav();
+    }
+
+    function advanceGameShow() {
+        if (gameShow.complete) { initGameShow(); return; }
+        if (gameShow.intro && gameShow.cursor === -1) {
+            gameShow.cursor = 0;
+            playGameShowCue('start');
+            showGamePhoto();
+            return;
+        }
+        if (!gameShow.showingClue) {
+            revealGameClue();
+            return;
+        }
+        gameShow.cursor += 1;
+        if (gameShow.cursor >= gameShow.order.length) {
+            finishGameShow();
+            return;
+        }
+        showGamePhoto();
+    }
+
+    function updateNav() {
+        const counter = document.getElementById('counter');
+        const prev = document.getElementById('prevBtn');
+        const next = document.getElementById('nextBtn');
+        if (gameShow.active) {
+            prev.disabled = true;
+            if (gameShow.complete) {
+                counter.textContent = gameShow.order.length + ' / ' + gameShow.order.length;
+                next.textContent = 'Play Again';
+            } else if (gameShow.intro) {
+                counter.textContent = 'Game Show';
+                next.textContent = 'Start Game';
+            } else if (gameShow.showingClue) {
+                counter.textContent = 'Clue ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length;
+                next.textContent = gameShow.cursor === gameShow.order.length - 1 ? 'Finish' : 'Next Photo';
+            } else {
+                counter.textContent = 'Photo ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length;
+                next.textContent = 'Reveal Clue';
+            }
+            document.getElementById('progressBar').style.width = gameShow.intro ? '0%' : (((gameShow.cursor + 1) / gameShow.order.length) * 100) + '%';
+            return;
+        }
+        counter.textContent = (current+1)+' / '+total;
+        prev.disabled = current===0;
+        next.disabled = current===total-1;
+        next.textContent = 'Next →';
+        document.getElementById('progressBar').style.width = ((current+1)/total*100)+'%';
+    }
 
     // ===== MODE CYCLING =====
     const modeOrder = ['full', 'guess', 'keywords', 'photo'];
@@ -220,7 +437,8 @@
     document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
     document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); });
     document.addEventListener('keydown', e => { if (e.key==='ArrowRight'||e.key===' ') { e.preventDefault(); changeSlide(1); } if (e.key==='ArrowLeft') { e.preventDefault(); changeSlide(-1); } });
-    updateSlideContent(); updateNav();
+    if (gameShow.active) initGameShow();
+    else { updateSlideContent(); updateNav(); }
 </script>
 </body>
 </html>
