@@ -226,11 +226,26 @@
             .slide-line { font-size: clamp(1.45rem, 6.2vw, 2.45rem); }
             .nav-btn { padding: 10px 24px; font-size: 1rem; }
         }
-    </style>
+
+        .nav-btn.hidden { visibility: hidden; pointer-events: none; }
+        .nav-btn.icon-btn { width: 44px; height: 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; line-height: 1; }
+        .nav-btn.stop-music { background: rgba(255,217,61,0.22); border-color: rgba(255,217,61,0.75); color: #ffd93d; }
+        .gameshow-intro { position: fixed; inset: 0; z-index: 90; display: none; align-items: center; justify-content: center; background: radial-gradient(circle at top, rgba(255,217,61,0.24), transparent 34%), linear-gradient(135deg, #110600, #2d1000 58%, #090301); overflow: hidden; }
+        .gameshow-intro.active { display: flex; }
+        .gameshow-panel { width: min(84vw, 900px); text-align: center; padding: 44px 32px 52px; border: 2px solid rgba(255,217,61,0.48); background: rgba(0,0,0,0.36); box-shadow: 0 0 80px rgba(255,107,53,0.18), inset 0 0 48px rgba(255,217,61,0.08); }
+        .gameshow-kicker { color: #ffd93d; font-family: Georgia, serif; font-size: clamp(0.95rem, 2vw, 1.35rem); letter-spacing: 6px; text-transform: uppercase; margin-bottom: 16px; }
+        .gameshow-logo { color: #fff; font-size: clamp(3.6rem, 10vw, 8rem); line-height: 0.95; text-transform: uppercase; text-shadow: 0 4px 0 #8f2c09, 0 0 36px rgba(255,217,61,0.46); }
+        .gameshow-song { margin-top: 18px; color: rgba(255,255,255,0.78); font-family: Georgia, serif; font-size: clamp(1rem, 2.6vw, 1.55rem); letter-spacing: 1px; }
+        .gameshow-theme-btn { margin-top: 26px; background: #ffd93d; border: 0; color: #180900; width: 54px; height: 54px; padding: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 26px rgba(0,0,0,0.26); -webkit-tap-highlight-color: transparent; }
+        .gameshow-theme-btn:active { transform: scale(0.97); }
+        body.gameshow-active .mode-toggle { display: none; }
+        body.gameshow-active .slide-bg { filter: brightness(0.9) saturate(1.08); }
+        body.gameshow-active .slide-line.guess-mode { color: #fffdf2; }
+</style>
 </head>
 <body>
 
-<div class="progress-bar" id="progressBar"></div>
+<div class="progress-bar" id="progressBar"></div><div class="gameshow-intro" id="gameshowIntro" aria-hidden="true"><div class="gameshow-panel"><div class="gameshow-kicker">Primary Flipcharts Presents</div><div class="gameshow-logo">FILL IT IN!</div><div class="gameshow-song">There Is Sunshine in My Soul Today</div><button class="gameshow-theme-btn" type="button" onclick="playGameShowCue('start')" title="Play theme song" aria-label="Play theme song">▶</button></div></div>
 
 <div class="jump-nav" id="jumpNav"></div>
 
@@ -410,118 +425,37 @@
 
 <div class="nav">
     <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>Back</button>
-    <span class="nav-counter" id="counter">1 / 33</span>
+    <span class="nav-counter" id="counter">1 / 33</span><button class="nav-btn icon-btn stop-music hidden" id="audioBtn" onclick="stopGameShowCue()" type="button" title="Stop music" aria-label="Stop music">■</button>
     <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next</button>
 </div>
 
 <script>
-    let current = 0;
-    let mode = 'full';
+    let current = 0, mode = 'full';
     const slides = document.querySelectorAll('.slide');
     const total = slides.length;
-
-    function updateSlideContent() {
-        slides.forEach(slide => {
-            const el = slide.querySelector('.slide-line');
-            if (!el) return;
-            const full = slide.dataset.full;
-            const key = slide.dataset.key;
-            if (!full) return;
-
-            if (mode === 'full') {
-                el.classList.remove('keywords', 'guess-mode');
-                el.innerHTML = full;
-            } else if (mode === 'guess') {
-                el.classList.remove('keywords');
-                el.classList.add('guess-mode');
-                const keyWords = new Set((key || '').toUpperCase().split(/[\s·]+/).filter(w => w.replace(/[^A-Z]/g,'').length > 2));
-                const fullWords = full.split(' ');
-                el.innerHTML = fullWords.map(w => {
-                    const clean = w.replace(/[^a-zA-Z0-9']/g, '').toUpperCase();
-                    const isKey = keyWords.has(clean);
-                    if (isKey) {
-                        const width = Math.max(clean.length * 16, 40);
-                        return '<span style="display:inline-block;border-bottom:3px solid rgba(255,255,255,0.85);min-width:' + width + 'px;margin:0 3px;vertical-align:bottom;height:1.1em;"></span>';
-                    }
-                    return w;
-                }).join(' ');
-            } else if (mode === 'keywords') {
-                el.classList.add('keywords');
-                el.classList.remove('guess-mode');
-                el.textContent = key || full;
-            } else {
-                el.classList.remove('keywords', 'guess-mode');
-                el.innerHTML = full;
-            }
-        });
-    }
-
-    function changeSlide(dir) {
-        slides[current].classList.remove('active');
-        current = Math.max(0, Math.min(total - 1, current + dir));
-        slides[current].classList.add('active');
-        updateNav();
-    }
-
-    function changeSlideAbsolute(idx) {
-        slides[current].classList.remove('active');
-        current = idx;
-        slides[current].classList.add('active');
-        updateNav();
-    }
-
-    function updateNav() {
-        document.getElementById('counter').textContent = `${current + 1} / ${total}`;
-        document.getElementById('prevBtn').disabled = current === 0;
-        document.getElementById('nextBtn').disabled = current === total - 1;
-        document.getElementById('progressBar').style.width = `${((current + 1) / total) * 100}%`;
-    }
-
-    const modeOrder = ['full', 'guess', 'keywords', 'photo'];
-    const modeIcons = {'full': '📝', 'guess': '❓', 'keywords': '🔑', 'photo': '📷'};
-    function cycleMode() {
-        const idx = modeOrder.indexOf(mode);
-        mode = modeOrder[(idx + 1) % modeOrder.length];
-        const btn = document.getElementById('modeBtn');
-        if (btn) { btn.textContent = modeIcons[mode]; btn.title = `Mode: ${mode}`; btn.setAttribute('aria-label', `Mode: ${mode}`); btn.classList.toggle('active', true); }
-        document.getElementById('slideshow').classList.toggle('photo-mode', mode === 'photo');
-        updateSlideContent();
-    }
-
-    function buildJumpNav() {
-        const nav = document.getElementById('jumpNav');
-        const homeBtn = document.createElement('button');
-        homeBtn.className = 'jump-btn home-btn';
-        homeBtn.textContent = '↺';
-        homeBtn.title = 'Back to beginning';
-        homeBtn.setAttribute('aria-label', 'Back to beginning');
-        homeBtn.onclick = () => changeSlideAbsolute(0);
-        nav.appendChild(homeBtn);
-        const libBtn = document.createElement('button');
-        libBtn.className = 'jump-btn';
-        libBtn.textContent = '🎵';
-        libBtn.title = 'Song library';
-        libBtn.setAttribute('aria-label', 'Song library');
-        libBtn.onclick = () => window.location.href = '/index.html';
-        nav.appendChild(libBtn);
-    }
-
-    buildJumpNav();
-
-    let touchStartX = 0;
-    document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
-    document.addEventListener('touchend', e => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
-    });
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
-    });
-
-    updateSlideContent();
-    updateNav();
+    const gameShow = { active: new URLSearchParams(window.location.search).get('mode') === 'gameshow', intro: false, complete: false, showingClue: false, showingAnswer: false, cursor: -1, order: [] };
+    const gameShowAudioFiles = { start: '/david-and-goliath/audio/fill-it-in-david-and-goliath.mp3', clue: '/david-and-goliath/audio/fill-it-in-thinking.mp3', answer: '/david-and-goliath/audio/fill-it-in-answer.mp3', complete: '/david-and-goliath/audio/fill-it-in-answer.mp3' };
+    let gameShowAudio = null;
+    function updateSlideContent() { slides.forEach(slide => { const el = slide.querySelector('.slide-line'); if (!el) return; const full = slide.dataset.full; const key = slide.dataset.key; if (!full) return; if (mode === 'full') { el.classList.remove('keywords', 'guess-mode'); el.innerHTML = full; } else if (mode === 'guess') { el.classList.remove('keywords'); el.classList.add('guess-mode'); const keyWords = new Set((key || '').toUpperCase().split(/[\s·]+/).filter(w => w.replace(/[^A-Z]/g,'').length > 2)); el.innerHTML = full.split(' ').map(w => { const clean = w.replace(/[^a-zA-Z0-9']/g, '').toUpperCase(); if (keyWords.has(clean)) { const width = Math.max(clean.length * 16, 40); return '<span style="display:inline-block;border-bottom:3px solid rgba(255,255,255,0.85);min-width:' + width + 'px;margin:0 3px;vertical-align:bottom;height:1.1em;"></span>'; } return w; }).join(' '); } else if (mode === 'keywords') { el.classList.add('keywords'); el.classList.remove('guess-mode'); el.textContent = key || full; } else { el.classList.remove('keywords', 'guess-mode'); el.innerHTML = full; } }); }
+    function changeSlide(dir) { if (gameShow.active) { advanceGameShow(); return; } slides[current].classList.remove('active'); current = Math.max(0, Math.min(total - 1, current + dir)); slides[current].classList.add('active'); updateNav(); }
+    function changeSlideAbsolute(idx) { if (gameShow.active && idx === 0) { initGameShow(); return; } slides[current].classList.remove('active'); current = idx; slides[current].classList.add('active'); updateNav(); }
+    function shuffle(values) { const arr = values.slice(); for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+    function setActiveSlide(idx) { slides[current].classList.remove('active'); current = idx; slides[current].classList.add('active'); }
+    function stopGameShowCue() { if (!gameShowAudio) return; gameShowAudio.pause(); gameShowAudio.currentTime = 0; gameShowAudio = null; }
+    function playGameShowCue(name, options = {}) { const src = gameShowAudioFiles[name]; if (!src) return; stopGameShowCue(); const cue = new Audio(src); cue.volume = options.volume ?? 0.55; cue.loop = Boolean(options.loop); gameShowAudio = cue; cue.play().catch(() => {}); }
+    function setGameShowIntroText(kicker, logo, song) { const intro = document.getElementById('gameshowIntro'); if (!intro) return; intro.querySelector('.gameshow-kicker').textContent = kicker; intro.querySelector('.gameshow-logo').textContent = logo; intro.querySelector('.gameshow-song').textContent = song; }
+    function getSongTitle() { return document.querySelector('.title-main')?.textContent?.trim() || document.title.replace(/[-—].*$/, '').trim() || 'Primary Song'; }
+    function initGameShow() { gameShow.active = true; gameShow.intro = true; gameShow.complete = false; gameShow.showingClue = false; gameShow.showingAnswer = false; gameShow.cursor = -1; gameShow.order = shuffle([...slides].map((_, idx) => idx).filter(idx => idx > 0 && slides[idx].dataset.full)); mode = 'photo'; stopGameShowCue(); setGameShowIntroText('Primary Flipcharts Presents', 'FILL IT IN!', getSongTitle()); document.body.classList.add('gameshow-active'); document.getElementById('slideshow').classList.add('photo-mode'); const intro = document.getElementById('gameshowIntro'); if (intro) { intro.classList.add('active'); intro.setAttribute('aria-hidden', 'false'); } updateSlideContent(); updateNav(); }
+    function showGamePhoto() { const intro = document.getElementById('gameshowIntro'); if (intro) { intro.classList.remove('active'); intro.setAttribute('aria-hidden', 'true'); } gameShow.intro = false; gameShow.complete = false; gameShow.showingClue = false; gameShow.showingAnswer = false; stopGameShowCue(); mode = 'photo'; document.getElementById('slideshow').classList.add('photo-mode'); setActiveSlide(gameShow.order[gameShow.cursor]); updateSlideContent(); updateNav(); }
+    function revealGameClue() { gameShow.showingClue = true; gameShow.showingAnswer = false; playGameShowCue('clue', { loop: true, volume: 0.16 }); mode = 'guess'; document.getElementById('slideshow').classList.remove('photo-mode'); updateSlideContent(); updateNav(); }
+    function revealGameAnswer() { gameShow.showingAnswer = true; playGameShowCue('answer', { volume: 0.65 }); mode = 'full'; document.getElementById('slideshow').classList.remove('photo-mode'); updateSlideContent(); updateNav(); }
+    function finishGameShow() { gameShow.complete = true; gameShow.intro = true; const intro = document.getElementById('gameshowIntro'); if (intro) { intro.classList.add('active'); intro.setAttribute('aria-hidden', 'false'); intro.querySelector('.gameshow-kicker').textContent = 'Game Complete'; intro.querySelector('.gameshow-logo').textContent = 'FILL IT IN!'; intro.querySelector('.gameshow-song').textContent = 'Back to beginning to play again'; playGameShowCue('complete'); } updateNav(); }
+    function advanceGameShow() { if (gameShow.complete) { initGameShow(); return; } if (gameShow.intro && gameShow.cursor === -1) { gameShow.cursor = 0; showGamePhoto(); return; } if (!gameShow.showingClue) { revealGameClue(); return; } if (!gameShow.showingAnswer) { revealGameAnswer(); return; } gameShow.cursor += 1; if (gameShow.cursor >= gameShow.order.length) { finishGameShow(); return; } showGamePhoto(); }
+    function updateNav() { const counter = document.getElementById('counter'); const prev = document.getElementById('prevBtn'); const next = document.getElementById('nextBtn'); const audio = document.getElementById('audioBtn'); if (audio) audio.classList.add('hidden'); if (gameShow.active) { prev.disabled = true; next.disabled = false; if (gameShow.complete) { counter.textContent = gameShow.order.length + ' / ' + gameShow.order.length; next.textContent = 'Play Again'; } else if (gameShow.intro) { counter.textContent = 'FILL IT IN!'; next.textContent = 'Start Game'; } else if (gameShow.showingAnswer) { counter.textContent = 'Answer ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length; next.textContent = gameShow.cursor === gameShow.order.length - 1 ? 'Finish' : 'Next Photo'; } else if (gameShow.showingClue) { counter.textContent = 'Clue ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length; next.textContent = 'Reveal Answer'; if (audio) audio.classList.remove('hidden'); } else { counter.textContent = 'Photo ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length; next.textContent = 'Reveal Clue'; } document.getElementById('progressBar').style.width = gameShow.intro ? '0%' : (((gameShow.cursor + 1) / gameShow.order.length) * 100) + '%'; return; } counter.textContent = (current + 1) + ' / ' + total; prev.disabled = current === 0; next.disabled = current === total - 1; next.textContent = next.textContent.includes('→') ? 'Next →' : 'Next'; document.getElementById('progressBar').style.width = ((current + 1) / total * 100) + '%'; }
+    const modeOrder = ['full', 'guess', 'keywords', 'photo']; const modeIcons = {'full': '📝', 'guess': '❓', 'keywords': '🔑', 'photo': '📷'};
+    function cycleMode() { const idx = modeOrder.indexOf(mode); mode = modeOrder[(idx + 1) % modeOrder.length]; const btn = document.getElementById('modeBtn'); if (btn) { btn.textContent = modeIcons[mode]; btn.title = 'Mode: ' + mode; btn.setAttribute('aria-label', 'Mode: ' + mode); btn.classList.toggle('active', true); } document.getElementById('slideshow').classList.toggle('photo-mode', mode === 'photo'); updateSlideContent(); }
+    function buildJumpNav() { const nav = document.getElementById('jumpNav'); const homeBtn = document.createElement('button'); homeBtn.className = 'jump-btn home-btn'; homeBtn.textContent = '↺'; homeBtn.title = 'Back to beginning'; homeBtn.setAttribute('aria-label', 'Back to beginning'); homeBtn.onclick = () => changeSlideAbsolute(0); nav.appendChild(homeBtn); const libBtn = document.createElement('button'); libBtn.className = 'jump-btn'; libBtn.textContent = '🎵'; libBtn.title = 'Song library'; libBtn.setAttribute('aria-label', 'Song library'); libBtn.onclick = () => window.location.href = '/index.html'; nav.appendChild(libBtn); }
+    buildJumpNav(); let touchStartX = 0; document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true}); document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); }); document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); } }); if (gameShow.active) initGameShow(); else { updateSlideContent(); updateNav(); }
 </script>
 </body>
 </html>
