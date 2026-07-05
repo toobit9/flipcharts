@@ -124,7 +124,7 @@
 <div class="gameshow-intro" id="gameshowIntro" aria-hidden="true">
     <div class="gameshow-panel">
         <div class="gameshow-kicker">Primary Flipcharts Presents</div>
-        <div class="gameshow-logo">Game Show</div>
+        <div class="gameshow-logo">FILL IT IN!</div>
         <div class="gameshow-song">David &amp; Goliath</div>
     </div>
 </div>
@@ -221,14 +221,17 @@
         intro: false,
         complete: false,
         showingClue: false,
+        showingAnswer: false,
         cursor: -1,
         order: []
     };
     const gameShowAudioFiles = {
-        start: 'audio/gameshow-start.mp3',
-        clue: 'audio/gameshow-clue.mp3',
-        complete: 'audio/gameshow-complete.mp3'
+        start: 'audio/fill-it-in-david-and-goliath.mp3',
+        clue: 'audio/fill-it-in-thinking.mp3',
+        answer: 'audio/fill-it-in-answer.mp3',
+        complete: 'audio/fill-it-in-complete.mp3'
     };
+    let gameShowAudio = null;
     
     function updateSlideContent() {
         slides.forEach(slide => {
@@ -300,11 +303,21 @@
         slides[current].classList.add('active');
     }
 
-    function playGameShowCue(name) {
+    function stopGameShowCue() {
+        if (!gameShowAudio) return;
+        gameShowAudio.pause();
+        gameShowAudio.currentTime = 0;
+        gameShowAudio = null;
+    }
+
+    function playGameShowCue(name, options = {}) {
         const src = gameShowAudioFiles[name];
         if (!src) return;
+        stopGameShowCue();
         const cue = new Audio(src);
-        cue.volume = 0.55;
+        cue.volume = options.volume ?? 0.55;
+        cue.loop = Boolean(options.loop);
+        gameShowAudio = cue;
         cue.play().catch(() => {});
     }
 
@@ -321,10 +334,12 @@
         gameShow.intro = true;
         gameShow.complete = false;
         gameShow.showingClue = false;
+        gameShow.showingAnswer = false;
         gameShow.cursor = -1;
         gameShow.order = shuffle([...slides].map((_, idx) => idx).filter(idx => idx > 0 && slides[idx].dataset.full));
         mode = 'photo';
-        setGameShowIntroText('Primary Flipcharts Presents', 'Game Show', 'David & Goliath');
+        stopGameShowCue();
+        setGameShowIntroText('Primary Flipcharts Presents', 'FILL IT IN!', 'David & Goliath');
         document.body.classList.add('gameshow-active');
         document.getElementById('slideshow').classList.add('photo-mode');
         const intro = document.getElementById('gameshowIntro');
@@ -339,6 +354,7 @@
         gameShow.intro = false;
         gameShow.complete = false;
         gameShow.showingClue = false;
+        gameShow.showingAnswer = false;
         mode = 'photo';
         document.getElementById('slideshow').classList.add('photo-mode');
         setActiveSlide(gameShow.order[gameShow.cursor]);
@@ -348,8 +364,18 @@
 
     function revealGameClue() {
         gameShow.showingClue = true;
-        playGameShowCue('clue');
+        gameShow.showingAnswer = false;
+        playGameShowCue('clue', { loop: true, volume: 0.42 });
         mode = 'guess';
+        document.getElementById('slideshow').classList.remove('photo-mode');
+        updateSlideContent();
+        updateNav();
+    }
+
+    function revealGameAnswer() {
+        gameShow.showingAnswer = true;
+        playGameShowCue('answer', { volume: 0.65 });
+        mode = 'full';
         document.getElementById('slideshow').classList.remove('photo-mode');
         updateSlideContent();
         updateNav();
@@ -363,7 +389,7 @@
             intro.classList.add('active');
             intro.setAttribute('aria-hidden', 'false');
             intro.querySelector('.gameshow-kicker').textContent = 'Game Complete';
-            intro.querySelector('.gameshow-logo').textContent = 'Final Score';
+            intro.querySelector('.gameshow-logo').textContent = 'FILL IT IN!';
             intro.querySelector('.gameshow-song').textContent = 'Back to beginning to play again';
             playGameShowCue('complete');
         }
@@ -382,11 +408,16 @@
             revealGameClue();
             return;
         }
+        if (!gameShow.showingAnswer) {
+            revealGameAnswer();
+            return;
+        }
         gameShow.cursor += 1;
         if (gameShow.cursor >= gameShow.order.length) {
             finishGameShow();
             return;
         }
+        stopGameShowCue();
         showGamePhoto();
     }
 
@@ -400,11 +431,14 @@
                 counter.textContent = gameShow.order.length + ' / ' + gameShow.order.length;
                 next.textContent = 'Play Again';
             } else if (gameShow.intro) {
-                counter.textContent = 'Game Show';
+                counter.textContent = 'FILL IT IN!';
                 next.textContent = 'Start Game';
+            } else if (gameShow.showingAnswer) {
+                counter.textContent = 'Answer ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length;
+                next.textContent = gameShow.cursor === gameShow.order.length - 1 ? 'Finish' : 'Next Photo';
             } else if (gameShow.showingClue) {
                 counter.textContent = 'Clue ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length;
-                next.textContent = gameShow.cursor === gameShow.order.length - 1 ? 'Finish' : 'Next Photo';
+                next.textContent = 'Reveal Answer';
             } else {
                 counter.textContent = 'Photo ' + (gameShow.cursor + 1) + ' / ' + gameShow.order.length;
                 next.textContent = 'Reveal Clue';
