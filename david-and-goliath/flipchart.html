@@ -98,10 +98,7 @@
             border: 2px solid rgba(255,217,61,0.48);
             background: rgba(0,0,0,0.36);
             box-shadow: 0 0 80px rgba(255,107,53,0.18), inset 0 0 48px rgba(255,217,61,0.08);
-            transition: transform 0.28s ease;
         }
-
-        .gameshow-intro.theme-playing .gameshow-panel { transform: translateY(-28px); }
 
         .gameshow-kicker {
             color: #ffd93d;
@@ -150,24 +147,6 @@
 
         .gameshow-theme-btn:active { transform: scale(0.97); }
 
-        .gameshow-jingle-words {
-            margin-top: 24px;
-            color: #ffd93d;
-            font-family: Georgia, serif;
-            font-size: clamp(1.4rem, 4vw, 2.6rem);
-            font-weight: 700;
-            letter-spacing: 1px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.28s ease, transform 0.28s ease;
-            text-shadow: 0 3px 18px rgba(0,0,0,0.65);
-        }
-
-        .gameshow-intro.theme-playing .gameshow-jingle-words {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         body.gameshow-active .mode-toggle { display: none; }
         body.gameshow-active .slide-bg { filter: brightness(0.9) saturate(1.08); }
         body.gameshow-active .slide-line.guess-mode { color: #fffdf2; }
@@ -181,8 +160,7 @@
         <div class="gameshow-kicker">Primary Flipcharts Presents</div>
         <div class="gameshow-logo">FILL IT IN!</div>
         <div class="gameshow-song">David &amp; Goliath</div>
-        <button class="gameshow-theme-btn" type="button" onclick="playGameShowTheme()" title="Play theme song" aria-label="Play theme song">▶</button>
-        <div class="gameshow-jingle-words" aria-live="polite">Fill it in... win win, win!</div>
+        <button class="gameshow-theme-btn" type="button" onclick="playGameShowCue('start')" title="Play theme song" aria-label="Play theme song">▶</button>
     </div>
 </div>
 <div class="jump-nav" id="jumpNav"></div>
@@ -379,17 +357,6 @@
         cue.play().catch(() => {});
     }
 
-    function setGameShowThemeWords(show) {
-        const intro = document.getElementById('gameshowIntro');
-        if (!intro) return;
-        intro.classList.toggle('theme-playing', show);
-    }
-
-    function playGameShowTheme() {
-        setGameShowThemeWords(true);
-        playGameShowCue('start');
-    }
-
     function setGameShowIntroText(kicker, logo, song) {
         const intro = document.getElementById('gameshowIntro');
         if (!intro) return;
@@ -408,7 +375,6 @@
         gameShow.order = shuffle([...slides].map((_, idx) => idx).filter(idx => idx > 0 && slides[idx].dataset.full));
         mode = 'photo';
         stopGameShowCue();
-        setGameShowThemeWords(false);
         setGameShowIntroText('Primary Flipcharts Presents', 'FILL IT IN!', 'David & Goliath');
         document.body.classList.add('gameshow-active');
         document.getElementById('slideshow').classList.add('photo-mode');
@@ -421,7 +387,6 @@
     function showGamePhoto() {
         const intro = document.getElementById('gameshowIntro');
         if (intro) { intro.classList.remove('active'); intro.setAttribute('aria-hidden', 'true'); }
-        setGameShowThemeWords(false);
         gameShow.intro = false;
         gameShow.complete = false;
         gameShow.showingClue = false;
@@ -463,7 +428,6 @@
             intro.querySelector('.gameshow-kicker').textContent = 'Game Complete';
             intro.querySelector('.gameshow-logo').textContent = 'FILL IT IN!';
             intro.querySelector('.gameshow-song').textContent = 'Back to beginning to play again';
-            setGameShowThemeWords(false);
             playGameShowCue('complete');
         }
         updateNav();
