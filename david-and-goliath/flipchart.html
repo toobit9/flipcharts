@@ -340,6 +340,7 @@
         mode = 'photo';
         stopGameShowCue();
         setGameShowIntroText('Primary Flipcharts Presents', 'FILL IT IN!', 'David & Goliath');
+        playGameShowCue('start');
         document.body.classList.add('gameshow-active');
         document.getElementById('slideshow').classList.add('photo-mode');
         const intro = document.getElementById('gameshowIntro');
@@ -400,7 +401,6 @@
         if (gameShow.complete) { initGameShow(); return; }
         if (gameShow.intro && gameShow.cursor === -1) {
             gameShow.cursor = 0;
-            playGameShowCue('start');
             showGamePhoto();
             return;
         }
