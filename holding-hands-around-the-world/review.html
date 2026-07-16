@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Images - Holding Hands Around the World</title>
+    <script>if(localStorage.getItem('fc_auth')!=='ok'){window.location.href='/login.html';}</script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --accent: #58d6c9;
+            --gold: #ffd93d;
+            --bg: #06070a;
+            --panel: rgba(255,255,255,0.06);
+            --border: rgba(255,255,255,0.12);
+            --text-soft: rgba(255,255,255,0.68);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #06070a 0%, #10141c 100%);
+            color: #fff;
+            padding: 24px;
+        }
+
+        .page {
+            width: min(1180px, 100%);
+            margin: 0 auto;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .back-link {
+            color: var(--text-soft);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover { color: #fff; }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 24px;
+            align-items: end;
+            padding: 28px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 0.95;
+            letter-spacing: 0;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: var(--text-soft);
+            line-height: 1.5;
+            max-width: 720px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 14px;
+            border: 1px solid rgba(88,214,201,0.45);
+            border-radius: 999px;
+            background: rgba(88,214,201,0.12);
+            color: #e9fffb;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .button.secondary {
+            border-color: rgba(255,217,61,0.45);
+            background: rgba(255,217,61,0.12);
+            color: #fff0a4;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 20px;
+            padding: 16px 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .meter {
+            flex: 1;
+            height: 10px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.09);
+        }
+
+        .meter-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            transition: width 0.2s ease;
+        }
+
+        .status-text {
+            color: var(--text-soft);
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .title-card,
+        .review-card {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--panel);
+            overflow: hidden;
+        }
+
+        .title-card {
+            display: grid;
+            grid-template-columns: minmax(260px, 42%) minmax(0, 1fr);
+            gap: 0;
+            margin-bottom: 20px;
+        }
+
+        .title-card img,
+        .review-card img {
+            width: 100%;
+            display: block;
+            background: #111;
+        }
+
+        .title-card img {
+            height: 100%;
+            min-height: 260px;
+            object-fit: cover;
+        }
+
+        .title-info,
+        .card-body {
+            padding: 20px;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .title-info h2,
+        .card-body h2 {
+            font-size: 1.45rem;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .title-info p,
+        .description {
+            color: var(--text-soft);
+            line-height: 1.45;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .review-card.approved {
+            border-color: rgba(81,207,102,0.58);
+            background: rgba(81,207,102,0.08);
+        }
+
+        .review-card img {
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .page-number {
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .section {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .lyric {
+            font-size: 1.25rem;
+            line-height: 1.28;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .card-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .download-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .small-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 38px;
+            padding: 0 11px;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        label.approval {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
+            color: #fff;
+            font-size: 0.86rem;
+            font-weight: 800;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: #51cf66;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 72px;
+            margin-top: 14px;
+            padding: 10px 12px;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 10px;
+            background: rgba(0,0,0,0.22);
+            color: #fff;
+            font: inherit;
+            resize: vertical;
+        }
+
+        textarea::placeholder { color: rgba(255,255,255,0.38); }
+
+        details {
+            margin-top: 12px;
+            color: var(--text-soft);
+        }
+
+        summary {
+            cursor: pointer;
+            color: rgba(255,255,255,0.72);
+            font-size: 0.86rem;
+            font-weight: 800;
+        }
+
+        details p {
+            margin-top: 8px;
+            line-height: 1.45;
+            font-size: 0.86rem;
+        }
+
+        .error {
+            padding: 20px;
+            border: 1px solid rgba(255,107,107,0.45);
+            border-radius: 12px;
+            background: rgba(255,107,107,0.12);
+            color: #ffd8d8;
+        }
+
+        @media (max-width: 760px) {
+            body { padding: 16px; }
+            .topbar,
+            .hero,
+            .status,
+            .title-card {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar,
+            .status {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .actions { justify-content: stretch; }
+            .button { flex: 1; }
+            .grid { grid-template-columns: 1fr; }
+            .card-actions { align-items: stretch; flex-direction: column; }
+            label.approval { justify-content: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<main class="page">
+    <div class="topbar">
+        <a class="back-link" href="/">← Library</a>
+        <a class="back-link" href="/holding-hands-around-the-world/flipchart.html">Open flipchart</a>
+    </div>
+
+    <section class="hero">
+        <div>
+            <h1>Approve Images</h1>
+            <p class="subtitle">Review each Holding Hands Around the World illustration, mark approved images, and download individual JPG files for printed Primary materials.</p>
+        </div>
+        <div class="actions">
+            <a class="button secondary" href="holding-hands-images-print-pack.zip" download>Download print pack ZIP</a>
+            <a class="button" href="/holding-hands-around-the-world/flipchart.html">Use flipchart</a>
+        </div>
+    </section>
+
+    <section class="status" aria-live="polite">
+        <div class="meter" aria-hidden="true"><div class="meter-fill" id="meterFill"></div></div>
+        <div class="status-text" id="statusText">Loading images...</div>
+    </section>
+
+    <section class="title-card">
+        <img src="images/title.jpg" alt="Holding Hands Around the World title illustration">
+        <div class="title-info">
+            <div class="eyebrow">Title Image</div>
+            <h2>Opening artwork</h2>
+            <p>This image is included in the print pack and can also be downloaded separately.</p>
+            <div class="card-actions">
+                <div class="download-row">
+                    <a class="small-button" href="images/title.jpg" download="holding-hands-title.jpg">Download JPG</a>
+                    <a class="small-button" href="images/title.jpg" target="_blank" rel="noopener">Open full size</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="grid" id="reviewGrid"></section>
+</main>
+
+<script>
+const storageKey = 'holding-hands-around-the-world-image-review-v1';
+const grid = document.getElementById('reviewGrid');
+const statusText = document.getElementById('statusText');
+const meterFill = document.getElementById('meterFill');
+
+function loadState() {
+    try {
+        return JSON.parse(localStorage.getItem(storageKey)) || {};
+    } catch (error) {
+        return {};
+    }
+}
+
+let state = loadState();
+let pages = [];
+
+function saveState() {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+    updateStatus();
+}
+
+function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (character) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[character]));
+}
+
+function updateStatus() {
+    const approved = pages.filter((page) => state[page.pageNumber]?.approved).length;
+    const total = pages.length;
+    const percent = total ? Math.round((approved / total) * 100) : 0;
+    statusText.textContent = `${approved} of ${total} page images approved`;
+    meterFill.style.width = `${percent}%`;
+
+    document.querySelectorAll('.review-card').forEach((card) => {
+        const pageNumber = card.dataset.pageNumber;
+        card.classList.toggle('approved', Boolean(state[pageNumber]?.approved));
+    });
+}
+
+function renderPage(page) {
+    const pageState = state[page.pageNumber] || {};
+    const pageNumber = String(page.pageNumber).padStart(2, '0');
+    const fileName = `holding-hands-page-${pageNumber}.jpg`;
+
+    return `
+        <article class="review-card" data-page-number="${page.pageNumber}">
+            <img src="${escapeHtml(page.image)}" alt="Illustration for page ${page.pageNumber}">
+            <div class="card-body">
+                <div class="meta-row">
+                    <div class="page-number">Page ${pageNumber}</div>
+                    <div class="section">${escapeHtml(page.section)}</div>
+                </div>
+                <h2 class="lyric">${escapeHtml(page.lyric)}</h2>
+                <p class="description">${escapeHtml(page.imageDescription)}</p>
+                <details>
+                    <summary>Image prompt</summary>
+                    <p>${escapeHtml(page.imagePrompt)}</p>
+                </details>
+                <textarea data-note="${page.pageNumber}" placeholder="Optional approval notes or image changes...">${escapeHtml(pageState.note || '')}</textarea>
+                <div class="card-actions">
+                    <div class="download-row">
+                        <a class="small-button" href="${escapeHtml(page.image)}" download="${fileName}">Download JPG</a>
+                        <a class="small-button" href="${escapeHtml(page.image)}" target="_blank" rel="noopener">Open full size</a>
+                    </div>
+                    <label class="approval">
+                        <input type="checkbox" data-approval="${page.pageNumber}" ${pageState.approved ? 'checked' : ''}>
+                        Approved
+                    </label>
+                </div>
+            </div>
+        </article>
+    `;
+}
+
+function wireEvents() {
+    grid.addEventListener('change', (event) => {
+        const pageNumber = event.target.dataset.approval;
+        if (!pageNumber) return;
+        state[pageNumber] = state[pageNumber] || {};
+        state[pageNumber].approved = event.target.checked;
+        saveState();
+    });
+
+    grid.addEventListener('input', (event) => {
+        const pageNumber = event.target.dataset.note;
+        if (!pageNumber) return;
+        state[pageNumber] = state[pageNumber] || {};
+        state[pageNumber].note = event.target.value;
+        saveState();
+    });
+}
+
+async function init() {
+    try {
+        const response = await fetch('metadata.json');
+        if (!response.ok) throw new Error(`Metadata request failed: ${response.status}`);
+        const metadata = await response.json();
+        pages = metadata.pages || [];
+        grid.innerHTML = pages.map(renderPage).join('');
+        wireEvents();
+        updateStatus();
+    } catch (error) {
+        grid.innerHTML = `<div class="error">Could not load image metadata. Open this page from the deployed site or a local web server.</div>`;
+        statusText.textContent = 'Image metadata unavailable';
+    }
+}
+
+init();
+</script>
+</body>
+</html>

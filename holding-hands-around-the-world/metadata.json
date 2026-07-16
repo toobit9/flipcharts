@@ -1,0 +1,255 @@
+{
+  "song": {
+    "title": "Holding Hands Around the World",
+    "number": "1011",
+    "sourceUrl": "https://www.churchofjesuschrist.org/study/music/hymns-for-home-and-church/holding-hands-around-the-world?lang=eng",
+    "textAndMusic": "Janice Kapp Perry, 2001",
+    "verifiedAgainstOfficialSource": true
+  },
+  "implementation": {
+    "architecture": "Static flipchart folder with flipchart.html containing slide data in data-full/data-key attributes and raster images in images/.",
+    "style": "Simple colorful child-friendly illustrations, no lettering or labels inside images, subtle worldwide soccer/teamwork theme, no cross imagery.",
+    "layout": {
+      "aspectRatio": "16:9",
+      "textPlacement": "left-centered lyric block over darkened image",
+      "modes": ["full", "guess", "keywords", "photo", "fill-it-in"],
+      "imageRendering": "object-fit: cover"
+    }
+  },
+  "pages": [
+    {
+      "pageNumber": 1,
+      "section": "Verse 1",
+      "lyric": "We are children singing all around the world,",
+      "imageDescription": "Children from several cultures singing together near a globe with a subtle soccer-field/teamwork feeling.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children from many cultures singing together around a glowing globe, subtle soccer field arc in the background, warm gospel light, modest contemporary clothing, clear shapes visible from across a Primary room, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-01.jpg",
+      "layout": { "sectionLabel": "Verse 1", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 2,
+      "section": "Verse 1",
+      "lyric": "Happy voices ringing out the joyful word.",
+      "imageDescription": "Joyful children singing with musical notes and bright light, suggesting happy voices carrying around the world.",
+      "imagePrompt": "Simple colorful reverent children's illustration, joyful diverse children singing with soft musical-note shapes and warm light, subtle stadium curve far in background, modest contemporary clothing, uncluttered composition, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-02.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 3,
+      "section": "Verse 1",
+      "lyric": "We are children glowing with the gospel light,",
+      "imageDescription": "Children illuminated by warm symbolic gospel light over a global background.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children glowing in warm gospel light, globe and gentle soccer-field curve in background, symbolic light instead of text, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-03.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 4,
+      "section": "Verse 1",
+      "lyric": "Standing tall, walking strong, choosing right.",
+      "imageDescription": "Children confidently walking along a bright path together.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children standing tall and walking on a bright path, subtle soccer sideline markings as secondary design, confident peaceful expressions, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-04.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 5,
+      "section": "Verse 1",
+      "lyric": "We are children leading out in ev’ry land",
+      "imageDescription": "Children from many places standing together near a globe.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children from many countries standing together by a globe, international unity without national stereotypes, modest contemporary clothing, soft soccer-field/stadium shape in background, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-05.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 6,
+      "section": "Verse 1",
+      "lyric": "Who believe in keeping all the Lord’s commands.",
+      "imageDescription": "A scripture-like book and children choosing faithful actions.",
+      "imagePrompt": "Simple colorful reverent children's illustration, scripture book symbol and children gathered reverently, warm light, subtle soccer field curve as background only, modest contemporary clothing, no readable text on book or image, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-06.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 7,
+      "section": "Verse 1",
+      "lyric": "Like the stripling warriors we go forth in faith,",
+      "imageDescription": "Faithful children with simple shield shapes, peaceful and courageous, no weapons.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children moving forward in faith with simple shield symbols, peaceful united team formation, no weapons and no battle violence, subtle soccer team unity theme, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-07.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 8,
+      "section": "Verse 1",
+      "lyric": "For we know that the Lord is our strength.",
+      "imageDescription": "Children strengthened by a warm beam of heavenly light.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children looking toward warm heavenly light that symbolizes strength from the Lord, no direct depiction required, quiet soccer-field curve in background, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-08.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 9,
+      "section": "Chorus",
+      "lyric": "We are children holding hands around the world,",
+      "imageDescription": "Children encircling a globe, holding hands in unity.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children holding hands around a glowing globe, unity and friendship, subtle soccer ball/world visual rhythm, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-09.jpg",
+      "layout": { "sectionLabel": "Chorus", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 10,
+      "section": "Chorus",
+      "lyric": "Like an army with the gospel flag unfurled.",
+      "imageDescription": "A peaceful group of covenant children standing under a bright banner.",
+      "imagePrompt": "Simple colorful reverent children's illustration, peaceful united children standing like one team beneath a bright unfurled banner, gospel flag symbol without text, no weapons, modest contemporary clothing, subtle stadium arc in background, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-10.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 11,
+      "section": "Chorus",
+      "lyric": "We are led by His light,",
+      "imageDescription": "Children following a warm beam of light.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children from varied backgrounds following a warm guiding light, symbolic representation of being led by the Savior, subtle soccer field path line, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-11.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 12,
+      "section": "Chorus",
+      "lyric": "And we love truth and right.",
+      "imageDescription": "Children making kind, honest choices with a simple check-like symbolic shape.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children choosing kindness and honesty, warm symbolic light and simple shape suggesting a good choice, subtle team/soccer background, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-12.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 13,
+      "section": "Chorus",
+      "lyric": "We are building the kingdom of God.",
+      "imageDescription": "Children building together with blocks and serving as one team.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children from many cultures building together with simple blocks, teamwork and service, subtle soccer field/stadium curve in background, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-13.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 14,
+      "section": "Verse 2",
+      "lyric": "We are children sharing all around the world,",
+      "imageDescription": "Children sharing and passing a ball/globe symbol around the world.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children sharing with each other around a globe, a soccer ball passed gently as a secondary teamwork symbol, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-14.jpg",
+      "layout": { "sectionLabel": "Verse 2", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 15,
+      "section": "Verse 2",
+      "lyric": "Leading other children to the gospel fold.",
+      "imageDescription": "Children gathering together kindly in a safe circle.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children gently inviting and gathering other children into a safe bright circle, worldwide friendship, subtle soccer team huddle feeling, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-15.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 16,
+      "section": "Verse 2",
+      "lyric": "With the strength of youth, we do the Savior’s work.",
+      "imageDescription": "Youth serving together under warm symbolic light.",
+      "imagePrompt": "Simple colorful reverent children's illustration, youth serving together with warm symbolic light representing the Savior's work, no direct portrait necessary, subtle soccer teamwork background, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-16.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 17,
+      "section": "Verse 2",
+      "lyric": "With our hearts and our hands we will serve.",
+      "imageDescription": "Hands and hearts symbolizing service.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children serving with open hands and warm heart-shaped light, teamwork and kindness, subtle soccer-field curve background, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-17.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 18,
+      "section": "Verse 2",
+      "lyric": "We are cov’nant children with a gift to give.",
+      "imageDescription": "Children with a simple gift symbol and warm covenant light.",
+      "imagePrompt": "Simple colorful reverent children's illustration, covenant children with a simple glowing gift symbol, warm light, diverse backgrounds, subtle world/team unity design, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-18.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 19,
+      "section": "Verse 2",
+      "lyric": "We will teach the gospel by the way we live.",
+      "imageDescription": "Children teaching by example through kindness and scripture symbolism.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children teaching by example through kindness and service, simple scripture symbol with no readable text, subtle soccer team huddle background, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-19.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 20,
+      "section": "Verse 2",
+      "lyric": "With each word and action, we will testify:",
+      "imageDescription": "A child standing with confidence while friends support them.",
+      "imagePrompt": "Simple colorful reverent children's illustration, child testifying through confident kind action with supportive friends nearby, warm light, subtle global soccer-team unity background, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-20.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 21,
+      "section": "Verse 2",
+      "lyric": "We believe, and we serve Jesus Christ.",
+      "imageDescription": "Children serving under reverent symbolic light representing Jesus Christ.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children serving others under warm reverent light representing Jesus Christ, peaceful and faithful, subtle soccer team unity motif, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-21.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 22,
+      "section": "Chorus",
+      "lyric": "We are children holding hands around the world,",
+      "imageDescription": "Children holding hands around two overlapping globe shapes.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children holding hands around a glowing world, repeated chorus image with unity and worldwide friendship, subtle soccer ball/world shape, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-22.jpg",
+      "layout": { "sectionLabel": "Chorus", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 23,
+      "section": "Chorus",
+      "lyric": "Like an army with the gospel flag unfurled.",
+      "imageDescription": "Peaceful children under a bright banner, like one united team.",
+      "imagePrompt": "Simple colorful reverent children's illustration, peaceful covenant children standing united like one team under a bright gospel banner with no text, no weapons, subtle stadium arc background, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-23.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 24,
+      "section": "Chorus",
+      "lyric": "We are led by His light,",
+      "imageDescription": "Children guided by warm light toward a hopeful path.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children following warm heavenly light on a hopeful path, symbolic guidance from the Savior, subtle soccer field line in background, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-24.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 25,
+      "section": "Chorus",
+      "lyric": "And we love truth and right.",
+      "imageDescription": "Children choosing truth and right with bright symbolic shapes.",
+      "imagePrompt": "Simple colorful reverent children's illustration, children making honest kind choices with bright symbolic shapes, worldwide team unity, subtle soccer background, modest contemporary clothing, no words, no letters, no numbers, no watermarks.",
+      "image": "images/slide-25.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    },
+    {
+      "pageNumber": 26,
+      "section": "Chorus",
+      "lyric": "We are building the kingdom of God.",
+      "imageDescription": "Children building together in a final hopeful teamwork scene.",
+      "imagePrompt": "Simple colorful reverent children's illustration, diverse children joyfully building together as one team, kingdom of God symbolized by blocks and warm light, subtle soccer field celebration in background, victory focused on following Jesus Christ, modest contemporary clothing, no words, no letters, no numbers, no watermarks, no cross symbols.",
+      "image": "images/slide-26.jpg",
+      "layout": { "sectionLabel": "", "textSize": "large", "textAlign": "left" }
+    }
+  ]
+}
