@@ -62,6 +62,7 @@
         body.gameshow-active .slide-line.guess-mode { color: #fffdf2; }
         @media (max-width: 768px) { .slide-content { padding: 34px 28px 92px; } .slide-line { font-size: clamp(2.1rem, 8vw, 3.35rem); } .slide-line.keywords { font-size: clamp(2.55rem, 9vw, 4rem); } .nav-btn { padding: 10px 24px; font-size: 1rem; } }
     </style>
+<link rel="stylesheet" href="/assets/accompaniment.css">
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -214,5 +215,6 @@
     function buildJumpNav() { const nav = document.getElementById('jumpNav'); const homeBtn = document.createElement('button'); homeBtn.className = 'jump-btn home-btn'; homeBtn.textContent = '↺'; homeBtn.title = 'Back to beginning'; homeBtn.setAttribute('aria-label', 'Back to beginning'); homeBtn.onclick = () => changeSlideAbsolute(0); nav.appendChild(homeBtn); const libBtn = document.createElement('button'); libBtn.className = 'jump-btn'; libBtn.textContent = '🎵'; libBtn.title = 'Song library'; libBtn.setAttribute('aria-label', 'Song library'); libBtn.onclick = () => window.location.href = '/index.html'; nav.appendChild(libBtn); }
     buildJumpNav(); let touchStartX = 0; document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true}); document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); }); document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); } }); if (gameShow.active) initGameShow(); else { updateSlideContent(); updateNav(); }
 </script>
+<script src="/assets/accompaniment.js" data-src="https://assets.churchofjesuschrist.org/a8/80/a8804501ee3511eeadd2eeeeac1e3e21531e1d7b/holding_hands_around_the_world.mp3"></script>
 </body>
 </html>

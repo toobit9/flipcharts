@@ -1,0 +1,59 @@
+.accompaniment-toggle {
+    position: fixed;
+    top: 14px;
+    right: calc(50% - min(50vw, 88.89vh) + 64px);
+    z-index: 100;
+    display: flex;
+    gap: 6px;
+    opacity: 0.62;
+    transition: opacity 0.2s ease;
+}
+
+.accompaniment-toggle:hover,
+.accompaniment-toggle:focus-within {
+    opacity: 0.95;
+}
+
+.accompaniment-btn {
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    width: 36px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.accompaniment-btn.active {
+    background: var(--accent, #ffd34f);
+    border-color: var(--accent, #ffd34f);
+    color: #15120a;
+    font-weight: 700;
+}
+
+.accompaniment-btn:active {
+    transform: scale(0.97);
+}
+
+body.gameshow-active .accompaniment-toggle {
+    display: none;
+}
+
+@media (pointer: coarse) {
+    .accompaniment-toggle {
+        opacity: 0.7;
+    }
+
+    .accompaniment-btn {
+        width: 40px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+

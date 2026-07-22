@@ -82,6 +82,7 @@
         body.gameshow-active .slide-bg { filter: brightness(0.9) saturate(1.08); }
         body.gameshow-active .slide-line.guess-mode { color: #fffdf2; }
 </style>
+<link rel="stylesheet" href="/assets/accompaniment.css">
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div><div class="gameshow-intro" id="gameshowIntro" aria-hidden="true"><div class="gameshow-panel"><div class="gameshow-kicker">Primary Flipcharts Presents</div><div class="gameshow-logo">FILL IT IN!</div><div class="gameshow-song">A Child's Prayer</div><button class="gameshow-theme-btn" type="button" onclick="playGameShowCue('start')" title="Play theme song" aria-label="Play theme song">▶</button></div></div>
@@ -193,5 +194,6 @@
     function buildJumpNav() { const nav = document.getElementById('jumpNav'); const homeBtn = document.createElement('button'); homeBtn.className = 'jump-btn home-btn'; homeBtn.textContent = '↺'; homeBtn.title = 'Back to beginning'; homeBtn.setAttribute('aria-label', 'Back to beginning'); homeBtn.onclick = () => changeSlideAbsolute(0); nav.appendChild(homeBtn); const libBtn = document.createElement('button'); libBtn.className = 'jump-btn'; libBtn.textContent = '🎵'; libBtn.title = 'Song library'; libBtn.setAttribute('aria-label', 'Song library'); libBtn.onclick = () => window.location.href = '/index.html'; nav.appendChild(libBtn); }
     buildJumpNav(); let touchStartX = 0; document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true}); document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1); }); document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); } }); if (gameShow.active) initGameShow(); else { updateSlideContent(); updateNav(); }
 </script>
+<script src="/assets/accompaniment.js" data-src="https://assets.churchofjesuschrist.org/35/16/351657965a4c092019ba24b7b40bf1780861d07a/oracion_de_un_ninomusica_solo.mp3"></script>
 </body>
 </html>
