@@ -53,8 +53,25 @@ module.exports = async function handler(request, response) {
             return;
         }
 
-        response.setHeader('Allow', 'GET, POST');
-        response.status(405).json({ error: 'Use GET or POST.' });
+        if (request.method === 'DELETE') {
+            if (!verifyAdminRequest(request)) {
+                response.status(401).json({ error: 'Admin access required.' });
+                return;
+            }
+
+            const id = Number(request.query && request.query.id);
+            if (!Number.isInteger(id) || id < 1) {
+                response.status(400).json({ error: 'Valid request id is required.' });
+                return;
+            }
+
+            await sql.query('DELETE FROM song_requests WHERE id = $1', [id]);
+            response.status(200).json({ ok: true });
+            return;
+        }
+
+        response.setHeader('Allow', 'GET, POST, DELETE');
+        response.status(405).json({ error: 'Use GET, POST, or DELETE.' });
     } catch (error) {
         sendError(response, error);
     }

@@ -163,7 +163,7 @@
 
         .tutorial-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 12px;
         }
 
@@ -171,17 +171,17 @@
             background: rgba(0,0,0,0.18);
             border: 1px solid rgba(255,255,255,0.07);
             border-radius: 10px;
-            padding: 13px 14px;
+            padding: 14px 12px;
             display: grid;
-            grid-template-columns: 44px 1fr;
-            gap: 12px;
-            align-items: center;
+            justify-items: center;
+            gap: 9px;
+            text-align: center;
         }
 
         .tutorial-item strong {
             display: block;
             color: rgba(255,255,255,0.88);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             font-size: 0.88rem;
         }
 
@@ -207,19 +207,24 @@
 
         .tutorial-icon.label {
             width: auto;
-            min-width: 62px;
+            min-width: 54px;
+            height: 38px;
             padding: 0 10px;
             border-radius: 999px;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             letter-spacing: 0.2px;
         }
 
         .tutorial-copy {
+            max-width: 170px;
             min-width: 0;
         }
 
         .tutorial-copy span {
             display: block;
+            color: rgba(255,255,255,0.54);
+            font-size: 0.78rem;
+            line-height: 1.35;
         }
 
         .section-title {
@@ -515,6 +520,29 @@
         .admin-entry span {
             color: rgba(255,255,255,0.36);
             font-size: 0.74rem;
+        }
+
+        .admin-entry-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .admin-resolve-btn {
+            border: 1px solid rgba(109,214,166,0.34);
+            background: rgba(109,214,166,0.1);
+            color: rgba(197,255,226,0.9);
+            border-radius: 999px;
+            padding: 6px 9px;
+            font: inherit;
+            font-size: 0.74rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .admin-resolve-btn:hover {
+            background: rgba(109,214,166,0.18);
         }
 
         .admin-empty {
@@ -869,7 +897,7 @@
     </details>
 
     <details class="library-section">
-        <summary class="section-title">Misc</summary>
+        <summary class="section-title">Other Songs</summary>
         <div class="song-grid">
 
         <div class="song-card with-actions" style="--card-color: #4ecdc4;">
@@ -1014,49 +1042,49 @@
                     <div class="tutorial-icon accent label">Open</div>
                     <div class="tutorial-copy">
                         <strong>Open Flipchart</strong>
-                        <span>Use for normal singing practice.</span>
+                        <span>Sing through slides.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
                     <div class="tutorial-icon label">FILL IT IN!</div>
                     <div class="tutorial-copy">
                         <strong>FILL IT IN!</strong>
-                        <span>Picture first, then missing-word clue, then answer.</span>
+                        <span>Photo, clue, answer.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
                     <div class="tutorial-icon">📝</div>
                     <div class="tutorial-copy">
                         <strong>Lyrics Mode</strong>
-                        <span>Tap to switch lyrics, blanks, keywords, or photo-only.</span>
+                        <span>Lyrics, blanks, keys.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
                     <div class="tutorial-icon">↺</div>
                     <div class="tutorial-copy">
                         <strong>Restart</strong>
-                        <span>Jump back to the start of the current song.</span>
+                        <span>Back to slide one.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
                     <div class="tutorial-icon">🎵</div>
                     <div class="tutorial-copy">
                         <strong>Library</strong>
-                        <span>Return to the song list.</span>
+                        <span>Return to songs.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
                     <div class="tutorial-icon">▶</div>
                     <div class="tutorial-copy">
                         <strong>Accompaniment</strong>
-                        <span>Play or stop practice music while slides continue.</span>
+                        <span>Play practice music.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
                     <div class="tutorial-icon accent">?</div>
                     <div class="tutorial-copy">
                         <strong>Request Song</strong>
-                        <span>Use the button at the bottom to add a title to Coming Soon. We will try to build requested flipcharts within 7-10 days.</span>
+                        <span>Add a future song.</span>
                     </div>
                 </div>
             </div>
@@ -1240,6 +1268,16 @@
         localStorage.setItem(REQUESTS_KEY, JSON.stringify(requests));
     }
 
+    function removeLocalSongRequest(requestToRemove) {
+        const requests = getSongRequests().filter((request) => (
+            request.id !== requestToRemove.id ||
+            request.title !== requestToRemove.title ||
+            createdAtFor(request) !== createdAtFor(requestToRemove)
+        ));
+        saveSongRequests(requests);
+        renderSongRequests();
+    }
+
     function getFeedbackReports() {
         try {
             const reports = JSON.parse(localStorage.getItem(FEEDBACK_KEY) || '[]');
@@ -1253,6 +1291,15 @@
 
     function saveFeedbackReports(reports) {
         localStorage.setItem(FEEDBACK_KEY, JSON.stringify(reports));
+    }
+
+    function removeLocalFeedbackReport(reportToRemove) {
+        const reports = getFeedbackReports().filter((report) => (
+            report.id !== reportToRemove.id ||
+            report.message !== reportToRemove.message ||
+            createdAtFor(report) !== createdAtFor(reportToRemove)
+        ));
+        saveFeedbackReports(reports);
     }
 
     function createdAtFor(item) {
@@ -1401,7 +1448,7 @@
         items.forEach((item) => list.append(renderItem(item)));
     }
 
-    function makeAdminEntry(title, body, meta) {
+    function makeAdminEntry(title, body, meta, onResolve) {
         const entry = document.createElement('div');
         entry.className = 'admin-entry';
 
@@ -1414,8 +1461,65 @@
         const detail = document.createElement('span');
         detail.textContent = meta;
 
-        entry.append(heading, content, detail);
+        const footer = document.createElement('div');
+        footer.className = 'admin-entry-footer';
+        footer.append(detail);
+
+        if (onResolve) {
+            const button = document.createElement('button');
+            button.className = 'admin-resolve-btn';
+            button.type = 'button';
+            button.textContent = '✓ Done';
+            button.addEventListener('click', onResolve);
+            footer.append(button);
+        }
+
+        entry.append(heading, content, footer);
         return entry;
+    }
+
+    async function deleteAdminItem(url) {
+        const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
+        if (!token) throw new Error('Admin session is not unlocked.');
+
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(result.error || 'Item could not be removed.');
+        }
+    }
+
+    async function resolveSongRequest(request) {
+        if (!window.confirm(`Remove "${request.title}" from song requests?`)) return;
+
+        try {
+            if (request.localOnly || !request.id) {
+                removeLocalSongRequest(request);
+            } else {
+                await deleteAdminItem(`/api/song-requests?id=${encodeURIComponent(request.id)}`);
+            }
+            loadAdminPanel();
+        } catch (error) {
+            window.alert(error.message);
+        }
+    }
+
+    async function resolveFeedbackReport(report) {
+        if (!window.confirm('Remove this feedback item?')) return;
+
+        try {
+            if (report.localOnly || !report.id) {
+                removeLocalFeedbackReport(report);
+            } else {
+                await deleteAdminItem(`/api/feedback?id=${encodeURIComponent(report.id)}`);
+            }
+            loadAdminPanel();
+        } catch (error) {
+            window.alert(error.message);
+        }
     }
 
     async function getAdminItems(url) {
@@ -1448,14 +1552,16 @@
                 (request) => makeAdminEntry(
                     request.title,
                     request.notes,
-                    `${artStyleFor(request)} · ${request.localOnly ? 'Saved on this device' : 'Database'} · ${requestAgeLabel(createdAtFor(request))}`
+                    `${artStyleFor(request)} · ${request.localOnly ? 'Saved on this device' : 'Database'} · ${requestAgeLabel(createdAtFor(request))}`,
+                    () => resolveSongRequest(request)
                 )
             );
         } catch (error) {
             renderAdminList('adminRequestsList', getSongRequests(), error.message, (request) => makeAdminEntry(
                 request.title,
                 request.notes,
-                `${artStyleFor(request)} · Local only · ${requestAgeLabel(createdAtFor(request))}`
+                `${artStyleFor(request)} · Local only · ${requestAgeLabel(createdAtFor(request))}`,
+                () => resolveSongRequest(request)
             ));
         }
 
@@ -1469,14 +1575,16 @@
                 (report) => makeAdminEntry(
                     `${report.kind || 'feedback'}${report.contact ? ` · ${report.contact}` : ''}`,
                     report.message,
-                    `${report.localOnly ? 'Saved on this device' : 'Database'} · ${formatAdminDate(createdAtFor(report))}${report.page ? ` · ${report.page}` : ''}`
+                    `${report.localOnly ? 'Saved on this device' : 'Database'} · ${formatAdminDate(createdAtFor(report))}${report.page ? ` · ${report.page}` : ''}`,
+                    () => resolveFeedbackReport(report)
                 )
             );
         } catch (error) {
             renderAdminList('adminFeedbackList', getFeedbackReports(), error.message, (report) => makeAdminEntry(
                 `${report.kind || 'feedback'}${report.contact ? ` · ${report.contact}` : ''}`,
                 report.message,
-                `Local only · ${formatAdminDate(createdAtFor(report))}`
+                `Local only · ${formatAdminDate(createdAtFor(report))}`,
+                () => resolveFeedbackReport(report)
             ));
         }
     }
