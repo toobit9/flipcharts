@@ -118,7 +118,7 @@
         .library-section { margin-top: 36px; }
 
         .tutorial-section {
-            margin: -18px 0 34px;
+            margin: 36px 0 0;
             border: 1px solid rgba(255,255,255,0.09);
             border-radius: 14px;
             background: rgba(255,255,255,0.045);
@@ -697,67 +697,7 @@
     <div class="header">
         <h1>🎵 Primary Song Library</h1>
         <p>Choose a flipchart or start the Fill It In game</p>
-        <div class="site-disclaimer">This is a work-in-progress beta flipchart app for educational teaching use. It is not officially associated with The Church of Jesus Christ of Latter-day Saints. Please report feedback or bugs with the button at the bottom.</div>
     </div>
-
-
-
-    <details class="tutorial-section">
-        <summary class="tutorial-title">Info and Tutorial</summary>
-        <div class="tutorial-body">
-            <div class="tutorial-grid">
-                <div class="tutorial-item">
-                    <div class="tutorial-icon accent label">Open</div>
-                    <div class="tutorial-copy">
-                        <strong>Open Flipchart</strong>
-                        <span>Use for normal singing practice.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon label">FILL IT IN!</div>
-                    <div class="tutorial-copy">
-                        <strong>FILL IT IN!</strong>
-                        <span>Picture first, then missing-word clue, then answer.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">📝</div>
-                    <div class="tutorial-copy">
-                        <strong>Lyrics Mode</strong>
-                        <span>Tap to switch lyrics, blanks, keywords, or photo-only.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">↺</div>
-                    <div class="tutorial-copy">
-                        <strong>Restart</strong>
-                        <span>Jump back to the start of the current song.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">🎵</div>
-                    <div class="tutorial-copy">
-                        <strong>Library</strong>
-                        <span>Return to the song list.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">▶</div>
-                    <div class="tutorial-copy">
-                        <strong>Accompaniment</strong>
-                        <span>Play or stop practice music while slides continue.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon accent">?</div>
-                    <div class="tutorial-copy">
-                        <strong>Request Song</strong>
-                        <span>Use the button at the bottom to add a title to Coming Soon. We will try to build requested flipcharts within 7-10 days.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </details>
 
     <div class="admin-badge">Admin mode is on. Coming Soon flipcharts, song requests, and feedback are visible here for review.</div>
 
@@ -1062,11 +1002,70 @@
         </div>
     </details>
 
+    <details class="tutorial-section">
+        <summary class="tutorial-title">Info and Tutorial</summary>
+        <div class="tutorial-body">
+            <div class="tutorial-grid">
+                <div class="tutorial-item">
+                    <div class="tutorial-icon accent label">Open</div>
+                    <div class="tutorial-copy">
+                        <strong>Open Flipchart</strong>
+                        <span>Use for normal singing practice.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-icon label">FILL IT IN!</div>
+                    <div class="tutorial-copy">
+                        <strong>FILL IT IN!</strong>
+                        <span>Picture first, then missing-word clue, then answer.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-icon">📝</div>
+                    <div class="tutorial-copy">
+                        <strong>Lyrics Mode</strong>
+                        <span>Tap to switch lyrics, blanks, keywords, or photo-only.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-icon">↺</div>
+                    <div class="tutorial-copy">
+                        <strong>Restart</strong>
+                        <span>Jump back to the start of the current song.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-icon">🎵</div>
+                    <div class="tutorial-copy">
+                        <strong>Library</strong>
+                        <span>Return to the song list.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-icon">▶</div>
+                    <div class="tutorial-copy">
+                        <strong>Accompaniment</strong>
+                        <span>Play or stop practice music while slides continue.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-icon accent">?</div>
+                    <div class="tutorial-copy">
+                        <strong>Request Song</strong>
+                        <span>Use the button at the bottom to add a title to Coming Soon. We will try to build requested flipcharts within 7-10 days.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </details>
+
     <div class="request-footer">
         <button class="request-btn" type="button" onclick="openRequestModal()">Request Song</button>
         <button class="feedback-btn" type="button" onclick="openFeedbackModal()">Feedback / Bug</button>
         <button class="admin-access-btn" id="adminAccessButton" type="button" onclick="handleAdminAccess()">Admin access</button>
     </div>
+
+    <div class="site-disclaimer">This is a work-in-progress beta flipchart app for educational teaching use. It is not officially associated with The Church of Jesus Christ of Latter-day Saints. Please report feedback or bugs with the button above.</div>
 
 
 </div>
