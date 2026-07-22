@@ -47,6 +47,18 @@
         .progress-bar { position: fixed; top: 0; left: 50%; transform: translateX(-50%); height: 4px; background: var(--accent); transition: width 0.3s ease; z-index: 200; max-width: min(100vw, 177.78vh); }
         @media (max-width: 768px) { .slide-content { padding: 30px 30px 90px; } .slide-line { font-size: clamp(1.45rem, 6.2vw, 2.45rem); } .nav-btn { padding: 10px 24px; font-size: 1rem; } }
 
+        .slide:not([data-type="title"]) { background: #f8fbff; }
+        .slide:not([data-type="title"]) .slide-bg { top: 0; bottom: auto; height: 68%; object-fit: contain; background: #f8fbff; filter: none; }
+        .slide:not([data-type="title"]) .slide-content { position: absolute; left: 0; right: 0; bottom: 0; height: 32%; justify-content: center; padding: 24px 82px 92px; background: linear-gradient(180deg, rgba(255,255,255,0.96), #eef6ff); border-top: 1px solid rgba(38,84,138,0.16); }
+        .slide:not([data-type="title"]) .slide-section { color: #3971a7; text-shadow: none; margin-bottom: 10px; }
+        .slide:not([data-type="title"]) .slide-line { color: #13233f; text-shadow: none; font-size: clamp(1.75rem, 4.25vw, 3.75rem); line-height: 1.08; max-width: 1320px; }
+        .slide[data-type="title"] { background: radial-gradient(circle at 50% 32%, rgba(142,212,255,0.26), transparent 36%), linear-gradient(135deg, var(--bg1), var(--bg2)); }
+        #slideshow.photo-mode .slide:not([data-type="title"]) .slide-bg { height: 100%; object-fit: cover; background: transparent; }
+        body.gameshow-active .slide:not([data-type="title"]) .slide-bg { height: 100%; object-fit: cover; background: transparent; }
+        body.gameshow-active .slide:not([data-type="title"]) .slide-content { height: 38%; padding: 24px 82px 92px; background: linear-gradient(180deg, rgba(12,23,43,0.08), rgba(9,17,32,0.86)); border-top: 0; }
+        body.gameshow-active .slide:not([data-type="title"]) .slide-section, body.gameshow-active .slide:not([data-type="title"]) .slide-line { color: #fffdf7; text-shadow: 0 3px 20px rgba(0,0,0,0.92), 0 1px 7px rgba(0,0,0,1); }
+        @media (max-width: 768px) { .slide:not([data-type="title"]) .slide-bg { height: 66%; } .slide:not([data-type="title"]) .slide-content { height: 34%; padding: 18px 28px 84px; } .slide:not([data-type="title"]) .slide-line { font-size: clamp(1.2rem, 5vw, 2.1rem); } }
+
         .nav-btn.hidden { visibility: hidden; pointer-events: none; }
         .nav-btn.icon-btn { width: 44px; height: 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 1rem; line-height: 1; }
         .nav-btn.stop-music { background: rgba(255,217,61,0.22); border-color: rgba(255,217,61,0.75); color: #ffd93d; }
@@ -70,74 +82,73 @@
 <div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics to Guess to Keywords to Photo" aria-label="Cycle display mode">📝</button></div>
 <div class="aspect-wrapper"><div class="screen"><div class="slideshow" id="slideshow">
     <div class="slide active" data-type="title">
-        <img class="slide-bg" src="images/title.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content">
             <div class="title-main">Scripture Power</div>
             <div class="title-sub">Clive Romney · Primary Flipchart</div>
         </div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Because I want to be like the Savior and I can" data-key="SAVIOR">
-        <img class="slide-bg" src="images/slide-01.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-01.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section">Verse 1</div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="I’m reading his instructions, I’m following His plan." data-key="READING · PLAN">
-        <img class="slide-bg" src="images/slide-02.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-02.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Because I want the power His word will give to me," data-key="POWER · WORD">
-        <img class="slide-bg" src="images/slide-03.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-03.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="I’m changing how I live, I’m changing what I’ll be." data-key="CHANGING">
-        <img class="slide-bg" src="images/slide-04.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-04.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="Scripture power keeps me safe from sin." data-key="SCRIPTURE POWER">
-        <img class="slide-bg" src="images/slide-05.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-05.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section">Chorus</div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="Scripture power is the power to win." data-key="POWER TO WIN">
-        <img class="slide-bg" src="images/slide-06.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-06.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="Scripture power! Every day I need" data-key="EVERY DAY">
-        <img class="slide-bg" src="images/slide-07.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-07.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="The power that I get each time I read." data-key="READ">
-        <img class="slide-bg" src="images/slide-08.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-08.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="I’ll find the sword of truth in each scripture that I learn." data-key="SWORD · TRUTH">
-        <img class="slide-bg" src="images/slide-09.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-09.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section">Verse 2</div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="I’ll take the shield of faith from these pages that I turn." data-key="SHIELD · FAITH">
-        <img class="slide-bg" src="images/slide-10.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-10.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="I’ll wear each vital part of the armor of the Lord," data-key="ARMOR">
-        <img class="slide-bg" src="images/slide-11.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-11.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="And fight my daily battles and win a great reward." data-key="DAILY BATTLES">
-        <img class="slide-bg" src="images/slide-12.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-12.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="Scripture power keeps me safe from sin." data-key="SCRIPTURE POWER">
-        <img class="slide-bg" src="images/slide-13.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-13.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section">Chorus</div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="Scripture power is the power to win." data-key="POWER TO WIN">
-        <img class="slide-bg" src="images/slide-14.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-14.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="Scripture power! Every day I need" data-key="EVERY DAY">
-        <img class="slide-bg" src="images/slide-15.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-15.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Chorus" data-full="The power that I get each time I read." data-key="READ">
-        <img class="slide-bg" src="images/slide-16.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-16.jpg?v=20260722clean" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
 </div></div></div><div class="nav">
