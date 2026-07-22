@@ -409,6 +409,14 @@
             margin: -6px 0 16px;
         }
 
+        .request-card {
+            opacity: 1;
+        }
+
+        .request-card .song-artist {
+            line-height: 1.35;
+        }
+
 
         .back-link {
             display: inline-flex;
@@ -608,7 +616,7 @@
                     <div class="tutorial-icon accent">?</div>
                     <div class="tutorial-copy">
                         <strong>Request Song</strong>
-                        <span>Use the button at the bottom to request a flipchart. We will try to build it within 7-10 days.</span>
+                        <span>Use the button at the bottom to add a title to Coming Soon. We will try to build requested flipcharts within 7-10 days.</span>
                     </div>
                 </div>
             </div>
@@ -841,10 +849,10 @@
         </div>
     </details>
 
-    <details class="library-section">
+    <details class="library-section" id="comingSoonSection">
         <summary class="section-title">Coming Soon</summary>
-        <p class="approval-note">These flipcharts are parked here until their images are approved and moved into production.</p>
-        <div class="song-grid">
+        <p class="approval-note">These flipcharts are parked here until their images are approved and moved into production. New requests appear here after they are submitted.</p>
+        <div class="song-grid" id="comingSoonGrid">
 
         <div class="song-card with-actions coming-soon" style="--card-color: #6dd6a6;">
             <div class="song-main">
@@ -906,7 +914,7 @@
 <div class="request-modal" id="requestModal" hidden>
     <form class="request-panel" id="requestForm">
         <h2>Request a Song</h2>
-        <p>Send a song title for a future flipchart.</p>
+        <p>Add a song title to the Coming Soon list. Requested flipcharts are usually built within 7-10 days.</p>
         <div class="request-field">
             <label for="requestTitle">Song Title</label>
             <input id="requestTitle" name="title" type="text" autocomplete="off" required>
@@ -922,7 +930,7 @@
     </form>
 </div>
 <script>
-    const REQUEST_EMAIL = 'tuckersmediashow@gmail.com';
+    const REQUESTS_KEY = 'flipchartsSongRequests';
     const params = new URLSearchParams(window.location.search);
 
     if (params.get('admin') === '1') {
@@ -946,15 +954,100 @@
         document.getElementById('requestForm').reset();
     }
 
-    function emailRequest(request) {
-        const subject = encodeURIComponent(`Flipchart request: ${request.title}`);
-        const body = encodeURIComponent([
-            `Song title: ${request.title}`,
-            request.notes ? `Notes: ${request.notes}` : '',
-            `Requested: ${new Date(request.createdAt).toLocaleString()}`
-        ].filter(Boolean).join('\n'));
+    function getSongRequests() {
+        try {
+            const requests = JSON.parse(localStorage.getItem(REQUESTS_KEY) || '[]');
+            return Array.isArray(requests)
+                ? requests.filter((request) => request && request.title && request.createdAt)
+                : [];
+        } catch (error) {
+            return [];
+        }
+    }
 
-        window.location.href = `mailto:${REQUEST_EMAIL}?subject=${subject}&body=${body}`;
+    function saveSongRequests(requests) {
+        localStorage.setItem(REQUESTS_KEY, JSON.stringify(requests));
+    }
+
+    function requestAgeLabel(createdAt) {
+        const requestedTime = new Date(createdAt).getTime();
+        const ageMs = Date.now() - requestedTime;
+        const ageDays = Math.max(0, Math.floor(ageMs / (24 * 60 * 60 * 1000)));
+
+        if (ageDays === 0) return 'Requested today';
+        if (ageDays === 1) return 'Requested 1 day ago';
+        return `Requested ${ageDays} days ago`;
+    }
+
+    function makeRequestCard(request) {
+        const card = document.createElement('div');
+        card.className = 'song-card with-actions request-card';
+        card.style.setProperty('--card-color', '#ffd34f');
+
+        const main = document.createElement('div');
+        main.className = 'song-main';
+
+        const icon = document.createElement('div');
+        icon.className = 'song-emoji';
+        icon.textContent = '📝';
+
+        const info = document.createElement('div');
+        info.className = 'song-info';
+
+        const title = document.createElement('div');
+        title.className = 'song-title';
+        title.textContent = request.title;
+
+        const detail = document.createElement('div');
+        detail.className = 'song-artist';
+        detail.textContent = request.notes || 'Requested song';
+
+        const tags = document.createElement('div');
+        tags.className = 'song-tags';
+
+        const statusTag = document.createElement('span');
+        statusTag.className = 'tag in-progress';
+        statusTag.textContent = requestAgeLabel(request.createdAt);
+
+        tags.append(statusTag);
+        info.append(title, detail, tags);
+        main.append(icon, info);
+
+        const actions = document.createElement('div');
+        actions.className = 'song-actions';
+
+        const received = document.createElement('button');
+        received.className = 'pending-link';
+        received.type = 'button';
+        received.disabled = true;
+        received.textContent = 'Request received';
+
+        actions.append(received);
+        card.append(main, actions);
+        return card;
+    }
+
+    function renderSongRequests() {
+        const grid = document.getElementById('comingSoonGrid');
+        if (!grid) return;
+
+        grid.querySelectorAll('.request-card').forEach((card) => card.remove());
+
+        const requests = getSongRequests().sort((a, b) => (
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        ));
+
+        requests.forEach((request) => {
+            grid.prepend(makeRequestCard(request));
+        });
+    }
+
+    function addSongRequest(request) {
+        const requests = getSongRequests();
+        requests.push(request);
+        saveSongRequests(requests);
+        renderSongRequests();
+        document.getElementById('comingSoonSection')?.setAttribute('open', '');
     }
 
     document.getElementById('requestForm').addEventListener('submit', (event) => {
@@ -967,7 +1060,7 @@
         const request = { title, notes, createdAt: new Date().toISOString() };
 
         closeRequestModal();
-        emailRequest(request);
+        addSongRequest(request);
     });
 
     document.getElementById('requestModal').addEventListener('click', (event) => {
@@ -980,6 +1073,7 @@
         }
     });
 
+    renderSongRequests();
 </script>
 </body>
 </html>
