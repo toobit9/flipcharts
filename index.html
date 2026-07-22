@@ -44,8 +44,8 @@
             font-size: 0.95rem;
         }
 
-        .header-actions {
-            margin-top: 22px;
+        .request-footer {
+            margin-top: 42px;
             display: flex;
             justify-content: center;
         }
@@ -251,54 +251,6 @@
             background: rgba(255,255,255,0.035);
         }
 
-        .request-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .request-title {
-            font-size: 1.04rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .request-note {
-            color: rgba(255,255,255,0.52);
-            font-size: 0.86rem;
-            line-height: 1.4;
-            margin-bottom: 10px;
-        }
-
-        .request-date {
-            color: rgba(255,255,255,0.34);
-            font-size: 0.72rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .remove-request {
-            border: 0;
-            background: rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.58);
-            border-radius: 999px;
-            width: 32px;
-            height: 32px;
-            flex-shrink: 0;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .remove-request:hover {
-            background: rgba(255,255,255,0.14);
-            color: rgba(255,255,255,0.86);
-        }
-
         .request-modal {
             position: fixed;
             inset: 0;
@@ -402,7 +354,6 @@
         @media (max-width: 600px) {
             .header h1 { font-size: 1.6rem; }
             .song-grid { grid-template-columns: 1fr; }
-            .request-card { padding: 18px; }
         }
     </style>
 </head>
@@ -412,9 +363,6 @@
     <div class="header">
         <h1>🎵 Primary Song Library</h1>
         <p>Tap any song to open its flipchart</p>
-        <div class="header-actions">
-            <button class="request-btn" type="button" onclick="openRequestModal()">Request Song</button>
-        </div>
     </div>
 
 
@@ -602,18 +550,16 @@
         </div>
     </details>
 
-    <details class="library-section" id="requestSection">
-        <summary class="section-title">Requested Songs</summary>
-        <div class="song-grid" id="requestList"></div>
-        <div class="empty-section" id="requestEmpty">No song requests yet.</div>
-    </details>
+    <div class="request-footer">
+        <button class="request-btn" type="button" onclick="openRequestModal()">Request Song</button>
+    </div>
 
 
 </div>
 <div class="request-modal" id="requestModal" hidden>
     <form class="request-panel" id="requestForm">
         <h2>Request a Song</h2>
-        <p>Add a song to the flipchart request queue. This saves on this device for now.</p>
+        <p>Send a song title for a future flipchart.</p>
         <div class="request-field">
             <label for="requestTitle">Song Title</label>
             <input id="requestTitle" name="title" type="text" autocomplete="off" required>
@@ -629,59 +575,7 @@
     </form>
 </div>
 <script>
-    const REQUEST_EMAIL = '';
-    const REQUEST_STORAGE_KEY = 'primaryFlipchartSongRequests';
-
-    function readRequests() {
-        try {
-            return JSON.parse(localStorage.getItem(REQUEST_STORAGE_KEY) || '[]');
-        } catch {
-            return [];
-        }
-    }
-
-    function saveRequests(requests) {
-        localStorage.setItem(REQUEST_STORAGE_KEY, JSON.stringify(requests));
-    }
-
-    function formatRequestDate(value) {
-        return new Intl.DateTimeFormat(undefined, {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        }).format(new Date(value));
-    }
-
-    function escapeHtml(value) {
-        return value.replace(/[&<>"']/g, (char) => ({
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
-        }[char]));
-    }
-
-    function renderRequests() {
-        const requests = readRequests();
-        const section = document.getElementById('requestSection');
-        const list = document.getElementById('requestList');
-        const empty = document.getElementById('requestEmpty');
-
-        list.innerHTML = requests.map((request) => `
-            <div class="request-card">
-                <div>
-                    <div class="request-title">${escapeHtml(request.title)}</div>
-                    ${request.notes ? `<div class="request-note">${escapeHtml(request.notes)}</div>` : ''}
-                    <div class="request-date">Requested ${formatRequestDate(request.createdAt)}</div>
-                </div>
-                <button class="remove-request" type="button" onclick="removeRequest('${request.id}')" title="Remove request" aria-label="Remove request">×</button>
-            </div>
-        `).join('');
-
-        empty.hidden = requests.length > 0;
-        section.open = requests.length > 0;
-    }
+    const REQUEST_EMAIL = 'tuckerdansie@gmail.com';
 
     function openRequestModal() {
         const modal = document.getElementById('requestModal');
@@ -694,14 +588,7 @@
         document.getElementById('requestForm').reset();
     }
 
-    function removeRequest(id) {
-        saveRequests(readRequests().filter((request) => request.id !== id));
-        renderRequests();
-    }
-
     function emailRequest(request) {
-        if (!REQUEST_EMAIL) return;
-
         const subject = encodeURIComponent(`Flipchart request: ${request.title}`);
         const body = encodeURIComponent([
             `Song title: ${request.title}`,
@@ -719,16 +606,9 @@
         const notes = document.getElementById('requestNotes').value.trim();
         if (!title) return;
 
-        const request = {
-            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-            title,
-            notes,
-            createdAt: new Date().toISOString()
-        };
+        const request = { title, notes, createdAt: new Date().toISOString() };
 
-        saveRequests([request, ...readRequests()]);
         closeRequestModal();
-        renderRequests();
         emailRequest(request);
     });
 
@@ -742,7 +622,6 @@
         }
     });
 
-    renderRequests();
 </script>
 </body>
 </html>
