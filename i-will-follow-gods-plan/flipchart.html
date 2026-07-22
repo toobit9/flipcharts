@@ -20,12 +20,12 @@
         .slideshow { width: 100%; height: 100%; position: relative; }
         .slide { display: none; position: absolute; inset: 0; }
         .slide.active { display: flex; flex-direction: column; }
-        .slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.72) saturate(1.12); }
-        .slide-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; padding: 42px 70px 104px; text-align: left; }
+        .slide-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background-size: cover; background-position: center; filter: brightness(0.66) saturate(1.12); }
+        .slide-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 52px 86px 108px; text-align: center; }
         .slide-section { font-size: clamp(0.7rem, 1.4vw, 0.95rem); letter-spacing: 3px; text-transform: uppercase; color: color-mix(in srgb, var(--accent) 72%, white); margin-bottom: 22px; text-shadow: 0 2px 12px rgba(0,0,0,0.7); }
-        .slide-line { font-size: clamp(1.75rem, 4.7vw, 3.35rem); font-weight: 700; color: #fffdf7; line-height: 1.35; text-shadow: 0 3px 25px rgba(0,0,0,0.95), 0 1px 8px rgba(0,0,0,1); max-width: 1080px; }
+        .slide-line { font-size: clamp(2.2rem, 5.6vw, 4.85rem); font-weight: 800; color: #fffdf7; line-height: 1.14; text-shadow: 0 3px 25px rgba(0,0,0,0.95), 0 1px 8px rgba(0,0,0,1); max-width: 1240px; width: 100%; margin: 0 auto; text-align: center; }
         .slide-line.keywords { font-size: clamp(2.25rem, 6.7vw, 5rem); color: var(--accent); letter-spacing: 0; }
-        .title-main { font-size: clamp(2.4rem, 6.2vw, 5rem); font-weight: bold; color: #fffdf7; text-shadow: 0 4px 30px rgba(0,0,0,0.95); margin-bottom: 16px; max-width: 1100px; }
+        .title-main { font-size: clamp(3rem, 7.4vw, 6.15rem); font-weight: bold; color: #fffdf7; text-shadow: 0 4px 30px rgba(0,0,0,0.95); margin-bottom: 16px; max-width: 1240px; width: 100%; text-align: center; }
         .title-sub { font-size: clamp(0.95rem, 2.1vw, 1.35rem); color: rgba(255,255,255,0.76); letter-spacing: 1px; text-shadow: 0 2px 14px rgba(0,0,0,0.85); }
         .nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100vw, 177.78vh); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: rgba(0,0,0,0.52); backdrop-filter: blur(8px); }
         .nav-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; padding: 10px 32px; border-radius: 30px; font-size: 1.1rem; cursor: pointer; transition: all 0.2s; font-family: Georgia, serif; -webkit-tap-highlight-color: transparent; }
@@ -69,50 +69,50 @@
 <div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics to Guess to Keywords to Photo" aria-label="Cycle display mode">📝</button></div>
 <div class="aspect-wrapper"><div class="screen"><div class="slideshow" id="slideshow">
     <div class="slide active" data-type="title">
-        <img class="slide-bg" src="images/title.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/title.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content">
             <div class="title-main">I Will Follow God&#x27;s Plan</div>
             <div class="title-sub">Vanja Y. Watkins · Primary Flipchart</div>
         </div>
     </div>
     <div class="slide" data-section="Verse" data-full="My life is a gift; my life has a plan." data-key="GIFT · PLAN">
-        <img class="slide-bg" src="images/slide-01.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-01.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section">Verse</div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="My life has a purpose; in heav’n it began." data-key="PURPOSE · HEAVEN">
-        <img class="slide-bg" src="images/slide-02.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-02.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="My choice was to come to this lovely home on earth" data-key="CHOICE · EARTH">
-        <img class="slide-bg" src="images/slide-03.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-03.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="And seek for God’s light to direct me from birth." data-key="GOD’S LIGHT">
-        <img class="slide-bg" src="images/slide-04.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-04.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="I will follow God’s plan for me," data-key="FOLLOW · PLAN">
-        <img class="slide-bg" src="images/slide-05.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-05.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="Holding fast to his word and his love." data-key="WORD · LOVE">
-        <img class="slide-bg" src="images/slide-06.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-06.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="I will work, and I will pray;" data-key="WORK · PRAY">
-        <img class="slide-bg" src="images/slide-07.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-07.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="I will always walk in his way." data-key="WALK · WAY">
-        <img class="slide-bg" src="images/slide-08.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-08.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="Then I will be happy on earth" data-key="HAPPY · EARTH">
-        <img class="slide-bg" src="images/slide-09.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-09.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse" data-full="And in my home above." data-key="HOME ABOVE">
-        <img class="slide-bg" src="images/slide-10.jpg?v=20260607b" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-10.jpg?v=20260722pdf" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
 </div></div></div>
