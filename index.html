@@ -44,14 +44,31 @@
             font-size: 0.95rem;
         }
 
+        .library-section { margin-top: 36px; }
+
         .section-title {
             font-size: 0.8rem;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255,255,255,0.42);
             margin-bottom: 16px;
-            margin-top: 36px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
         }
+
+        .section-title::-webkit-details-marker { display: none; }
+
+        .section-title::before {
+            content: '>';
+            display: inline-block;
+            margin-right: 10px;
+            color: rgba(255,255,255,0.55);
+            transform: rotate(90deg);
+            transition: transform 0.18s ease;
+        }
+
+        .library-section:not([open]) .section-title::before { transform: rotate(0deg); }
 
         .song-grid {
             display: grid;
@@ -213,21 +230,10 @@
         <p>Tap any song to open its flipchart</p>
     </div>
 
-    <div class="section-title">✅ Ready</div>
-    <div class="song-grid">
 
-        <div class="song-card with-actions" style="--card-color: #58d6c9;">
-            <a href="/holding-hands-around-the-world/flipchart.html" class="song-main">
-                <div class="song-emoji">🌍</div>
-                <div class="song-info">
-                    <div class="song-title">Holding Hands Around the World</div>
-                    <div class="song-artist">Janice Kapp Perry</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">27 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/holding-hands-around-the-world/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-        </div>
+    <details class="library-section" open>
+        <summary class="section-title">Primary Program</summary>
+        <div class="song-grid">
 
         <div class="song-card with-actions" style="--card-color: #ffd93d;">
             <a href="/david-and-goliath/flipchart.html" class="song-main">
@@ -240,19 +246,6 @@
                 <div class="arrow">›</div>
             </a>
             <a href="/david-and-goliath/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-        </div>
-
-        <div class="song-card with-actions" style="--card-color: #4ecdc4;">
-            <a href="/faith-in-every-footstep/flipchart.html" class="song-main">
-            <div class="song-emoji">🦶</div>
-            <div class="song-info">
-                <div class="song-title">Faith in Every Footstep</div>
-                <div class="song-artist">K. Newell Dayley</div>
-                <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">37 slides</span></div>
-            </div>
-            <div class="arrow">›</div>
-            </a>
-            <a href="/faith-in-every-footstep/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #a78bfa;">
@@ -268,6 +261,39 @@
             <a href="/a-childs-prayer/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
+        <div class="song-card with-actions" style="--card-color: #c7a6ff;">
+            <a href="/i-will-walk-with-jesus/flipchart.html" class="song-main">
+            <div class="song-emoji">👣</div>
+            <div class="song-info">
+                <div class="song-title">I Will Walk with Jesus</div>
+                <div class="song-artist">Stephen P. Schank</div>
+                <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
+            </div>
+            <div class="arrow">›</div>
+            </a>
+            <a href="/i-will-walk-with-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+        </div>
+
+        </div>
+    </details>
+
+    <details class="library-section">
+        <summary class="section-title">Misc</summary>
+        <div class="song-grid">
+
+        <div class="song-card with-actions" style="--card-color: #58d6c9;">
+            <a href="/holding-hands-around-the-world/flipchart.html" class="song-main">
+                <div class="song-emoji">🌍</div>
+                <div class="song-info">
+                    <div class="song-title">Holding Hands Around the World</div>
+                    <div class="song-artist">Janice Kapp Perry</div>
+                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">27 slides</span></div>
+                </div>
+                <div class="arrow">›</div>
+            </a>
+            <a href="/holding-hands-around-the-world/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+        </div>
+
         <div class="song-card with-actions" style="--card-color: #f06595;">
             <a href="/more-than-enough/flipchart.html" class="song-main">
             <div class="song-emoji">💝</div>
@@ -279,6 +305,19 @@
             <div class="arrow">›</div>
             </a>
             <a href="/more-than-enough/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+        </div>
+
+        <div class="song-card with-actions" style="--card-color: #4ecdc4;">
+            <a href="/faith-in-every-footstep/flipchart.html" class="song-main">
+            <div class="song-emoji">🦶</div>
+            <div class="song-info">
+                <div class="song-title">Faith in Every Footstep</div>
+                <div class="song-artist">K. Newell Dayley</div>
+                <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">37 slides</span></div>
+            </div>
+            <div class="arrow">›</div>
+            </a>
+            <a href="/faith-in-every-footstep/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #ffd34f;">
@@ -294,23 +333,12 @@
             <a href="/there-is-sunshine-in-my-soul-today/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
-        <div class="song-card with-actions" style="--card-color: #c7a6ff;">
-            <a href="/i-will-walk-with-jesus/flipchart.html" class="song-main">
-            <div class="song-emoji">👣</div>
-            <div class="song-info">
-                <div class="song-title">I Will Walk with Jesus</div>
-                <div class="song-artist">Stephen P. Schank</div>
-                <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
-            </div>
-            <div class="arrow">›</div>
-            </a>
-            <a href="/i-will-walk-with-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
+    </details>
 
-    </div>
-
-    <div class="section-title">🖼️ Images Coming Soon</div>
-    <div class="song-grid">
+    <details class="library-section">
+        <summary class="section-title">Coming Soon</summary>
+        <div class="song-grid">
 
         <div class="song-card with-actions" style="--card-color: #6dd6a6;">
             <a href="/i-will-follow-gods-plan/flipchart.html" class="song-main">
@@ -377,7 +405,9 @@
             <a href="/holy-places/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
-    </div>
+        </div>
+    </details>
+
 
 </div>
 </body>
