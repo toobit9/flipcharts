@@ -44,6 +44,32 @@
             font-size: 0.95rem;
         }
 
+        .header-actions {
+            margin-top: 22px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .request-btn {
+            border: 1px solid rgba(255,211,79,0.52);
+            background: rgba(255,211,79,0.13);
+            color: #ffe17a;
+            border-radius: 999px;
+            padding: 12px 18px;
+            font: inherit;
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+            transition: transform 0.2s, background 0.2s, border-color 0.2s;
+        }
+
+        .request-btn:hover {
+            background: rgba(255,211,79,0.22);
+            border-color: rgba(255,211,79,0.78);
+            transform: translateY(-2px);
+        }
+
         .library-section { margin-top: 36px; }
 
         .section-title {
@@ -225,9 +251,158 @@
             background: rgba(255,255,255,0.035);
         }
 
+        .request-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .request-title {
+            font-size: 1.04rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .request-note {
+            color: rgba(255,255,255,0.52);
+            font-size: 0.86rem;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .request-date {
+            color: rgba(255,255,255,0.34);
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .remove-request {
+            border: 0;
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.58);
+            border-radius: 999px;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .remove-request:hover {
+            background: rgba(255,255,255,0.14);
+            color: rgba(255,255,255,0.86);
+        }
+
+        .request-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px;
+            background: rgba(0,0,0,0.72);
+            backdrop-filter: blur(10px);
+        }
+
+        .request-modal[hidden] { display: none; }
+
+        .request-panel {
+            width: min(100%, 460px);
+            background: #15151b;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+        }
+
+        .request-panel h2 {
+            font-size: 1.35rem;
+            margin-bottom: 8px;
+        }
+
+        .request-panel p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            line-height: 1.45;
+            margin-bottom: 18px;
+        }
+
+        .request-field {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .request-field label {
+            color: rgba(255,255,255,0.68);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .request-field input,
+        .request-field textarea {
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.13);
+            background: rgba(255,255,255,0.06);
+            color: white;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font: inherit;
+            outline: none;
+        }
+
+        .request-field textarea {
+            min-height: 92px;
+            resize: vertical;
+        }
+
+        .request-field input:focus,
+        .request-field textarea:focus {
+            border-color: rgba(255,211,79,0.68);
+            box-shadow: 0 0 0 3px rgba(255,211,79,0.12);
+        }
+
+        .request-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .secondary-btn,
+        .submit-request {
+            border-radius: 999px;
+            padding: 10px 15px;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .secondary-btn {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.7);
+        }
+
+        .submit-request {
+            border: 1px solid rgba(255,211,79,0.55);
+            background: #ffd34f;
+            color: #15120a;
+        }
+
         @media (max-width: 600px) {
             .header h1 { font-size: 1.6rem; }
             .song-grid { grid-template-columns: 1fr; }
+            .request-card { padding: 18px; }
         }
     </style>
 </head>
@@ -237,6 +412,9 @@
     <div class="header">
         <h1>🎵 Primary Song Library</h1>
         <p>Tap any song to open its flipchart</p>
+        <div class="header-actions">
+            <button class="request-btn" type="button" onclick="openRequestModal()">Request Song</button>
+        </div>
     </div>
 
 
@@ -424,12 +602,147 @@
         </div>
     </details>
 
-    <details class="library-section">
-        <summary class="section-title">Coming Soon</summary>
-        <div class="empty-section">More flipcharts coming soon.</div>
+    <details class="library-section" id="requestSection">
+        <summary class="section-title">Requested Songs</summary>
+        <div class="song-grid" id="requestList"></div>
+        <div class="empty-section" id="requestEmpty">No song requests yet.</div>
     </details>
 
 
 </div>
+<div class="request-modal" id="requestModal" hidden>
+    <form class="request-panel" id="requestForm">
+        <h2>Request a Song</h2>
+        <p>Add a song to the flipchart request queue. This saves on this device for now.</p>
+        <div class="request-field">
+            <label for="requestTitle">Song Title</label>
+            <input id="requestTitle" name="title" type="text" autocomplete="off" required>
+        </div>
+        <div class="request-field">
+            <label for="requestNotes">Notes</label>
+            <textarea id="requestNotes" name="notes" placeholder="Optional: program date, artist, link, or lyrics source"></textarea>
+        </div>
+        <div class="request-actions">
+            <button class="secondary-btn" type="button" onclick="closeRequestModal()">Cancel</button>
+            <button class="submit-request" type="submit">Add Request</button>
+        </div>
+    </form>
+</div>
+<script>
+    const REQUEST_EMAIL = '';
+    const REQUEST_STORAGE_KEY = 'primaryFlipchartSongRequests';
+
+    function readRequests() {
+        try {
+            return JSON.parse(localStorage.getItem(REQUEST_STORAGE_KEY) || '[]');
+        } catch {
+            return [];
+        }
+    }
+
+    function saveRequests(requests) {
+        localStorage.setItem(REQUEST_STORAGE_KEY, JSON.stringify(requests));
+    }
+
+    function formatRequestDate(value) {
+        return new Intl.DateTimeFormat(undefined, {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        }).format(new Date(value));
+    }
+
+    function escapeHtml(value) {
+        return value.replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        }[char]));
+    }
+
+    function renderRequests() {
+        const requests = readRequests();
+        const section = document.getElementById('requestSection');
+        const list = document.getElementById('requestList');
+        const empty = document.getElementById('requestEmpty');
+
+        list.innerHTML = requests.map((request) => `
+            <div class="request-card">
+                <div>
+                    <div class="request-title">${escapeHtml(request.title)}</div>
+                    ${request.notes ? `<div class="request-note">${escapeHtml(request.notes)}</div>` : ''}
+                    <div class="request-date">Requested ${formatRequestDate(request.createdAt)}</div>
+                </div>
+                <button class="remove-request" type="button" onclick="removeRequest('${request.id}')" title="Remove request" aria-label="Remove request">×</button>
+            </div>
+        `).join('');
+
+        empty.hidden = requests.length > 0;
+        section.open = requests.length > 0;
+    }
+
+    function openRequestModal() {
+        const modal = document.getElementById('requestModal');
+        modal.hidden = false;
+        setTimeout(() => document.getElementById('requestTitle').focus(), 0);
+    }
+
+    function closeRequestModal() {
+        document.getElementById('requestModal').hidden = true;
+        document.getElementById('requestForm').reset();
+    }
+
+    function removeRequest(id) {
+        saveRequests(readRequests().filter((request) => request.id !== id));
+        renderRequests();
+    }
+
+    function emailRequest(request) {
+        if (!REQUEST_EMAIL) return;
+
+        const subject = encodeURIComponent(`Flipchart request: ${request.title}`);
+        const body = encodeURIComponent([
+            `Song title: ${request.title}`,
+            request.notes ? `Notes: ${request.notes}` : '',
+            `Requested: ${new Date(request.createdAt).toLocaleString()}`
+        ].filter(Boolean).join('\n'));
+
+        window.location.href = `mailto:${REQUEST_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    document.getElementById('requestForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const title = document.getElementById('requestTitle').value.trim();
+        const notes = document.getElementById('requestNotes').value.trim();
+        if (!title) return;
+
+        const request = {
+            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+            title,
+            notes,
+            createdAt: new Date().toISOString()
+        };
+
+        saveRequests([request, ...readRequests()]);
+        closeRequestModal();
+        renderRequests();
+        emailRequest(request);
+    });
+
+    document.getElementById('requestModal').addEventListener('click', (event) => {
+        if (event.target.id === 'requestModal') closeRequestModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !document.getElementById('requestModal').hidden) {
+            closeRequestModal();
+        }
+    });
+
+    renderRequests();
+</script>
 </body>
 </html>
