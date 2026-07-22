@@ -15,6 +15,7 @@ module.exports = async function handler(request, response) {
         if (request.method === 'POST') {
             const body = parseBody(request);
             const title = cleanText(body.title, 160);
+            const artStyle = cleanText(body.artStyle || body.art_style, 120);
             const notes = cleanText(body.notes, 1000);
 
             if (!title) {
@@ -24,11 +25,11 @@ module.exports = async function handler(request, response) {
 
             const rows = await sql.query(
                 `
-                INSERT INTO song_requests (title, notes)
-                VALUES ($1, $2)
-                RETURNING id, title, notes, created_at
+                INSERT INTO song_requests (title, art_style, notes)
+                VALUES ($1, $2, $3)
+                RETURNING id, title, art_style, notes, created_at
                 `,
-                [title, notes || null]
+                [title, artStyle || 'You choose', notes || null]
             );
 
             response.status(201).json({ item: rows[0] });
@@ -42,7 +43,7 @@ module.exports = async function handler(request, response) {
             }
 
             const rows = await sql.query(`
-                SELECT id, title, notes, created_at
+                SELECT id, title, art_style, notes, created_at
                 FROM song_requests
                 ORDER BY created_at DESC
                 LIMIT 100

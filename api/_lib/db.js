@@ -31,9 +31,15 @@ async function ensureTables() {
         CREATE TABLE IF NOT EXISTS song_requests (
             id SERIAL PRIMARY KEY,
             title TEXT NOT NULL,
+            art_style TEXT,
             notes TEXT,
             created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
         )
+    `);
+
+    await sql.query(`
+        ALTER TABLE song_requests
+        ADD COLUMN IF NOT EXISTS art_style TEXT
     `);
 
     await sql.query(`

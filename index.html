@@ -642,6 +642,10 @@
             resize: vertical;
         }
 
+        .request-field.is-hidden {
+            display: none;
+        }
+
         .admin-error {
             min-height: 20px;
             color: #ff9f9f;
@@ -1078,6 +1082,21 @@
             <input id="requestTitle" name="title" type="text" autocomplete="off" required>
         </div>
         <div class="request-field">
+            <label for="requestArtStyle">Preferred Art Style</label>
+            <select id="requestArtStyle" name="artStyle">
+                <option value="You choose">You choose</option>
+                <option value="Watercolor">Watercolor</option>
+                <option value="3D animated">3D animated</option>
+                <option value="Cartoon">Cartoon</option>
+                <option value="Realistic">Realistic</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="request-field is-hidden" id="requestOtherArtStyleField">
+            <label for="requestOtherArtStyle">Other Style</label>
+            <input id="requestOtherArtStyle" name="otherArtStyle" type="text" autocomplete="off" placeholder="Example: claymation, paper cutout, stained glass">
+        </div>
+        <div class="request-field">
             <label for="requestNotes">Notes</label>
             <textarea id="requestNotes" name="notes" placeholder="Optional: program date, artist, link, or lyrics source"></textarea>
         </div>
@@ -1169,6 +1188,7 @@
         document.getElementById('requestModal').hidden = true;
         document.getElementById('requestForm').reset();
         document.getElementById('requestStatus').textContent = '';
+        updateOtherArtStyleField();
     }
 
     function openFeedbackModal() {
@@ -1239,6 +1259,20 @@
         return item.createdAt || item.created_at || new Date().toISOString();
     }
 
+    function artStyleFor(request) {
+        return request.artStyle || request.art_style || 'You choose';
+    }
+
+    function updateOtherArtStyleField() {
+        const artStyle = document.getElementById('requestArtStyle');
+        const otherField = document.getElementById('requestOtherArtStyleField');
+        if (!artStyle || !otherField) return;
+
+        const isOther = artStyle.value === 'Other';
+        otherField.classList.toggle('is-hidden', !isOther);
+        if (!isOther) document.getElementById('requestOtherArtStyle').value = '';
+    }
+
     function requestAgeLabel(createdAt) {
         const requestedTime = new Date(createdAt).getTime();
         const ageMs = Date.now() - requestedTime;
@@ -1275,11 +1309,15 @@
         const tags = document.createElement('div');
         tags.className = 'song-tags';
 
+        const styleTag = document.createElement('span');
+        styleTag.className = 'tag';
+        styleTag.textContent = artStyleFor(request);
+
         const statusTag = document.createElement('span');
         statusTag.className = 'tag in-progress';
         statusTag.textContent = requestAgeLabel(createdAtFor(request));
 
-        tags.append(statusTag);
+        tags.append(styleTag, statusTag);
         info.append(title, detail, tags);
         main.append(icon, info);
 
@@ -1410,14 +1448,14 @@
                 (request) => makeAdminEntry(
                     request.title,
                     request.notes,
-                    `${request.localOnly ? 'Saved on this device' : 'Database'} · ${requestAgeLabel(createdAtFor(request))}`
+                    `${artStyleFor(request)} · ${request.localOnly ? 'Saved on this device' : 'Database'} · ${requestAgeLabel(createdAtFor(request))}`
                 )
             );
         } catch (error) {
             renderAdminList('adminRequestsList', getSongRequests(), error.message, (request) => makeAdminEntry(
                 request.title,
                 request.notes,
-                `Local only · ${requestAgeLabel(createdAtFor(request))}`
+                `${artStyleFor(request)} · Local only · ${requestAgeLabel(createdAtFor(request))}`
             ));
         }
 
@@ -1443,16 +1481,21 @@
         }
     }
 
+    document.getElementById('requestArtStyle').addEventListener('change', updateOtherArtStyleField);
+
     document.getElementById('requestForm').addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const title = document.getElementById('requestTitle').value.trim();
+        const selectedArtStyle = document.getElementById('requestArtStyle').value;
+        const otherArtStyle = document.getElementById('requestOtherArtStyle').value.trim();
+        const artStyle = selectedArtStyle === 'Other' ? (otherArtStyle || 'Other') : selectedArtStyle;
         const notes = document.getElementById('requestNotes').value.trim();
         const status = document.getElementById('requestStatus');
         const submit = event.submitter;
         if (!title) return;
 
-        const request = { title, notes, createdAt: new Date().toISOString() };
+        const request = { title, artStyle, notes, createdAt: new Date().toISOString() };
 
         status.textContent = '';
         if (submit) {
@@ -1464,6 +1507,7 @@
             const result = await postJson('/api/song-requests', request);
             addSongRequest({
                 title: result.item.title,
+                artStyle: result.item.art_style,
                 notes: result.item.notes,
                 createdAt: result.item.created_at
             });
