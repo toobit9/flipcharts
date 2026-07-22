@@ -72,6 +72,70 @@
 
         .library-section { margin-top: 36px; }
 
+        .tutorial-section {
+            margin: -18px 0 34px;
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.045);
+            overflow: hidden;
+        }
+
+        .tutorial-title {
+            padding: 16px 18px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+            color: rgba(255,255,255,0.76);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tutorial-title::-webkit-details-marker { display: none; }
+
+        .tutorial-title::before {
+            content: '>';
+            color: rgba(255,211,79,0.78);
+            transform: rotate(0deg);
+            transition: transform 0.18s ease;
+        }
+
+        .tutorial-section[open] .tutorial-title::before {
+            transform: rotate(90deg);
+        }
+
+        .tutorial-body {
+            padding: 0 18px 18px;
+            display: grid;
+            gap: 14px;
+            color: rgba(255,255,255,0.62);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .tutorial-item {
+            background: rgba(0,0,0,0.18);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 10px;
+            padding: 13px 14px;
+        }
+
+        .tutorial-item strong {
+            display: block;
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 4px;
+            font-size: 0.88rem;
+        }
+
         .section-title {
             font-size: 0.8rem;
             letter-spacing: 3px;
@@ -187,11 +251,11 @@
 
         .song-card.with-actions {
             align-items: stretch;
-            gap: 16px;
+            gap: 18px;
+            flex-direction: column;
         }
 
         .song-card.with-actions .song-main {
-            flex: 1;
             display: flex;
             align-items: center;
             gap: 20px;
@@ -200,20 +264,44 @@
             min-width: 0;
         }
 
+        .song-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .flipchart-link,
         .game-link {
-            align-self: center;
-            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid rgba(255,217,61,0.45);
-            background: rgba(255,217,61,0.12);
+            min-height: 42px;
             color: #ffd93d;
             border-radius: 999px;
-            padding: 9px 12px;
-            font-size: 0.74rem;
+            padding: 10px 12px;
+            font-size: 0.78rem;
             font-weight: 700;
             letter-spacing: 0.3px;
             text-decoration: none;
+            text-align: center;
             white-space: nowrap;
             transition: background 0.2s, border-color 0.2s;
+        }
+
+        .flipchart-link {
+            background: #ffd34f;
+            color: #15120a;
+            border-color: #ffd34f;
+        }
+
+        .flipchart-link:hover {
+            background: #ffe17a;
+            border-color: #ffe17a;
+        }
+
+        .game-link {
+            background: rgba(255,217,61,0.12);
         }
 
         .game-link:hover {
@@ -354,6 +442,7 @@
         @media (max-width: 600px) {
             .header h1 { font-size: 1.6rem; }
             .song-grid { grid-template-columns: 1fr; }
+            .song-actions { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -362,10 +451,35 @@
 
     <div class="header">
         <h1>🎵 Primary Song Library</h1>
-        <p>Tap any song to open its flipchart</p>
+        <p>Choose a flipchart or start the Fill It In game</p>
     </div>
 
 
+
+    <details class="tutorial-section">
+        <summary class="tutorial-title">Info and Tutorial</summary>
+        <div class="tutorial-body">
+            <p>Use <strong>Open Flipchart</strong> for normal singing practice. Use <strong>FILL IT IN!</strong> when you want the guessing game: it shows a picture first, then a clue with one or more missing words, then the full answer.</p>
+            <div class="tutorial-grid">
+                <div class="tutorial-item">
+                    <strong>Flipchart Buttons</strong>
+                    Back and Next move through the slides. The restart icon jumps back to the beginning, and the music-note icon returns to the song library.
+                </div>
+                <div class="tutorial-item">
+                    <strong>Display Modes</strong>
+                    The top-right icon cycles through full lyrics, missing-word practice, keyword prompts, and photo-only mode.
+                </div>
+                <div class="tutorial-item">
+                    <strong>Accompaniment</strong>
+                    Songs with music show small play/pause and stop controls near the top. The audio keeps playing while you flip slides.
+                </div>
+                <div class="tutorial-item">
+                    <strong>FILL IT IN!</strong>
+                    Start the game from the song library. Press Next to move from picture, to clue, to answer, then on to another random slide.
+                </div>
+            </div>
+        </div>
+    </details>
 
     <details class="library-section" open>
         <summary class="section-title">Primary Program</summary>
@@ -373,120 +487,129 @@
 
 
         <div class="song-card with-actions" style="--card-color: #a78bfa;">
-            <a href="/a-childs-prayer/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🙏</div>
                 <div class="song-info">
                     <div class="song-title">A Child&#x27;s Prayer</div>
                     <div class="song-artist">Janice Kapp Perry</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">17 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/a-childs-prayer/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/a-childs-prayer/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/a-childs-prayer/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #4ecdc4;">
-            <a href="/build-an-ark/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🛶</div>
                 <div class="song-info">
                     <div class="song-title">Build an Ark</div>
                     <div class="song-artist">Marianne Porter</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">19 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/build-an-ark/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/build-an-ark/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/build-an-ark/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #ffd93d;">
-            <a href="/david-and-goliath/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🪨</div>
                 <div class="song-info">
                     <div class="song-title">David &amp; Goliath</div>
                     <div class="song-artist">Shawna Edwards</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">18 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/david-and-goliath/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/david-and-goliath/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/david-and-goliath/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #f7b267;">
-            <a href="/holy-places/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🏛️</div>
                 <div class="song-info">
                     <div class="song-title">Holy Places</div>
                     <div class="song-artist">Sherrie Manwill Boren</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">22 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/holy-places/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/holy-places/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/holy-places/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #6dd6a6;">
-            <a href="/i-will-follow-gods-plan/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🗺️</div>
                 <div class="song-info">
                     <div class="song-title">I Will Follow God&#x27;s Plan</div>
                     <div class="song-artist">Vanja Y. Watkins</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">11 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/i-will-follow-gods-plan/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/i-will-follow-gods-plan/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/i-will-follow-gods-plan/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #7bdff2;">
-            <a href="/my-heavenly-father-loves-me/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🌿</div>
                 <div class="song-info">
                     <div class="song-title">My Heavenly Father Loves Me</div>
                     <div class="song-artist">Clara W. McMaster</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/my-heavenly-father-loves-me/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/my-heavenly-father-loves-me/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/my-heavenly-father-loves-me/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #8ed4ff;">
-            <a href="/scripture-power/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">📖</div>
                 <div class="song-info">
                     <div class="song-title">Scripture Power</div>
                     <div class="song-artist">Clive Romney</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">17 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/scripture-power/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/scripture-power/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/scripture-power/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #ffd166;">
-            <a href="/the-creation/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🌎</div>
                 <div class="song-info">
                     <div class="song-title">The Creation</div>
                     <div class="song-artist">Shawna Edwards</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">27 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/the-creation/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/the-creation/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/the-creation/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #c7a6ff;">
-            <a href="/i-will-walk-with-jesus/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">👣</div>
                 <div class="song-info">
                     <div class="song-title">I Will Walk with Jesus</div>
                     <div class="song-artist">Stephen P. Schank</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/i-will-walk-with-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/i-will-walk-with-jesus/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/i-will-walk-with-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         </div>
@@ -497,94 +620,101 @@
         <div class="song-grid">
 
         <div class="song-card with-actions" style="--card-color: #58d6c9;">
-            <a href="/holding-hands-around-the-world/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🌍</div>
                 <div class="song-info">
                     <div class="song-title">Holding Hands Around the World</div>
                     <div class="song-artist">Janice Kapp Perry</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">27 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/holding-hands-around-the-world/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/holding-hands-around-the-world/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/holding-hands-around-the-world/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #6dd6a6;">
-            <a href="/i-want-to-be-a-missionary-now/flipchart.html" class="song-main">
+            <div class="song-main">
                 <div class="song-emoji">🧳</div>
                 <div class="song-info">
                     <div class="song-title">I Want to Be a Missionary Now</div>
                     <div class="song-artist">B. Jackman · D. O. McKay</div>
                     <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">14 slides</span></div>
-                </div>
-                <div class="arrow">›</div>
-            </a>
-            <a href="/i-want-to-be-a-missionary-now/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+                </div></div>
+            <div class="song-actions">
+                <a href="/i-want-to-be-a-missionary-now/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/i-want-to-be-a-missionary-now/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
+            </div>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #f06595;">
-            <a href="/more-than-enough/flipchart.html" class="song-main">
+            <div class="song-main">
             <div class="song-emoji">💝</div>
             <div class="song-info">
                 <div class="song-title">More Than Enough</div>
                 <div class="song-artist">Shawna Edwards</div>
                 <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag mothers-day">Mother's Day</span><span class="tag">34 slides</span></div>
+            </div></div>
+            <div class="song-actions">
+                <a href="/more-than-enough/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/more-than-enough/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
-            <div class="arrow">›</div>
-            </a>
-            <a href="/more-than-enough/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #f6c85f;">
-            <a href="/the-miracle/flipchart.html" class="song-main">
+            <div class="song-main">
             <div class="song-emoji">✨</div>
             <div class="song-info">
                 <div class="song-title">The Miracle</div>
                 <div class="song-artist">Shawna Edwards</div>
                 <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">24 slides</span></div>
+            </div></div>
+            <div class="song-actions">
+                <a href="/the-miracle/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/the-miracle/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
-            <div class="arrow">›</div>
-            </a>
-            <a href="/the-miracle/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #8ed4ff;">
-            <a href="/the-liahona/flipchart.html" class="song-main">
+            <div class="song-main">
             <div class="song-emoji">🧭</div>
             <div class="song-info">
                 <div class="song-title">The Liahona</div>
                 <div class="song-artist">Angie Killian</div>
                 <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">29 slides</span></div>
+            </div></div>
+            <div class="song-actions">
+                <a href="/the-liahona/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/the-liahona/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
-            <div class="arrow">›</div>
-            </a>
-            <a href="/the-liahona/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #4ecdc4;">
-            <a href="/faith-in-every-footstep/flipchart.html" class="song-main">
+            <div class="song-main">
             <div class="song-emoji">🦶</div>
             <div class="song-info">
                 <div class="song-title">Faith in Every Footstep</div>
                 <div class="song-artist">K. Newell Dayley</div>
                 <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">37 slides</span></div>
+            </div></div>
+            <div class="song-actions">
+                <a href="/faith-in-every-footstep/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/faith-in-every-footstep/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
-            <div class="arrow">›</div>
-            </a>
-            <a href="/faith-in-every-footstep/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
         <div class="song-card with-actions" style="--card-color: #ffd34f;">
-            <a href="/there-is-sunshine-in-my-soul-today/flipchart.html" class="song-main">
+            <div class="song-main">
             <div class="song-emoji">☀️</div>
             <div class="song-info">
                 <div class="song-title">There Is Sunshine in My Soul Today</div>
                 <div class="song-artist">Eliza E. Hewitt · John R. Sweney</div>
                 <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">33 slides</span></div>
+            </div></div>
+            <div class="song-actions">
+                <a href="/there-is-sunshine-in-my-soul-today/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/there-is-sunshine-in-my-soul-today/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
-            <div class="arrow">›</div>
-            </a>
-            <a href="/there-is-sunshine-in-my-soul-today/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
         </div>
 
         </div>
