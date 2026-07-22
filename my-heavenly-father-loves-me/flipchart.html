@@ -20,10 +20,10 @@
         .slideshow { width: 100%; height: 100%; position: relative; }
         .slide { display: none; position: absolute; inset: 0; }
         .slide.active { display: flex; flex-direction: column; }
-        .slide-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background-size: cover; background-position: center; filter: brightness(0.66) saturate(1.12); }
+        .slide-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background-size: cover; background-position: center; filter: brightness(0.62) saturate(1.08); }
         .slide-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 52px 86px 108px; text-align: center; }
         .slide-section { font-size: clamp(0.7rem, 1.4vw, 0.95rem); letter-spacing: 3px; text-transform: uppercase; color: color-mix(in srgb, var(--accent) 72%, white); margin-bottom: 22px; text-shadow: 0 2px 12px rgba(0,0,0,0.7); }
-        .slide-line { font-size: clamp(2.2rem, 5.6vw, 4.85rem); font-weight: 800; color: #fffdf7; line-height: 1.14; text-shadow: 0 3px 25px rgba(0,0,0,0.95), 0 1px 8px rgba(0,0,0,1); max-width: 1240px; width: 100%; margin: 0 auto; text-align: center; }
+        .slide-line { font-size: clamp(2.2rem, 5.6vw, 4.85rem); font-weight: 800; color: #fffdf7; line-height: 1.14; text-shadow: 0 4px 28px rgba(0,0,0,1), 0 2px 10px rgba(0,0,0,1); max-width: 1240px; width: 100%; margin: 0 auto; text-align: center; }
         .slide-line.keywords { font-size: clamp(2.25rem, 6.7vw, 5rem); color: var(--accent); letter-spacing: 0; }
         .title-main { font-size: clamp(3rem, 7.4vw, 6.15rem); font-weight: bold; color: #fffdf7; text-shadow: 0 4px 30px rgba(0,0,0,0.95); margin-bottom: 16px; max-width: 1240px; width: 100%; text-align: center; }
         .title-sub { font-size: clamp(0.95rem, 2.1vw, 1.35rem); color: rgba(255,255,255,0.76); letter-spacing: 1px; text-shadow: 0 2px 14px rgba(0,0,0,0.85); }
@@ -69,74 +69,74 @@
 <div class="mode-toggle"><button class="mode-btn active" id="modeBtn" onclick="cycleMode()" title="Cycle: Lyrics to Guess to Keywords to Photo" aria-label="Cycle display mode">📝</button></div>
 <div class="aspect-wrapper"><div class="screen"><div class="slideshow" id="slideshow">
     <div class="slide active" data-type="title">
-        <img class="slide-bg" src="images/title.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/title.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content">
             <div class="title-main">My Heavenly Father Loves Me</div>
             <div class="title-sub">Clara W. McMaster · Primary Flipchart</div>
         </div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Whenever I hear the song of a bird" data-key="BIRD · SONG">
-        <img class="slide-bg" src="images/slide-01.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-01.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section">Verse 1</div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Or look at the blue, blue sky," data-key="BLUE SKY">
-        <img class="slide-bg" src="images/slide-02.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-02.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Whenever I feel the rain on my face" data-key="RAIN · FACE">
-        <img class="slide-bg" src="images/slide-03.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-03.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Or the wind as it rushes by," data-key="WIND">
-        <img class="slide-bg" src="images/slide-04.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-04.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Whenever I touch a velvet rose" data-key="VELVET ROSE">
-        <img class="slide-bg" src="images/slide-05.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-05.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Or walk by our lilac tree," data-key="LILAC TREE">
-        <img class="slide-bg" src="images/slide-06.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-06.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="I’m glad that I live in this beautiful world" data-key="BEAUTIFUL WORLD">
-        <img class="slide-bg" src="images/slide-07.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-07.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 1" data-full="Heav’nly Father created for me." data-key="CREATED FOR ME">
-        <img class="slide-bg" src="images/slide-08.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-08.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="He gave me my eyes that I might see" data-key="EYES · SEE">
-        <img class="slide-bg" src="images/slide-09.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-09.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section">Verse 2</div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="The color of butterfly wings." data-key="BUTTERFLY WINGS">
-        <img class="slide-bg" src="images/slide-10.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-10.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="He gave me my ears that I might hear" data-key="EARS · HEAR">
-        <img class="slide-bg" src="images/slide-11.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-11.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="The magical sound of things." data-key="MAGICAL SOUND">
-        <img class="slide-bg" src="images/slide-12.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-12.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="He gave me my life, my mind, my heart:" data-key="LIFE · MIND · HEART">
-        <img class="slide-bg" src="images/slide-13.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-13.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="I thank him rev’rently" data-key="THANK · REVERENTLY">
-        <img class="slide-bg" src="images/slide-14.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-14.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="For all his creations, of which I’m a part." data-key="CREATIONS · PART">
-        <img class="slide-bg" src="images/slide-15.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-15.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
     <div class="slide" data-section="Verse 2" data-full="Yes, I know Heav’nly Father loves me." data-key="FATHER LOVES ME">
-        <img class="slide-bg" src="images/slide-16.jpg?v=20260722pdf" alt="" aria-hidden="true">
+        <img class="slide-bg" src="images/slide-16.jpg?v=20260722redone" alt="" aria-hidden="true">
         <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
     </div>
 </div></div></div>
