@@ -24,7 +24,7 @@ module.exports = async function handler(request, response) {
                 return;
             }
 
-            const rows = await sql(
+            const rows = await sql.query(
                 `
                 INSERT INTO feedback_reports (kind, message, contact, page)
                 VALUES ($1, $2, $3, $4)
@@ -43,7 +43,7 @@ module.exports = async function handler(request, response) {
                 return;
             }
 
-            const rows = await sql(`
+            const rows = await sql.query(`
                 SELECT id, kind, message, contact, page, created_at
                 FROM feedback_reports
                 ORDER BY created_at DESC

@@ -22,7 +22,7 @@ module.exports = async function handler(request, response) {
                 return;
             }
 
-            const rows = await sql(
+            const rows = await sql.query(
                 `
                 INSERT INTO song_requests (title, notes)
                 VALUES ($1, $2)
@@ -41,7 +41,7 @@ module.exports = async function handler(request, response) {
                 return;
             }
 
-            const rows = await sql(`
+            const rows = await sql.query(`
                 SELECT id, title, notes, created_at
                 FROM song_requests
                 ORDER BY created_at DESC

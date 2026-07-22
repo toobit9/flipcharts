@@ -27,7 +27,7 @@ function getSql() {
 async function ensureTables() {
     const sql = getSql();
 
-    await sql(`
+    await sql.query(`
         CREATE TABLE IF NOT EXISTS song_requests (
             id SERIAL PRIMARY KEY,
             title TEXT NOT NULL,
@@ -36,7 +36,7 @@ async function ensureTables() {
         )
     `);
 
-    await sql(`
+    await sql.query(`
         CREATE TABLE IF NOT EXISTS feedback_reports (
             id SERIAL PRIMARY KEY,
             kind TEXT NOT NULL DEFAULT 'feedback',
