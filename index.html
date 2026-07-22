@@ -44,6 +44,14 @@
             font-size: 0.95rem;
         }
 
+        .site-disclaimer {
+            margin: 14px auto 0;
+            max-width: 620px;
+            color: rgba(255,255,255,0.36);
+            font-size: 0.78rem;
+            line-height: 1.45;
+        }
+
         .request-footer {
             margin-top: 42px;
             display: flex;
@@ -545,6 +553,7 @@
     <div class="header">
         <h1>🎵 Primary Song Library</h1>
         <p>Choose a flipchart or start the Fill It In game</p>
+        <div class="site-disclaimer">This is an educational teaching tool and is not officially associated with The Church of Jesus Christ of Latter-day Saints.</div>
     </div>
 
 
@@ -913,7 +922,7 @@
     </form>
 </div>
 <script>
-    const REQUEST_EMAIL = 'tuckerdansie@gmail.com';
+    const REQUEST_EMAIL = 'tuckersmediashow@gmail.com';
     const params = new URLSearchParams(window.location.search);
 
     if (params.get('admin') === '1') {
