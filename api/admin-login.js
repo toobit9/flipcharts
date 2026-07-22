@@ -1,3 +1,5 @@
+const { createAdminToken } = require('./_lib/admin-auth');
+
 module.exports = async function handler(request, response) {
     response.setHeader('Cache-Control', 'no-store');
 
@@ -24,5 +26,5 @@ module.exports = async function handler(request, response) {
         return;
     }
 
-    response.status(200).json({ ok: true });
+    response.status(200).json({ ok: true, token: createAdminToken() });
 };

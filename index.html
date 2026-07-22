@@ -81,6 +81,25 @@
             transform: translateY(-2px);
         }
 
+        .feedback-btn {
+            border: 1px solid rgba(126,211,255,0.36);
+            background: rgba(126,211,255,0.08);
+            color: rgba(206,239,255,0.9);
+            border-radius: 999px;
+            padding: 10px 16px;
+            font: inherit;
+            font-size: 0.86rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s, border-color 0.2s;
+        }
+
+        .feedback-btn:hover {
+            background: rgba(126,211,255,0.16);
+            border-color: rgba(126,211,255,0.6);
+            transform: translateY(-2px);
+        }
+
         .admin-access-btn {
             border: 0;
             background: transparent;
@@ -420,6 +439,96 @@
             display: block;
         }
 
+        .admin-panel {
+            display: none;
+            margin: 0 0 34px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.045);
+            padding: 18px;
+        }
+
+        body.admin-mode .admin-panel {
+            display: block;
+        }
+
+        .admin-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .admin-panel h2 {
+            font-size: 1rem;
+        }
+
+        .admin-panel-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .admin-list-panel {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            background: rgba(0,0,0,0.12);
+            padding: 14px;
+        }
+
+        .admin-list-panel h3 {
+            font-size: 0.86rem;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.76);
+        }
+
+        .admin-list {
+            display: grid;
+            gap: 10px;
+            max-height: 360px;
+            overflow: auto;
+            padding-right: 4px;
+        }
+
+        .admin-entry {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .admin-entry strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+
+        .admin-entry p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.82rem;
+            line-height: 1.4;
+            margin-bottom: 6px;
+            white-space: pre-wrap;
+        }
+
+        .admin-entry span {
+            color: rgba(255,255,255,0.36);
+            font-size: 0.74rem;
+        }
+
+        .admin-empty {
+            color: rgba(255,255,255,0.38);
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 700px) {
+            .admin-panel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .approval-note {
             color: rgba(255,255,255,0.42);
             font-size: 0.86rem;
@@ -516,6 +625,7 @@
         }
 
         .request-field input,
+        .request-field select,
         .request-field textarea {
             width: 100%;
             border: 1px solid rgba(255,255,255,0.13);
@@ -540,6 +650,7 @@
         }
 
         .request-field input:focus,
+        .request-field select:focus,
         .request-field textarea:focus {
             border-color: rgba(255,211,79,0.68);
             box-shadow: 0 0 0 3px rgba(255,211,79,0.12);
@@ -586,7 +697,7 @@
     <div class="header">
         <h1>🎵 Primary Song Library</h1>
         <p>Choose a flipchart or start the Fill It In game</p>
-        <div class="site-disclaimer">This is an educational teaching tool and is not officially associated with The Church of Jesus Christ of Latter-day Saints.</div>
+        <div class="site-disclaimer">This is a work-in-progress beta flipchart app for educational teaching use. It is not officially associated with The Church of Jesus Christ of Latter-day Saints. Please report feedback or bugs with the button at the bottom.</div>
     </div>
 
 
@@ -648,7 +759,28 @@
         </div>
     </details>
 
-    <div class="admin-badge">Admin preview mode is on. Coming Soon flipcharts are visible here for review.</div>
+    <div class="admin-badge">Admin mode is on. Coming Soon flipcharts, song requests, and feedback are visible here for review.</div>
+
+    <section class="admin-panel" id="adminPanel">
+        <div class="admin-panel-header">
+            <h2>Admin Panel</h2>
+            <button class="secondary-btn" type="button" onclick="loadAdminPanel()">Refresh</button>
+        </div>
+        <div class="admin-panel-grid">
+            <div class="admin-list-panel">
+                <h3>Song Requests</h3>
+                <div class="admin-list" id="adminRequestsList">
+                    <div class="admin-empty">Unlock admin mode to load song requests.</div>
+                </div>
+            </div>
+            <div class="admin-list-panel">
+                <h3>Feedback and Bugs</h3>
+                <div class="admin-list" id="adminFeedbackList">
+                    <div class="admin-empty">Unlock admin mode to load feedback.</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <details class="library-section" open>
         <summary class="section-title">Primary Program</summary>
@@ -932,6 +1064,7 @@
 
     <div class="request-footer">
         <button class="request-btn" type="button" onclick="openRequestModal()">Request Song</button>
+        <button class="feedback-btn" type="button" onclick="openFeedbackModal()">Feedback / Bug</button>
         <button class="admin-access-btn" id="adminAccessButton" type="button" onclick="handleAdminAccess()">Admin access</button>
     </div>
 
@@ -953,6 +1086,34 @@
             <button class="secondary-btn" type="button" onclick="closeRequestModal()">Cancel</button>
             <button class="submit-request" type="submit">Add Request</button>
         </div>
+        <div class="admin-error" id="requestStatus" aria-live="polite"></div>
+    </form>
+</div>
+<div class="request-modal" id="feedbackModal" hidden>
+    <form class="request-panel" id="feedbackForm">
+        <h2>Feedback / Bug</h2>
+        <p>Report a bug, confusing button, typo, image issue, or idea for the app.</p>
+        <div class="request-field">
+            <label for="feedbackKind">Type</label>
+            <select id="feedbackKind" name="kind">
+                <option value="bug">Bug</option>
+                <option value="feedback">Feedback</option>
+                <option value="idea">Idea</option>
+            </select>
+        </div>
+        <div class="request-field">
+            <label for="feedbackMessage">Details</label>
+            <textarea id="feedbackMessage" name="message" placeholder="What happened? What would you change?" required></textarea>
+        </div>
+        <div class="request-field">
+            <label for="feedbackContact">Contact</label>
+            <input id="feedbackContact" name="contact" type="text" autocomplete="off" placeholder="Optional">
+        </div>
+        <div class="request-actions">
+            <button class="secondary-btn" type="button" onclick="closeFeedbackModal()">Cancel</button>
+            <button class="submit-request" id="feedbackSubmit" type="submit">Send Feedback</button>
+        </div>
+        <div class="admin-error" id="feedbackStatus" aria-live="polite"></div>
     </form>
 </div>
 <div class="request-modal" id="adminModal" hidden>
@@ -972,11 +1133,14 @@
 </div>
 <script>
     const REQUESTS_KEY = 'flipchartsSongRequests';
+    const FEEDBACK_KEY = 'flipchartsFeedbackReports';
     const ADMIN_KEY = 'flipchartsAdminPreview';
+    const ADMIN_TOKEN_KEY = 'flipchartsAdminToken';
     const params = new URLSearchParams(window.location.search);
 
     if (params.get('admin') === '0') {
         localStorage.removeItem(ADMIN_KEY);
+        sessionStorage.removeItem(ADMIN_TOKEN_KEY);
     }
 
     function setAdminMode(enabled) {
@@ -985,6 +1149,7 @@
             localStorage.setItem(ADMIN_KEY, '1');
         } else {
             localStorage.removeItem(ADMIN_KEY);
+            sessionStorage.removeItem(ADMIN_TOKEN_KEY);
         }
 
         const adminButton = document.getElementById('adminAccessButton');
@@ -993,7 +1158,7 @@
         }
     }
 
-    setAdminMode(localStorage.getItem(ADMIN_KEY) === '1');
+    setAdminMode(localStorage.getItem(ADMIN_KEY) === '1' && Boolean(sessionStorage.getItem(ADMIN_TOKEN_KEY)));
 
     function openRequestModal() {
         const modal = document.getElementById('requestModal');
@@ -1004,6 +1169,19 @@
     function closeRequestModal() {
         document.getElementById('requestModal').hidden = true;
         document.getElementById('requestForm').reset();
+        document.getElementById('requestStatus').textContent = '';
+    }
+
+    function openFeedbackModal() {
+        const modal = document.getElementById('feedbackModal');
+        modal.hidden = false;
+        setTimeout(() => document.getElementById('feedbackMessage').focus(), 0);
+    }
+
+    function closeFeedbackModal() {
+        document.getElementById('feedbackModal').hidden = true;
+        document.getElementById('feedbackForm').reset();
+        document.getElementById('feedbackStatus').textContent = '';
     }
 
     function handleAdminAccess() {
@@ -1043,6 +1221,25 @@
         localStorage.setItem(REQUESTS_KEY, JSON.stringify(requests));
     }
 
+    function getFeedbackReports() {
+        try {
+            const reports = JSON.parse(localStorage.getItem(FEEDBACK_KEY) || '[]');
+            return Array.isArray(reports)
+                ? reports.filter((report) => report && report.message && (report.createdAt || report.created_at))
+                : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function saveFeedbackReports(reports) {
+        localStorage.setItem(FEEDBACK_KEY, JSON.stringify(reports));
+    }
+
+    function createdAtFor(item) {
+        return item.createdAt || item.created_at || new Date().toISOString();
+    }
+
     function requestAgeLabel(createdAt) {
         const requestedTime = new Date(createdAt).getTime();
         const ageMs = Date.now() - requestedTime;
@@ -1074,14 +1271,14 @@
 
         const detail = document.createElement('div');
         detail.className = 'song-artist';
-        detail.textContent = request.notes || 'Requested song';
+        detail.textContent = request.notes || (request.localOnly ? 'Requested song, saved on this device' : 'Requested song');
 
         const tags = document.createElement('div');
         tags.className = 'song-tags';
 
         const statusTag = document.createElement('span');
         statusTag.className = 'tag in-progress';
-        statusTag.textContent = requestAgeLabel(request.createdAt);
+        statusTag.textContent = requestAgeLabel(createdAtFor(request));
 
         tags.append(statusTag);
         info.append(title, detail, tags);
@@ -1124,21 +1321,207 @@
         document.getElementById('comingSoonSection')?.setAttribute('open', '');
     }
 
-    document.getElementById('requestForm').addEventListener('submit', (event) => {
+    function addFeedbackReport(report) {
+        const reports = getFeedbackReports();
+        reports.push(report);
+        saveFeedbackReports(reports);
+    }
+
+    async function postJson(url, payload) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(result.error || 'Submission could not be saved.');
+        }
+        return result;
+    }
+
+    function formatAdminDate(value) {
+        return new Date(value).toLocaleString([], {
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit'
+        });
+    }
+
+    function renderAdminList(listId, items, emptyText, renderItem) {
+        const list = document.getElementById(listId);
+        list.replaceChildren();
+
+        if (!items.length) {
+            const empty = document.createElement('div');
+            empty.className = 'admin-empty';
+            empty.textContent = emptyText;
+            list.append(empty);
+            return;
+        }
+
+        items.forEach((item) => list.append(renderItem(item)));
+    }
+
+    function makeAdminEntry(title, body, meta) {
+        const entry = document.createElement('div');
+        entry.className = 'admin-entry';
+
+        const heading = document.createElement('strong');
+        heading.textContent = title;
+
+        const content = document.createElement('p');
+        content.textContent = body || 'No notes added.';
+
+        const detail = document.createElement('span');
+        detail.textContent = meta;
+
+        entry.append(heading, content, detail);
+        return entry;
+    }
+
+    async function getAdminItems(url) {
+        const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
+        if (!token) throw new Error('Admin session is not unlocked.');
+
+        const response = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(result.error || 'Admin items could not be loaded.');
+        }
+        return result.items || [];
+    }
+
+    async function loadAdminPanel() {
+        if (!document.body.classList.contains('admin-mode')) return;
+
+        renderAdminList('adminRequestsList', [], 'Loading song requests...', () => document.createElement('div'));
+        renderAdminList('adminFeedbackList', [], 'Loading feedback...', () => document.createElement('div'));
+
+        try {
+            const serverRequests = await getAdminItems('/api/song-requests');
+            const localRequests = getSongRequests().filter((request) => request.localOnly);
+            renderAdminList(
+                'adminRequestsList',
+                [...localRequests, ...serverRequests],
+                'No song requests yet.',
+                (request) => makeAdminEntry(
+                    request.title,
+                    request.notes,
+                    `${request.localOnly ? 'Saved on this device' : 'Database'} · ${requestAgeLabel(createdAtFor(request))}`
+                )
+            );
+        } catch (error) {
+            renderAdminList('adminRequestsList', getSongRequests(), error.message, (request) => makeAdminEntry(
+                request.title,
+                request.notes,
+                `Local only · ${requestAgeLabel(createdAtFor(request))}`
+            ));
+        }
+
+        try {
+            const serverFeedback = await getAdminItems('/api/feedback');
+            const localFeedback = getFeedbackReports().filter((report) => report.localOnly);
+            renderAdminList(
+                'adminFeedbackList',
+                [...localFeedback, ...serverFeedback],
+                'No feedback or bugs yet.',
+                (report) => makeAdminEntry(
+                    `${report.kind || 'feedback'}${report.contact ? ` · ${report.contact}` : ''}`,
+                    report.message,
+                    `${report.localOnly ? 'Saved on this device' : 'Database'} · ${formatAdminDate(createdAtFor(report))}${report.page ? ` · ${report.page}` : ''}`
+                )
+            );
+        } catch (error) {
+            renderAdminList('adminFeedbackList', getFeedbackReports(), error.message, (report) => makeAdminEntry(
+                `${report.kind || 'feedback'}${report.contact ? ` · ${report.contact}` : ''}`,
+                report.message,
+                `Local only · ${formatAdminDate(createdAtFor(report))}`
+            ));
+        }
+    }
+
+    document.getElementById('requestForm').addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const title = document.getElementById('requestTitle').value.trim();
         const notes = document.getElementById('requestNotes').value.trim();
+        const status = document.getElementById('requestStatus');
+        const submit = event.submitter;
         if (!title) return;
 
         const request = { title, notes, createdAt: new Date().toISOString() };
 
-        closeRequestModal();
-        addSongRequest(request);
+        status.textContent = '';
+        if (submit) {
+            submit.disabled = true;
+            submit.textContent = 'Saving...';
+        }
+
+        try {
+            const result = await postJson('/api/song-requests', request);
+            addSongRequest({
+                title: result.item.title,
+                notes: result.item.notes,
+                createdAt: result.item.created_at
+            });
+            closeRequestModal();
+        } catch (error) {
+            addSongRequest({ ...request, localOnly: true });
+            status.textContent = `${error.message} Saved on this device for now.`;
+            window.setTimeout(closeRequestModal, 1600);
+        } finally {
+            if (submit) {
+                submit.disabled = false;
+                submit.textContent = 'Add Request';
+            }
+        }
     });
 
     document.getElementById('requestModal').addEventListener('click', (event) => {
         if (event.target.id === 'requestModal') closeRequestModal();
+    });
+
+    document.getElementById('feedbackForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const kind = document.getElementById('feedbackKind').value;
+        const message = document.getElementById('feedbackMessage').value.trim();
+        const contact = document.getElementById('feedbackContact').value.trim();
+        const status = document.getElementById('feedbackStatus');
+        const submit = document.getElementById('feedbackSubmit');
+        if (!message) return;
+
+        const report = {
+            kind,
+            message,
+            contact,
+            page: window.location.pathname,
+            createdAt: new Date().toISOString()
+        };
+
+        status.textContent = '';
+        submit.disabled = true;
+        submit.textContent = 'Sending...';
+
+        try {
+            await postJson('/api/feedback', report);
+            closeFeedbackModal();
+        } catch (error) {
+            addFeedbackReport({ ...report, localOnly: true });
+            status.textContent = `${error.message} Saved on this device for now.`;
+            window.setTimeout(closeFeedbackModal, 1600);
+        } finally {
+            submit.disabled = false;
+            submit.textContent = 'Send Feedback';
+        }
+    });
+
+    document.getElementById('feedbackModal').addEventListener('click', (event) => {
+        if (event.target.id === 'feedbackModal') closeFeedbackModal();
     });
 
     document.getElementById('adminForm').addEventListener('submit', async (event) => {
@@ -1158,14 +1541,20 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password })
             });
+            const result = await response.json().catch(() => ({}));
 
             if (!response.ok) {
-                const result = await response.json().catch(() => ({}));
                 throw new Error(result.error || 'That password did not work.');
             }
 
+            if (!result.token) {
+                throw new Error('Admin session could not be started.');
+            }
+
+            sessionStorage.setItem(ADMIN_TOKEN_KEY, result.token);
             setAdminMode(true);
             closeAdminModal();
+            loadAdminPanel();
         } catch (loginError) {
             error.textContent = loginError.message;
         } finally {
@@ -1181,11 +1570,13 @@
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             if (!document.getElementById('requestModal').hidden) closeRequestModal();
+            if (!document.getElementById('feedbackModal').hidden) closeFeedbackModal();
             if (!document.getElementById('adminModal').hidden) closeAdminModal();
         }
     });
 
     renderSongRequests();
+    loadAdminPanel();
 </script>
 </body>
 </html>
