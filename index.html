@@ -222,6 +222,19 @@
             letter-spacing: 0.2px;
         }
 
+        .tutorial-icon-group {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .tutorial-icon-group .tutorial-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 0.86rem;
+        }
+
         .tutorial-copy {
             max-width: 170px;
             min-width: 0;
@@ -758,31 +771,15 @@
                     </div>
                 </div>
                 <div class="tutorial-item">
-                    <div class="tutorial-icon">📝</div>
-                    <div class="tutorial-copy">
-                        <strong>Lyrics</strong>
-                        <span>Full words for teaching.</span>
+                    <div class="tutorial-icon-group" aria-hidden="true">
+                        <div class="tutorial-icon">📝</div>
+                        <div class="tutorial-icon">❓</div>
+                        <div class="tutorial-icon">🔑</div>
+                        <div class="tutorial-icon">📷</div>
                     </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">❓</div>
                     <div class="tutorial-copy">
-                        <strong>Blanks</strong>
-                        <span>Missing words for review.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">🔑</div>
-                    <div class="tutorial-copy">
-                        <strong>Keywords</strong>
-                        <span>Memory cues only.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">📷</div>
-                    <div class="tutorial-copy">
-                        <strong>Pictures Only</strong>
-                        <span>Hide words and show art.</span>
+                        <strong>Top-Right Mode Button</strong>
+                        <span>Tap the same button to switch: lyrics, blanks, keywords, pictures only.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
