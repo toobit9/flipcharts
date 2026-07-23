@@ -311,6 +311,11 @@
             user-select: none;
         }
 
+        .section-count {
+            color: rgba(255,255,255,0.28);
+            letter-spacing: 1.4px;
+        }
+
         .section-title::-webkit-details-marker { display: none; }
 
         .section-title::before {
@@ -903,6 +908,8 @@
             .request-actions-row .feedback-btn {
                 flex: 1 1 150px;
             }
+            .playlist-tools { width: 100%; }
+            .playlist-tool-btn:not(.icon-only) { flex: 1 1 140px; }
         }
     </style>
 </head>
@@ -938,17 +945,17 @@
     </section>
 
     <details class="library-section" id="playlistSection" open>
-        <summary class="section-title">My Playlist</summary>
+        <summary class="section-title">My Singing List</summary>
         <div class="playlist-toolbar">
-            <div class="playlist-note">Use Edit playlist to choose songs. Save playlist hides the full library so only your set stays front and center.</div>
+            <div class="playlist-note">Use Edit singing list to choose songs. Save singing list hides the full library so only your set stays front and center.</div>
             <div class="playlist-tools">
-                <button class="playlist-tool-btn" id="editPlaylistButton" type="button" onclick="togglePlaylistEditing()">Edit playlist</button>
-                <button class="playlist-tool-btn" id="clearPlaylistButton" type="button" onclick="clearPlaylist()" disabled>Clear playlist</button>
-                <button class="playlist-tool-btn icon-only" id="copyPlaylistButton" type="button" onclick="copyPlaylistLink()" aria-label="Copy playlist link" title="Copy playlist link" disabled>⧉</button>
+                <button class="playlist-tool-btn" id="editPlaylistButton" type="button" onclick="togglePlaylistEditing()">Edit singing list</button>
+                <button class="playlist-tool-btn" id="clearPlaylistButton" type="button" onclick="clearPlaylist()" disabled>Clear singing list</button>
+                <button class="playlist-tool-btn icon-only" id="copyPlaylistButton" type="button" onclick="copyPlaylistLink()" aria-label="Copy singing list link" title="Copy singing list link" disabled>⧉</button>
             </div>
         </div>
         <div class="song-grid" id="playlistGrid"></div>
-        <div class="empty-section" id="playlistEmpty">No songs starred yet. Tap a star in All Songs to add it here.</div>
+        <div class="empty-section" id="playlistEmpty">Tap Edit singing list, then star songs from All Songs.</div>
         <div class="playlist-status" id="playlistStatus" aria-live="polite"></div>
     </details>
 
@@ -957,7 +964,7 @@
         <div class="song-grid" id="allSongsGrid">
 
         <div class="song-card with-actions" data-song-id="a-childs-prayer" data-sort-title="childs prayer" style="--card-color: #a78bfa;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add A Child's Prayer to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add A Child's Prayer to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🙏</div>
                 <div class="song-info">
@@ -967,13 +974,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/a-childs-prayer/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/a-childs-prayer/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/a-childs-prayer/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="build-an-ark" data-sort-title="build an ark" style="--card-color: #4ecdc4;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Build an Ark to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Build an Ark to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🛶</div>
                 <div class="song-info">
@@ -983,13 +990,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/build-an-ark/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/build-an-ark/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/build-an-ark/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="the-church-of-jesus-christ" data-sort-title="church of jesus christ" style="--card-color: #8bc34a;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add The Church of Jesus Christ to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add The Church of Jesus Christ to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">⛪</div>
                 <div class="song-info">
@@ -999,13 +1006,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/the-church-of-jesus-christ/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/the-church-of-jesus-christ/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/the-church-of-jesus-christ/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="the-creation" data-sort-title="creation" style="--card-color: #ffd166;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add The Creation to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add The Creation to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🌎</div>
                 <div class="song-info">
@@ -1015,13 +1022,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/the-creation/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/the-creation/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/the-creation/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="david-and-goliath" data-sort-title="david goliath" style="--card-color: #ffd93d;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add David &amp; Goliath to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add David &amp; Goliath to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🪨</div>
                 <div class="song-info">
@@ -1031,13 +1038,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/david-and-goliath/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/david-and-goliath/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/david-and-goliath/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="faith-in-every-footstep" data-sort-title="faith in every footstep" style="--card-color: #4ecdc4;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Faith in Every Footstep to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Faith in Every Footstep to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🦶</div>
                 <div class="song-info">
@@ -1047,13 +1054,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/faith-in-every-footstep/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/faith-in-every-footstep/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/faith-in-every-footstep/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="holding-hands-around-the-world" data-sort-title="holding hands around the world" style="--card-color: #58d6c9;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Holding Hands Around the World to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Holding Hands Around the World to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🌍</div>
                 <div class="song-info">
@@ -1063,13 +1070,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/holding-hands-around-the-world/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/holding-hands-around-the-world/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/holding-hands-around-the-world/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="holy-places" data-sort-title="holy places" style="--card-color: #f7b267;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Holy Places to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Holy Places to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🏛️</div>
                 <div class="song-info">
@@ -1079,13 +1086,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/holy-places/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/holy-places/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/holy-places/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="i-want-to-be-a-missionary-now" data-sort-title="i want to be a missionary now" style="--card-color: #6dd6a6;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Want to Be a Missionary Now to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Want to Be a Missionary Now to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🧳</div>
                 <div class="song-info">
@@ -1095,13 +1102,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/i-want-to-be-a-missionary-now/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/i-want-to-be-a-missionary-now/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/i-want-to-be-a-missionary-now/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="i-will-follow-gods-plan" data-sort-title="i will follow gods plan" style="--card-color: #6dd6a6;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Will Follow God's Plan to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Will Follow God's Plan to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🗺️</div>
                 <div class="song-info">
@@ -1111,13 +1118,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/i-will-follow-gods-plan/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/i-will-follow-gods-plan/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/i-will-follow-gods-plan/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="i-will-walk-with-jesus" data-sort-title="i will walk with jesus" style="--card-color: #c7a6ff;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Will Walk with Jesus to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Will Walk with Jesus to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">👣</div>
                 <div class="song-info">
@@ -1127,13 +1134,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/i-will-walk-with-jesus/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/i-will-walk-with-jesus/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/i-will-walk-with-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="more-than-enough" data-sort-title="more than enough" style="--card-color: #f06595;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add More Than Enough to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add More Than Enough to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">💝</div>
                 <div class="song-info">
@@ -1143,13 +1150,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/more-than-enough/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/more-than-enough/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/more-than-enough/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="my-heavenly-father-loves-me" data-sort-title="my heavenly father loves me" style="--card-color: #7bdff2;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add My Heavenly Father Loves Me to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add My Heavenly Father Loves Me to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">🌿</div>
                 <div class="song-info">
@@ -1159,13 +1166,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/my-heavenly-father-loves-me/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/my-heavenly-father-loves-me/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/my-heavenly-father-loves-me/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="scripture-power" data-sort-title="scripture power" style="--card-color: #8ed4ff;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Scripture Power to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Scripture Power to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">📖</div>
                 <div class="song-info">
@@ -1175,13 +1182,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/scripture-power/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/scripture-power/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/scripture-power/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="there-is-sunshine-in-my-soul-today" data-sort-title="there is sunshine in my soul today" style="--card-color: #ffd34f;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add There Is Sunshine in My Soul Today to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add There Is Sunshine in My Soul Today to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">☀️</div>
                 <div class="song-info">
@@ -1191,13 +1198,13 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/there-is-sunshine-in-my-soul-today/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/there-is-sunshine-in-my-soul-today/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/there-is-sunshine-in-my-soul-today/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
 
         <div class="song-card with-actions" data-song-id="this-is-jesus" data-sort-title="this is jesus" style="--card-color: #ffd166;">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add This Is Jesus to playlist" title="Add to playlist">☆</button>
+            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add This Is Jesus to singing list" title="Add to singing list">☆</button>
             <div class="song-main">
                 <div class="song-emoji">✨</div>
                 <div class="song-info">
@@ -1207,7 +1214,7 @@
                 </div>
             </div>
             <div class="song-actions">
-                <a href="/this-is-jesus/flipchart.html" class="flipchart-link">Open Flipchart</a>
+                <a href="/this-is-jesus/flipchart.html" class="flipchart-link">Sing</a>
                 <a href="/this-is-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
             </div>
         </div>
@@ -1216,7 +1223,7 @@
     </details>
 
     <details class="library-section" id="comingSoonSection">
-        <summary class="section-title">Coming Soon</summary>
+        <summary class="section-title">Coming Soon <span class="section-count" id="comingSoonCount">(2)</span></summary>
         <p class="approval-note">These flipcharts are parked here until their images are approved and moved into production. New requests appear here after they are submitted.</p>
         <div class="song-grid" id="comingSoonGrid">
 
@@ -1258,12 +1265,12 @@
     <details class="tutorial-section">
         <summary class="tutorial-title">Info</summary>
         <div class="tutorial-body">
-            <p class="tutorial-intro">Primary Flipcharts is a beta educational tool for teaching children Primary songs with large lyrics, memorable pictures, practice modes, custom playlists, and simple games.</p>
+            <p class="tutorial-intro">Primary Flipcharts is a beta educational tool for teaching children Primary songs with large lyrics, memorable pictures, practice modes, custom singing lists, and simple games.</p>
             <div class="tutorial-grid">
                 <div class="tutorial-item">
                     <div class="tutorial-icon accent label">Open</div>
                     <div class="tutorial-copy">
-                        <strong>Open Flipchart</strong>
+                        <strong>Sing</strong>
                         <span>Sing through slides.</span>
                     </div>
                 </div>
@@ -1289,7 +1296,7 @@
                 <div class="tutorial-item">
                     <div class="tutorial-icon">☆</div>
                     <div class="tutorial-copy">
-                        <strong>My Playlist</strong>
+                        <strong>My Singing List</strong>
                         <span>Edit opens All Songs. Star songs, save to collapse the library, then copy the share link.</span>
                     </div>
                 </div>
@@ -1297,7 +1304,14 @@
                     <div class="tutorial-icon">⧉</div>
                     <div class="tutorial-copy">
                         <strong>Copy Link</strong>
-                        <span>Copies a shareable link for your current playlist.</span>
+                        <span>Copies a shareable link for your current singing list.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <div class="tutorial-icon">☑</div>
+                    <div class="tutorial-copy">
+                        <strong>Prepare</strong>
+                        <span>Build a singing list before Sunday. Use picture modes to reveal images for teaching or printing ideas.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
@@ -1332,7 +1346,8 @@
             <details class="change-log">
                 <summary class="change-log-title">Change Log</summary>
                 <div class="change-log-list">
-                    <div><strong>v0.5 pre-alpha:</strong> Added shareable playlists, edit/save playlist mode, public song requests, feedback, accompaniment controls, and Fill It In game support.</div>
+                    <div><strong>Updated July 23, 2026</strong></div>
+                    <div><strong>v0.5 pre-alpha:</strong> Added shareable singing lists, edit/save list mode, public song requests, feedback, accompaniment controls, and Fill It In game support.</div>
                 </div>
             </details>
         </div>
@@ -1513,8 +1528,8 @@
 
         button.classList.toggle('is-success', active);
         button.textContent = active ? '✓' : '⧉';
-        button.setAttribute('aria-label', active ? 'Playlist link copied' : 'Copy playlist link');
-        button.title = active ? 'Copied!' : 'Copy playlist link';
+        button.setAttribute('aria-label', active ? 'Singing list link copied' : 'Copy singing list link');
+        button.title = active ? 'Copied!' : 'Copy singing list link';
     }
 
     function updatePlaylistEditingState() {
@@ -1528,7 +1543,7 @@
             }
         }
         if (editButton) {
-            editButton.textContent = playlistEditing ? 'Save playlist' : 'Edit playlist';
+            editButton.textContent = playlistEditing ? 'Save singing list' : 'Edit singing list';
             editButton.classList.toggle('is-success', playlistEditing);
             editButton.setAttribute('aria-pressed', String(playlistEditing));
         }
@@ -1537,7 +1552,7 @@
     function togglePlaylistEditing() {
         playlistEditing = !playlistEditing;
         updatePlaylistEditingState();
-        setPlaylistStatus(playlistEditing ? 'Choose songs from All Songs.' : 'Playlist saved.');
+        setPlaylistStatus(playlistEditing ? 'Choose songs from All Songs.' : 'Singing list saved.');
     }
 
     function playlistLinkFor(ids) {
@@ -1594,8 +1609,8 @@
             button.classList.toggle('is-active', isFavorite);
             button.textContent = isFavorite ? '★' : '☆';
             button.setAttribute('aria-pressed', String(isFavorite));
-            button.setAttribute('aria-label', `${isFavorite ? 'Remove' : 'Add'} ${title} ${isFavorite ? 'from' : 'to'} playlist`);
-            button.title = isFavorite ? 'Remove from playlist' : 'Add to playlist';
+            button.setAttribute('aria-label', `${isFavorite ? 'Remove' : 'Add'} ${title} ${isFavorite ? 'from' : 'to'} singing list`);
+            button.title = isFavorite ? 'Remove from singing list' : 'Add to singing list';
         });
     }
 
@@ -1630,12 +1645,12 @@
         try {
             await navigator.clipboard.writeText(link);
             setCopyButtonSuccess(true);
-            setPlaylistStatus('Playlist link copied.');
+            setPlaylistStatus('Singing list link copied.');
             window.setTimeout(() => setCopyButtonSuccess(false), 2600);
         } catch (error) {
-            window.prompt('Copy this playlist link:', link);
+            window.prompt('Copy this singing list link:', link);
             setCopyButtonSuccess(true);
-            setPlaylistStatus('Playlist link ready.');
+            setPlaylistStatus('Singing list link ready.');
             window.setTimeout(() => setCopyButtonSuccess(false), 2600);
         }
     }
@@ -1646,7 +1661,7 @@
         renderPlaylist();
         playlistEditing = true;
         updatePlaylistEditingState();
-        setPlaylistStatus('Playlist cleared.');
+        setPlaylistStatus('Singing list cleared.');
     }
 
     function initializePlaylist() {
@@ -1840,6 +1855,12 @@
         return card;
     }
 
+    function updateComingSoonCount() {
+        const count = document.querySelectorAll('#comingSoonGrid .song-card').length;
+        const countLabel = document.getElementById('comingSoonCount');
+        if (countLabel) countLabel.textContent = `(${count})`;
+    }
+
     function renderSongRequests() {
         const grid = document.getElementById('comingSoonGrid');
         if (!grid) return;
@@ -1849,6 +1870,7 @@
         visibleSongRequests().forEach((request) => {
             grid.append(makeRequestCard(request));
         });
+        updateComingSoonCount();
     }
 
     function addSongRequest(request) {
