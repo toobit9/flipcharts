@@ -33,15 +33,18 @@
         .header h1 {
             font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             background: linear-gradient(135deg, #ddf00c, #4ecdc4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .header p {
+        .version-label {
             color: rgba(255,255,255,0.5);
-            font-size: 0.95rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
         }
 
         .site-disclaimer {
@@ -253,6 +256,48 @@
             color: rgba(255,255,255,0.54);
             font-size: 0.78rem;
             line-height: 1.35;
+        }
+
+        .change-log {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 12px;
+        }
+
+        .change-log-title {
+            cursor: pointer;
+            list-style: none;
+            color: rgba(255,255,255,0.72);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .change-log-title::-webkit-details-marker { display: none; }
+
+        .change-log-title::before {
+            content: '>';
+            display: inline-block;
+            margin-right: 9px;
+            color: rgba(255,211,79,0.78);
+            transition: transform 0.18s ease;
+        }
+
+        .change-log[open] .change-log-title::before {
+            transform: rotate(90deg);
+        }
+
+        .change-log-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 12px;
+            color: rgba(255,255,255,0.54);
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+
+        .change-log-list strong {
+            color: rgba(255,255,255,0.82);
         }
 
         .section-title {
@@ -866,6 +911,7 @@
 
     <div class="header">
         <h1>🎵 Primary Digital Flipcharts</h1>
+        <div class="version-label">v0.5 pre-alpha</div>
     </div>
 
     <div class="admin-badge">Admin mode is on. Coming Soon flipcharts, song requests, and feedback are visible here for review.</div>
@@ -1283,6 +1329,12 @@
                     </div>
                 </div>
             </div>
+            <details class="change-log">
+                <summary class="change-log-title">Change Log</summary>
+                <div class="change-log-list">
+                    <div><strong>v0.5 pre-alpha:</strong> Added shareable playlists, edit/save playlist mode, public song requests, feedback, accompaniment controls, and Fill It In game support.</div>
+                </div>
+            </details>
         </div>
     </details>
 
