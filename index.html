@@ -1224,6 +1224,7 @@
     const ADMIN_KEY = 'flipchartsAdminPreview';
     const ADMIN_TOKEN_KEY = 'flipchartsAdminToken';
     const params = new URLSearchParams(window.location.search);
+    let publicSongRequests = [];
 
     if (params.get('admin') === '0') {
         localStorage.removeItem(ADMIN_KEY);
@@ -1429,21 +1430,49 @@
 
         grid.querySelectorAll('.request-card').forEach((card) => card.remove());
 
-        const requests = getSongRequests().sort((a, b) => (
-            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-        ));
-
-        requests.forEach((request) => {
-            grid.prepend(makeRequestCard(request));
+        visibleSongRequests().forEach((request) => {
+            grid.append(makeRequestCard(request));
         });
     }
 
     function addSongRequest(request) {
-        const requests = getSongRequests();
-        requests.push(request);
-        saveSongRequests(requests);
+        if (request.localOnly) {
+            const requests = getSongRequests();
+            requests.push(request);
+            saveSongRequests(requests);
+        } else {
+            publicSongRequests = [request, ...publicSongRequests];
+        }
         renderSongRequests();
         document.getElementById('comingSoonSection')?.setAttribute('open', '');
+    }
+
+    function songRequestKey(request) {
+        return `${request.title || ''}|${createdAtFor(request)}`;
+    }
+
+    function visibleSongRequests() {
+        const seen = new Set();
+        return [...publicSongRequests, ...getSongRequests()]
+            .filter((request) => {
+                const key = songRequestKey(request);
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            })
+            .sort((a, b) => new Date(createdAtFor(b)).getTime() - new Date(createdAtFor(a)).getTime());
+    }
+
+    async function loadPublicSongRequests() {
+        try {
+            const response = await fetch('/api/song-requests');
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(result.error || 'Song requests could not be loaded.');
+            publicSongRequests = Array.isArray(result.items) ? result.items : [];
+        } catch (error) {
+            publicSongRequests = [];
+        }
+        renderSongRequests();
     }
 
     function addFeedbackReport(report) {
@@ -1541,6 +1570,7 @@
                 removeLocalSongRequest(request);
             } else {
                 await deleteAdminItem(`/api/song-requests?id=${encodeURIComponent(request.id)}`);
+                await loadPublicSongRequests();
             }
             loadAdminPanel();
         } catch (error) {
@@ -1767,7 +1797,7 @@
         }
     });
 
-    renderSongRequests();
+    loadPublicSongRequests();
     loadAdminPanel();
 </script>
 </body>

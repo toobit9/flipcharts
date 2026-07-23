@@ -37,11 +37,6 @@ module.exports = async function handler(request, response) {
         }
 
         if (request.method === 'GET') {
-            if (!verifyAdminRequest(request)) {
-                response.status(401).json({ error: 'Admin access required.' });
-                return;
-            }
-
             const rows = await sql.query(`
                 SELECT id, title, art_style, notes, created_at
                 FROM song_requests
@@ -49,7 +44,18 @@ module.exports = async function handler(request, response) {
                 LIMIT 100
             `);
 
-            response.status(200).json({ items: rows });
+            if (verifyAdminRequest(request)) {
+                response.status(200).json({ items: rows });
+                return;
+            }
+
+            response.status(200).json({
+                items: rows.map((item) => ({
+                    title: item.title,
+                    art_style: item.art_style,
+                    created_at: item.created_at
+                }))
+            });
             return;
         }
 
