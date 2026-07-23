@@ -682,6 +682,14 @@
             color: #8ff0a4;
         }
 
+        .playlist-tool-btn.icon-only {
+            width: 38px;
+            height: 38px;
+            padding: 0;
+            font-size: 1rem;
+            flex: 0 0 auto;
+        }
+
         .playlist-status {
             min-height: 18px;
             margin-top: 10px;
@@ -889,8 +897,8 @@
             <div class="playlist-note">Use Edit playlist to choose songs. Save playlist hides the full library so only your set stays front and center.</div>
             <div class="playlist-tools">
                 <button class="playlist-tool-btn" id="editPlaylistButton" type="button" onclick="togglePlaylistEditing()">Edit playlist</button>
-                <button class="playlist-tool-btn" id="copyPlaylistButton" type="button" onclick="copyPlaylistLink()" disabled>Copy playlist link</button>
                 <button class="playlist-tool-btn" id="clearPlaylistButton" type="button" onclick="clearPlaylist()" disabled>Clear playlist</button>
+                <button class="playlist-tool-btn icon-only" id="copyPlaylistButton" type="button" onclick="copyPlaylistLink()" aria-label="Copy playlist link" title="Copy playlist link" disabled>⧉</button>
             </div>
         </div>
         <div class="song-grid" id="playlistGrid"></div>
@@ -1240,6 +1248,13 @@
                     </div>
                 </div>
                 <div class="tutorial-item">
+                    <div class="tutorial-icon">⧉</div>
+                    <div class="tutorial-copy">
+                        <strong>Copy Link</strong>
+                        <span>Copies a shareable link for your current playlist.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
                     <div class="tutorial-icon">↺</div>
                     <div class="tutorial-copy">
                         <strong>Restart</strong>
@@ -1445,7 +1460,9 @@
         if (!button) return;
 
         button.classList.toggle('is-success', active);
-        button.textContent = active ? 'Copied!' : 'Copy playlist link';
+        button.textContent = active ? '✓' : '⧉';
+        button.setAttribute('aria-label', active ? 'Playlist link copied' : 'Copy playlist link');
+        button.title = active ? 'Copied!' : 'Copy playlist link';
     }
 
     function updatePlaylistEditingState() {
