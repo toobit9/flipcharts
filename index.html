@@ -668,6 +668,12 @@
             cursor: default;
         }
 
+        .playlist-tool-btn.is-success {
+            border-color: rgba(81,207,102,0.5);
+            background: rgba(81,207,102,0.16);
+            color: #8ff0a4;
+        }
+
         .playlist-status {
             min-height: 18px;
             margin-top: 10px;
@@ -898,7 +904,7 @@
                     <div class="tutorial-icon">☆</div>
                     <div class="tutorial-copy">
                         <strong>My Playlist</strong>
-                        <span>Star songs, then copy a share link for your set.</span>
+                        <span>Edit to star songs, save to hide the full library, then share.</span>
                     </div>
                 </div>
                 <div class="tutorial-item">
@@ -938,8 +944,9 @@
     <details class="library-section" id="playlistSection" open>
         <summary class="section-title">My Playlist</summary>
         <div class="playlist-toolbar">
-            <div class="playlist-note">Star songs below to build a custom playlist. Copy the link to share the same starred set without a login.</div>
+            <div class="playlist-note">Use Edit playlist to choose songs. Save playlist hides the full library so only your set stays front and center.</div>
             <div class="playlist-tools">
+                <button class="playlist-tool-btn" id="editPlaylistButton" type="button" onclick="togglePlaylistEditing()">Edit playlist</button>
                 <button class="playlist-tool-btn" id="copyPlaylistButton" type="button" onclick="copyPlaylistLink()" disabled>Copy playlist link</button>
                 <button class="playlist-tool-btn" id="clearPlaylistButton" type="button" onclick="clearPlaylist()" disabled>Clear playlist</button>
             </div>
@@ -949,7 +956,7 @@
         <div class="playlist-status" id="playlistStatus" aria-live="polite"></div>
     </details>
 
-    <details class="library-section" open>
+    <details class="library-section" id="allSongsSection" open>
         <summary class="section-title">All Songs</summary>
         <div class="song-grid" id="allSongsGrid">
 
@@ -1347,6 +1354,7 @@
     const PLAYLIST_PARAM = 'playlist';
     const params = new URLSearchParams(window.location.search);
     let publicSongRequests = [];
+    let playlistEditing = false;
 
     if (params.get('admin') === '0') {
         localStorage.removeItem(ADMIN_KEY);
@@ -1418,6 +1426,37 @@
         }
     }
 
+    function setCopyButtonSuccess(active) {
+        const button = document.getElementById('copyPlaylistButton');
+        if (!button) return;
+
+        button.classList.toggle('is-success', active);
+        button.textContent = active ? 'Copied!' : 'Copy playlist link';
+    }
+
+    function updatePlaylistEditingState() {
+        const allSongsSection = document.getElementById('allSongsSection');
+        const editButton = document.getElementById('editPlaylistButton');
+        if (allSongsSection) {
+            if (playlistEditing) {
+                allSongsSection.setAttribute('open', '');
+            } else {
+                allSongsSection.removeAttribute('open');
+            }
+        }
+        if (editButton) {
+            editButton.textContent = playlistEditing ? 'Save playlist' : 'Edit playlist';
+            editButton.classList.toggle('is-success', playlistEditing);
+            editButton.setAttribute('aria-pressed', String(playlistEditing));
+        }
+    }
+
+    function togglePlaylistEditing() {
+        playlistEditing = !playlistEditing;
+        updatePlaylistEditingState();
+        setPlaylistStatus(playlistEditing ? 'Choose songs from All Songs.' : 'Playlist saved.');
+    }
+
     function playlistLinkFor(ids) {
         const url = new URL(window.location.href);
         url.searchParams.delete('admin');
@@ -1432,6 +1471,7 @@
     function syncPlaylistUrl(ids) {
         const url = playlistLinkFor(ids);
         window.history.replaceState({}, '', url);
+        setCopyButtonSuccess(false);
     }
 
     function renderPlaylist() {
@@ -1506,10 +1546,14 @@
         const link = playlistLinkFor(ids);
         try {
             await navigator.clipboard.writeText(link);
+            setCopyButtonSuccess(true);
             setPlaylistStatus('Playlist link copied.');
+            window.setTimeout(() => setCopyButtonSuccess(false), 2600);
         } catch (error) {
             window.prompt('Copy this playlist link:', link);
+            setCopyButtonSuccess(true);
             setPlaylistStatus('Playlist link ready.');
+            window.setTimeout(() => setCopyButtonSuccess(false), 2600);
         }
     }
 
@@ -1517,6 +1561,8 @@
         savePlaylistIds([]);
         syncPlaylistUrl([]);
         renderPlaylist();
+        playlistEditing = true;
+        updatePlaylistEditingState();
         setPlaylistStatus('Playlist cleared.');
     }
 
@@ -1527,7 +1573,10 @@
             savePlaylistIds(urlIds);
         }
         renderPlaylist();
-        if (urlIds && urlIds.length) {
+        const ids = getPlaylistIds();
+        playlistEditing = ids.length === 0;
+        updatePlaylistEditingState();
+        if (ids.length) {
             document.getElementById('playlistSection')?.setAttribute('open', '');
         }
     }
@@ -1945,6 +1994,13 @@
     }
 
     document.getElementById('requestArtStyle').addEventListener('change', updateOtherArtStyleField);
+
+    document.getElementById('allSongsSection')?.addEventListener('toggle', (event) => {
+        const isOpen = event.currentTarget.hasAttribute('open');
+        if (playlistEditing === isOpen) return;
+        playlistEditing = isOpen;
+        updatePlaylistEditingState();
+    });
 
     document.getElementById('requestForm').addEventListener('submit', async (event) => {
         event.preventDefault();
