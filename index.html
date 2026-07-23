@@ -947,7 +947,7 @@
     <details class="library-section" id="playlistSection" open>
         <summary class="section-title">My Singing List</summary>
         <div class="playlist-toolbar">
-            <div class="playlist-note">Use Edit singing list to choose songs. Save singing list hides the full library so only your set stays front and center.</div>
+            <div class="playlist-note">Tap Edit singing list when you want to choose songs. Save singing list hides the full library so only your set stays front and center.</div>
             <div class="playlist-tools">
                 <button class="playlist-tool-btn" id="editPlaylistButton" type="button" onclick="togglePlaylistEditing()">Edit singing list</button>
                 <button class="playlist-tool-btn" id="clearPlaylistButton" type="button" onclick="clearPlaylist()" disabled>Clear singing list</button>
@@ -955,7 +955,7 @@
             </div>
         </div>
         <div class="song-grid" id="playlistGrid"></div>
-        <div class="empty-section" id="playlistEmpty">Tap Edit singing list, then star songs from All Songs.</div>
+        <div class="empty-section" id="playlistEmpty">Your singing list is empty. Tap Edit singing list to choose songs.</div>
         <div class="playlist-status" id="playlistStatus" aria-live="polite"></div>
     </details>
 
@@ -1659,7 +1659,7 @@
         savePlaylistIds([]);
         syncPlaylistUrl([]);
         renderPlaylist();
-        playlistEditing = true;
+        playlistEditing = false;
         updatePlaylistEditingState();
         setPlaylistStatus('Singing list cleared.');
     }
@@ -1671,9 +1671,9 @@
             savePlaylistIds(urlIds);
         }
         renderPlaylist();
-        const ids = getPlaylistIds();
-        playlistEditing = ids.length === 0;
+        playlistEditing = false;
         updatePlaylistEditingState();
+        const ids = getPlaylistIds();
         if (ids.length) {
             document.getElementById('playlistSection')?.setAttribute('open', '');
         }
