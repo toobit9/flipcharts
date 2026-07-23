@@ -128,6 +128,37 @@
 
         .library-section { margin-top: 36px; }
 
+        .library-options {
+            display: flex;
+            justify-content: flex-end;
+            margin: -14px 0 6px;
+        }
+
+        .library-toggle-btn {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.58);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font: inherit;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .library-toggle-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.24);
+            color: rgba(255,255,255,0.86);
+        }
+
+        body.singing-list-disabled #playlistSection,
+        body.singing-list-disabled .favorite-btn,
+        body:not(.singing-list-editing) .favorite-btn {
+            display: none;
+        }
+
         .tutorial-section {
             margin: 42px 0 0;
             border: 1px solid rgba(255,255,255,0.09);
@@ -919,6 +950,7 @@
             }
             .playlist-tools { width: 100%; }
             .playlist-tool-btn:not(.icon-only) { flex: 1 1 140px; }
+            .library-options { justify-content: center; }
         }
     </style>
 </head>
@@ -927,7 +959,7 @@
 
     <div class="header">
         <h1>🎵 Primary Digital Flipcharts</h1>
-        <div class="version-label">v0.5 pre-alpha</div>
+        <div class="version-label">v0.5 beta</div>
     </div>
 
     <div class="admin-badge">Admin mode is on. Coming Soon flipcharts, song requests, and feedback are visible here for review.</div>
@@ -952,6 +984,10 @@
             </div>
         </div>
     </section>
+
+    <div class="library-options">
+        <button class="library-toggle-btn" id="singingListToggleButton" type="button" onclick="toggleSingingListVisibility()">Hide singing list</button>
+    </div>
 
     <details class="library-section" id="playlistSection" open>
         <summary class="section-title">My Singing List</summary>
@@ -1310,6 +1346,13 @@
                     </div>
                 </div>
                 <div class="tutorial-item">
+                    <div class="tutorial-icon">◐</div>
+                    <div class="tutorial-copy">
+                        <strong>Hide List</strong>
+                        <span>Turn off the singing list panel to use the app as a simple song library.</span>
+                    </div>
+                </div>
+                <div class="tutorial-item">
                     <div class="tutorial-icon">⧉</div>
                     <div class="tutorial-copy">
                         <strong>Copy Link</strong>
@@ -1356,10 +1399,11 @@
                 <summary class="change-log-title">Change Log</summary>
                 <div class="change-log-list">
                     <div><strong>Updated July 23, 2026</strong></div>
-                    <div><strong>v0.5 pre-alpha</strong></div>
+                    <div><strong>v0.5 beta</strong></div>
                     <ul>
                         <li>Added shareable singing lists.</li>
                         <li>Added edit/save list mode.</li>
+                        <li>Added a hide/show singing list option.</li>
                         <li>Added public song requests and feedback.</li>
                         <li>Added accompaniment controls.</li>
                         <li>Added Fill It In game support.</li>
@@ -1464,9 +1508,11 @@
     const ADMIN_TOKEN_KEY = 'flipchartsAdminToken';
     const PLAYLIST_KEY = 'flipchartsPlaylist';
     const PLAYLIST_PARAM = 'playlist';
+    const SINGING_LIST_ENABLED_KEY = 'flipchartsSingingListEnabled';
     const params = new URLSearchParams(window.location.search);
     let publicSongRequests = [];
     let playlistEditing = false;
+    let singingListEnabled = localStorage.getItem(SINGING_LIST_ENABLED_KEY) !== '0';
 
     if (params.get('admin') === '0') {
         localStorage.removeItem(ADMIN_KEY);
@@ -1527,6 +1573,37 @@
         localStorage.setItem(PLAYLIST_KEY, JSON.stringify(normalizedPlaylistIds(ids)));
     }
 
+    function setAllSongsOpen(open) {
+        const allSongsSection = document.getElementById('allSongsSection');
+        if (!allSongsSection) return;
+        if (open) {
+            allSongsSection.setAttribute('open', '');
+        } else {
+            allSongsSection.removeAttribute('open');
+        }
+    }
+
+    function updateSingingListVisibility() {
+        document.body.classList.toggle('singing-list-disabled', !singingListEnabled);
+        const button = document.getElementById('singingListToggleButton');
+        if (button) {
+            button.textContent = singingListEnabled ? 'Hide singing list' : 'Show singing list';
+            button.setAttribute('aria-pressed', String(singingListEnabled));
+        }
+        if (!singingListEnabled) {
+            playlistEditing = false;
+            setAllSongsOpen(true);
+        }
+    }
+
+    function toggleSingingListVisibility() {
+        singingListEnabled = !singingListEnabled;
+        localStorage.setItem(SINGING_LIST_ENABLED_KEY, singingListEnabled ? '1' : '0');
+        updateSingingListVisibility();
+        updatePlaylistEditingState();
+        setPlaylistStatus(singingListEnabled ? 'Singing list shown.' : 'Singing list hidden.');
+    }
+
     function setPlaylistStatus(message) {
         const status = document.getElementById('playlistStatus');
         if (!status) return;
@@ -1549,14 +1626,14 @@
     }
 
     function updatePlaylistEditingState() {
-        const allSongsSection = document.getElementById('allSongsSection');
         const editButton = document.getElementById('editPlaylistButton');
-        if (allSongsSection) {
-            if (playlistEditing) {
-                allSongsSection.setAttribute('open', '');
-            } else {
-                allSongsSection.removeAttribute('open');
-            }
+        document.body.classList.toggle('singing-list-editing', singingListEnabled && playlistEditing);
+        if (!singingListEnabled) {
+            setAllSongsOpen(true);
+        } else if (playlistEditing || getPlaylistIds().length === 0) {
+            setAllSongsOpen(true);
+        } else {
+            setAllSongsOpen(false);
         }
         if (editButton) {
             editButton.textContent = playlistEditing ? 'Save singing list' : 'Edit singing list';
@@ -1566,6 +1643,11 @@
     }
 
     function togglePlaylistEditing() {
+        if (!singingListEnabled) {
+            singingListEnabled = true;
+            localStorage.setItem(SINGING_LIST_ENABLED_KEY, '1');
+            updateSingingListVisibility();
+        }
         playlistEditing = !playlistEditing;
         updatePlaylistEditingState();
         setPlaylistStatus(playlistEditing ? 'Choose songs from All Songs.' : 'Singing list saved.');
@@ -1685,14 +1767,18 @@
         const urlIds = playlistIdsFromUrl();
         if (urlIds) {
             savePlaylistIds(urlIds);
+            singingListEnabled = true;
+            localStorage.setItem(SINGING_LIST_ENABLED_KEY, '1');
         }
         renderPlaylist();
-        playlistEditing = false;
-        updatePlaylistEditingState();
         const ids = getPlaylistIds();
-        if (ids.length) {
+        const hasSharedOrSavedList = ids.length > 0;
+        playlistEditing = false;
+        updateSingingListVisibility();
+        if (singingListEnabled && hasSharedOrSavedList) {
             document.getElementById('playlistSection')?.setAttribute('open', '');
         }
+        updatePlaylistEditingState();
     }
 
     function openRequestModal() {
@@ -2115,13 +2201,6 @@
     }
 
     document.getElementById('requestArtStyle').addEventListener('change', updateOtherArtStyleField);
-
-    document.getElementById('allSongsSection')?.addEventListener('toggle', (event) => {
-        const isOpen = event.currentTarget.hasAttribute('open');
-        if (playlistEditing === isOpen) return;
-        playlistEditing = isOpen;
-        updatePlaylistEditingState();
-    });
 
     document.getElementById('requestForm').addEventListener('submit', async (event) => {
         event.preventDefault();
