@@ -8,8 +8,9 @@
     "mobilePdf": "https://assets.churchofjesuschrist.org/3f/ab/3fabd9a3303d11efb4caeeeeac1e3b3817b7574a/liken_the_scriptures.pdf"
   },
   "accompaniment": {
-    "status": "Needs user-provided purchased/downloaded MP3 before app wiring. The official Church page exposes PDF assets but no accompaniment MP3 asset.",
-    "notes": "Use Shawna Edwards Music or user upload for audio if accompaniment is desired."
+    "status": "Wired in app from user-provided MP3.",
+    "path": "/liken-the-scriptures/audio/accompaniment.mp3",
+    "notes": "User provided the purchased/downloaded accompaniment MP3."
   },
   "visualStyle": {
     "name": "claymation / stop-motion",

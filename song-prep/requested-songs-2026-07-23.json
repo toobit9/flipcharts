@@ -65,12 +65,12 @@
       ],
       "licenseNote": "The Church music page credits this as Shawna Edwards Music and says copies may be made for incidental, noncommercial church or home use with the notice included.",
       "lyricsStatus": "Official Church page exposes structured verses: 3 verses and repeated choruses. Ready to segment after confirming exact display phrases.",
-      "accompanimentStatus": "Church page exposes PDF assets but no accompaniment MP3 asset. Accompaniment likely needs to come from Shawna Edwards Music or user upload.",
+      "accompanimentStatus": "Wired in app from user-provided MP3 at /liken-the-scriptures/audio/accompaniment.mp3.",
       "imageDirection": "Claymation / stop-motion style showing children imagining scripture stories and applying them today: Nephi-like courage, Daniel-like prayer, Esther-like courage, scripture reading, family study, modern children choosing right. No violent battle imagery, no cross imagery, no words in images.",
       "readyForImages": true,
       "nextNeeded": [
         "Confirm whether to use Church-page lyric segmentation",
-        "Accompaniment MP3 if desired"
+        "Review accompaniment timing/volume in app"
       ]
     }
   ]
