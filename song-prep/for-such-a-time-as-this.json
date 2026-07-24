@@ -8,8 +8,9 @@
   },
   "sourceWarning": "Do not confuse this with the Sally DeFord song of the same title on the Church music site.",
   "accompaniment": {
-    "status": "Needs user-provided purchased/downloaded MP3 before app wiring unless a legitimate free accompaniment source is provided.",
-    "notes": "Likely available from Shawna Edwards Music resources."
+    "status": "Wired in app from user-provided MP3.",
+    "path": "/for-such-a-time-as-this/audio/accompaniment.mp3",
+    "notes": "User provided the purchased/downloaded accompaniment MP3."
   },
   "visualStyle": {
     "name": "paper cutout",

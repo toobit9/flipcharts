@@ -36,11 +36,11 @@
       ],
       "sourceWarning": "There is also a different Church music page for a Sally DeFord song with this same title. Use Shawna Edwards source for this request.",
       "lyricsStatus": "Lyrics provided by user for Shawna Edwards song. Ready to segment/build from local prep file.",
-      "accompanimentStatus": "Likely available through Shawna Edwards Music purchase/download. No free official accompaniment asset found yet.",
+      "accompanimentStatus": "Wired in app from user-provided MP3.",
       "imageDirection": "Layered paper cutout style inspired by Esther: a courageous young woman, palace setting, prayerful preparation, standing with faith, helping her people. Avoid weapons, intimidation, and cross imagery.",
       "readyForImages": true,
       "nextNeeded": [
-        "Accompaniment MP3 if desired",
+        "Accompaniment MP3 is wired in the app",
         "Generate/approve paper cutout Esther images"
       ]
     },
