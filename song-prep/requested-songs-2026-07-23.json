@@ -1,0 +1,77 @@
+{
+  "createdAt": "2026-07-23",
+  "purpose": "Preparation notes for requested flipcharts before image generation and app wiring.",
+  "copyrightNote": "Do not paste full non-user-provided lyrics into chat. Use official/purchased files, user-provided lyrics, or creator pages whose terms permit the intended Primary teaching use.",
+  "songs": [
+    {
+      "slug": "kind-like-christ",
+      "title": "Kind Like Christ",
+      "artist": "Angie Killian",
+      "requestedSection": "Coming Soon until images and lyrics are approved",
+      "sourceCandidates": [
+        {
+          "label": "Angie Killian Music product/search source",
+          "url": "https://www.angiekillian.com/"
+        }
+      ],
+      "lyricsStatus": "Lyrics provided by user. Ready to segment/build from local prep file.",
+      "accompanimentStatus": "Likely requires creator/purchased audio. No official free accompaniment asset found yet.",
+      "imageDirection": "Soft watercolor picture-book artwork, kind actions like sharing, helping, including others, forgiving, and following Christlike examples. Reverent, bright, child-friendly, no cross imagery.",
+      "readyForImages": true,
+      "nextNeeded": [
+        "Accompaniment MP3 if desired",
+        "Generate/approve watercolor images"
+      ]
+    },
+    {
+      "slug": "for-such-a-time-as-this-shawna-edwards",
+      "title": "For Such a Time As This",
+      "artist": "Shawna Edwards",
+      "requestedSection": "Coming Soon until images and lyrics are approved",
+      "sourceCandidates": [
+        {
+          "label": "Shawna Edwards Music song page",
+          "url": "https://shawnaedwardsmusic.com/pages/for-such-a-time-as-this"
+        }
+      ],
+      "sourceWarning": "There is also a different Church music page for a Sally DeFord song with this same title. Use Shawna Edwards source for this request.",
+      "lyricsStatus": "Lyrics provided by user for Shawna Edwards song. Ready to segment/build from local prep file.",
+      "accompanimentStatus": "Likely available through Shawna Edwards Music purchase/download. No free official accompaniment asset found yet.",
+      "imageDirection": "Layered paper cutout style inspired by Esther: a courageous young woman, palace setting, prayerful preparation, standing with faith, helping her people. Avoid weapons, intimidation, and cross imagery.",
+      "readyForImages": true,
+      "nextNeeded": [
+        "Accompaniment MP3 if desired",
+        "Generate/approve paper cutout Esther images"
+      ]
+    },
+    {
+      "slug": "liken-the-scriptures",
+      "title": "Liken the Scriptures",
+      "artist": "Shawna Edwards",
+      "requestedSection": "Coming Soon until images and lyrics are approved",
+      "sourceCandidates": [
+        {
+          "label": "Church music page",
+          "url": "https://www.churchofjesuschrist.org/media/music/songs/liken-the-scriptures?lang=eng"
+        },
+        {
+          "label": "PDF sheet music",
+          "url": "https://assets.churchofjesuschrist.org/75/81/75811bd1f5e711ee9a9beeeeac1e845bcdfc1e6f/liken_the_scriptures.pdf"
+        },
+        {
+          "label": "Mobile PDF sheet music",
+          "url": "https://assets.churchofjesuschrist.org/3f/ab/3fabd9a3303d11efb4caeeeeac1e3b3817b7574a/liken_the_scriptures.pdf"
+        }
+      ],
+      "licenseNote": "The Church music page credits this as Shawna Edwards Music and says copies may be made for incidental, noncommercial church or home use with the notice included.",
+      "lyricsStatus": "Official Church page exposes structured verses: 3 verses and repeated choruses. Ready to segment after confirming exact display phrases.",
+      "accompanimentStatus": "Church page exposes PDF assets but no accompaniment MP3 asset. Accompaniment likely needs to come from Shawna Edwards Music or user upload.",
+      "imageDirection": "Claymation / stop-motion style showing children imagining scripture stories and applying them today: Nephi-like courage, Daniel-like prayer, Esther-like courage, scripture reading, family study, modern children choosing right. No violent battle imagery, no cross imagery, no words in images.",
+      "readyForImages": true,
+      "nextNeeded": [
+        "Confirm whether to use Church-page lyric segmentation",
+        "Accompaniment MP3 if desired"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "title": "God’s Love",
+  "slug": "gods-love",
+  "artist": "Linda Urquhart · Shawna Edwards",
+  "source": "https://www.churchofjesuschrist.org/media/music/songs/gods-love-2026?lang=eng",
+  "credits": "<p data-aid=\"0000019f-90dc-dffb-a5df-b1dca5330000\" data-pid=\"p_bP9Xb\">Words by Linda Urquhart and Shawna Edwards</p><br><br> <p data-aid=\"0000019f-90dc-dffb-a5df-b1dca5330001\" data-pid=\"p_jKsLc\">Music by Shawna Edwards</p><br><br> <p data-aid=\"0000019f-90dc-dffb-a5df-b1dca5330002\" data-pid=\"p_yWocw\">© 2025 by Shawna Edwards. All rights reserved. This song may be copied for incidental, noncommercial church or home use. This notice must be included on each copy made.</p>",
+  "accompaniment": {
+    "status": "No MP3 accompaniment asset exposed on official page; needs user-provided audio if desired."
+  },
+  "style": "hand-drawn cartoon storybook animation",
+  "slides": [
+    {
+      "number": 1,
+      "type": "title",
+      "section": "Title",
+      "lyric": "God’s Love",
+      "imageDescription": "Children under a wide bright sky and ocean, surrounded by Bible story memory scenes.",
+      "imagePrompt": "Title image for God’s Love: diverse Primary children stand between a wide sky and deep blue sea, with small gentle Bible story scenes glowing around them to show God’s love through scripture stories. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 2,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "He was there to comfort Joseph in a jail.",
+      "key": "COMFORT · JOSEPH · JAIL",
+      "imageDescription": "Joseph comforted in jail by warm light.",
+      "imagePrompt": "Joseph in a simple ancient jail cell is comforted by warm heavenly light while a modern child reads scriptures nearby, peaceful and not gloomy. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 3,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "He kept Jonah safe in the belly of a whale.",
+      "key": "KEPT · JONAH · SAFE",
+      "imageDescription": "Jonah safe inside a whale.",
+      "imagePrompt": "Jonah sits safely and prayerfully inside a friendly whale-shaped scene with soft blue light, calm water feeling, child-friendly and not scary. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 4,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "He gave Job sons and daughters again,",
+      "key": "GAVE · SONS · DAUGHTERS",
+      "imageDescription": "Job reunited with family.",
+      "imagePrompt": "Job is lovingly reunited with sons and daughters in a warm family scene, showing restoration and comfort after sorrow. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 5,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "And protected Daniel in the lions’ den.",
+      "key": "PROTECTED · DANIEL · LIONS'",
+      "imageDescription": "Daniel peaceful with lions.",
+      "imagePrompt": "Daniel kneels peacefully in the lions den while gentle lions rest nearby and warm protective light surrounds him. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 6,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "In ev’ry Bible story I read,",
+      "key": "EV'RY · BIBLE · STORY",
+      "imageDescription": "Child reading Bible stories.",
+      "imagePrompt": "A modern Primary child reads Bible stories while soft illustrated story scenes float gently around the open book. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 7,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "I learn this undeniable thing:",
+      "key": "LEARN · UNDENIABLE · THING",
+      "imageDescription": "Child discovering truth from scriptures.",
+      "imagePrompt": "A child reading scriptures has a bright, peaceful realization, with warm light rising from the pages and a thoughtful smile. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 8,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "That God’s love is wider than the sky",
+      "key": "GOD'S · LOVE · WIDER",
+      "imageDescription": "Wide sky symbol.",
+      "imagePrompt": "Children look up at an expansive glowing sky, arms open in wonder, symbolizing God’s love wider than the sky. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 9,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "And deeper than the deep blue sea.",
+      "key": "DEEPER · THAN · DEEP",
+      "imageDescription": "Deep blue sea symbol.",
+      "imagePrompt": "Children stand safely near a deep blue sea with sparkling waves and warm light reflecting on the water, symbolizing depth and peace. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 10,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "God’s love can light the darkest night",
+      "key": "GOD'S · LOVE · LIGHT",
+      "imageDescription": "Light in dark night.",
+      "imagePrompt": "A child walks safely through a dark night while warm golden light from heaven and scripture softly lights the path. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 11,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "And fill an aching heart with peace.",
+      "key": "FILL · ACHING · HEART",
+      "imageDescription": "Comforting aching heart.",
+      "imagePrompt": "A sad child is comforted by a loving friend and warm golden light, showing peace filling an aching heart. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 12,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "God’s love is guaranteed to be",
+      "key": "GOD'S · LOVE · GUARANTEED",
+      "imageDescription": "Reliable love symbol.",
+      "imagePrompt": "A child stands on a firm bright path with family and friends nearby, warm light steady and dependable around them. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 13,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "Unchanging through eternity.",
+      "key": "UNCHANGING · THROUGH · ETERNITY",
+      "imageDescription": "Eternal light symbol.",
+      "imagePrompt": "Children watch a golden sunrise over rolling hills, with a gentle continuous ribbon of light suggesting eternity. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 14,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "Just as God loved Joseph and Jonah and Job,",
+      "key": "JUST · LOVED · JOSEPH",
+      "imageDescription": "Joseph Jonah Job montage.",
+      "imagePrompt": "A simple triptych-style cartoon scene showing Joseph comforted, Jonah safe, and Job with family, all connected by the same warm light. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 15,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I know He loves me.",
+      "key": "KNOW · LOVES",
+      "imageDescription": "Child knows God loves them.",
+      "imagePrompt": "A Primary child smiles peacefully with scriptures held close, surrounded by warm heavenly light and a simple heart-shaped glow in the sky. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 16,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "He blessed Sarah with a son when she was old.",
+      "key": "BLESSED · SARAH",
+      "imageDescription": "Sarah with baby.",
+      "imagePrompt": "Sarah lovingly holds her baby son in a peaceful ancient family tent scene with warm joyful light. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 17,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "He led Ruth to find a new family and home.",
+      "key": "RUTH · FIND · FAMILY",
+      "imageDescription": "Ruth welcomed home.",
+      "imagePrompt": "Ruth is warmly welcomed by a new family near fields and a simple home, showing belonging and kindness. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 18,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "He sent a guardian angel, we know,",
+      "key": "SENT · GUARDIAN · ANGEL",
+      "imageDescription": "Guardian angel sent.",
+      "imagePrompt": "A reverent guardian angel in soft light appears protectively near faithful children, symbolic and gentle. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 19,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "To Shadrach, Meshach, and Abed-nego.",
+      "key": "SHADRACH · MESHACH · ABED",
+      "imageDescription": "Three faithful men protected.",
+      "imagePrompt": "Shadrach, Meshach, and Abed-nego stand peacefully together surrounded by protective golden light, no flames touching them, calm and reverent. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 20,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "In ev’ry Bible story I read,",
+      "key": "EV'RY · BIBLE · STORY",
+      "imageDescription": "Child reading Bible stories again.",
+      "imagePrompt": "A different modern Primary child reads Bible stories while warm storybook scenes glow from the pages. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 21,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "I learn this undeniable thing:",
+      "key": "LEARN · UNDENIABLE · THING",
+      "imageDescription": "Learning truth again.",
+      "imagePrompt": "A child points softly to an open scripture page as warm light fills the room, showing a clear spiritual discovery. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 22,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "Just as God loved Sarah and Daniel and Ruth,",
+      "key": "JUST · LOVED · SARAH",
+      "imageDescription": "Sarah Daniel Ruth montage.",
+      "imagePrompt": "A simple triptych-style cartoon scene showing Sarah with her baby, Daniel protected with lions, and Ruth welcomed by family, all connected by warm light. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    },
+    {
+      "number": 23,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I know He loves me.",
+      "key": "KNOW · LOVES",
+      "imageDescription": "Final God loves me.",
+      "imagePrompt": "Final joyful scene of diverse Primary children standing together under a wide sky and warm light, each feeling God’s love personally. Hand-drawn 2D cartoon storybook animation style, clean expressive linework, warm colors, simple readable shapes, reverent Primary teaching tone, modest clothing, diverse children where modern children appear, 16:9 widescreen, clear open space for large lyric overlay. No words, lettering, numbers, watermarks, weapons, frightening imagery, or crosses."
+    }
+  ]
+}

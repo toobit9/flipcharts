@@ -1,0 +1,215 @@
+{
+  "slug": "for-such-a-time-as-this",
+  "title": "For Such a Time As This",
+  "credits": "Words and music by Shawna Edwards.",
+  "source": {
+    "lyricsProvidedByUser": true,
+    "officialSongPage": "https://shawnaedwardsmusic.com/pages/for-such-a-time-as-this"
+  },
+  "sourceWarning": "Do not confuse this with the Sally DeFord song of the same title on the Church music site.",
+  "accompaniment": {
+    "status": "Needs user-provided purchased/downloaded MP3 before app wiring unless a legitimate free accompaniment source is provided.",
+    "notes": "Likely available from Shawna Edwards Music resources."
+  },
+  "visualStyle": {
+    "name": "paper cutout",
+    "promptStyle": "layered paper cutout illustration, hand-cut paper edges, soft shadows between layers, warm textured paper, simple theatrical staging, reverent Primary teaching visuals",
+    "constraints": [
+      "No words, lettering, numbers, watermarks, or labels inside images.",
+      "No crosses or cross-shaped symbols.",
+      "No violent battle imagery.",
+      "Keep Esther and modern children modestly dressed.",
+      "Use courage, fasting, prayer, truth, and divine purpose as the visual anchors."
+    ]
+  },
+  "slides": [
+    {
+      "number": 1,
+      "type": "title",
+      "section": "Title",
+      "lyric": "For Such a Time As This",
+      "imageDescription": "Esther standing courageously in warm palace light with modern children suggested in the glow.",
+      "imagePrompt": "Layered paper cutout title image for For Such a Time As This. Show Queen Esther standing courageously in warm palace light, with a subtle golden path and modern children faintly connected by the light, symbolizing purpose across time. Hand-cut paper edges, soft shadows between layers, warm textured paper, reverent and hopeful. No text inside image, no crosses."
+    },
+    {
+      "number": 2,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "Long ago there lived a deeply faithful soul.",
+      "key": "LONG AGO · FAITHFUL",
+      "imageDescription": "A peaceful ancient Persian setting introducing Esther as faithful and thoughtful.",
+      "imagePrompt": "Layered paper cutout illustration. Ancient Persian-inspired courtyard, young Esther shown peaceful and prayerful, warm light, modest robe, reverent and simple. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 3,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "A woman who was brave and bold",
+      "key": "BRAVE · BOLD",
+      "imageDescription": "Esther standing with courage, shoulders lifted, warm light behind her.",
+      "imagePrompt": "Layered paper cutout illustration. Queen Esther stands with quiet courage in a palace hallway, warm golden light behind her, brave but humble expression. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 4,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "And Esther was her name.",
+      "key": "ESTHER",
+      "imageDescription": "Close, reverent portrait of Esther in simple royal clothing.",
+      "imagePrompt": "Layered paper cutout illustration. Reverent portrait of Queen Esther in modest ancient royal clothing, kind eyes, warm watercolor palace background. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 5,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "She heard a plan created by a wicked man",
+      "key": "HEARD · PLAN",
+      "imageDescription": "Esther hearing troubling news, no violence shown.",
+      "imagePrompt": "Layered paper cutout illustration. Esther hears troubling news from a trusted messenger in a palace courtyard; expressions serious but not frightening. Avoid violence and weapons. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 6,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "To kill the people of her land",
+      "key": "PEOPLE · LAND",
+      "imageDescription": "Families of Esther's people gathered worried but hopeful.",
+      "imagePrompt": "Layered paper cutout illustration. Families of Esther's people gather with worried but hopeful faces in a village street, children and parents close together, no violence shown. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 7,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "Upon a coming day.",
+      "key": "COMING DAY",
+      "imageDescription": "A sunrise over the city, suggesting an important day ahead.",
+      "imagePrompt": "Layered paper cutout illustration. Sunrise over an ancient city and palace, quiet anticipation, warm and reverent, simple open sky for lyric overlay. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 8,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "She rose to say, “Oh let us humbly fast and pray",
+      "key": "FAST · PRAY",
+      "imageDescription": "Esther inviting her people to fast and pray.",
+      "imagePrompt": "Layered paper cutout illustration. Esther stands among faithful families, gently inviting them to fast and pray, heads bowed and hands folded reverently. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 9,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "That the king will keep us safe",
+      "key": "KING · SAFE",
+      "imageDescription": "Esther looking toward the palace throne room with faith.",
+      "imagePrompt": "Layered paper cutout illustration. Esther looks with faith toward a softly lit palace doorway leading to the king's court, symbolizing hope for safety. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 10,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "And let our nation live.”",
+      "key": "NATION · LIVE",
+      "imageDescription": "Families standing together in hope under warm light.",
+      "imagePrompt": "Layered paper cutout illustration. Families and children stand together with hopeful faces under warm sunrise light, symbolizing a nation preserved. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 11,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "She spoke the truth though she would be in danger too",
+      "key": "TRUTH · DANGER",
+      "imageDescription": "Esther approaching the king with courage, no threat shown.",
+      "imagePrompt": "Layered paper cutout illustration. Queen Esther approaches the king's court with courage and humility, palace columns and warm light, no weapons or threat shown. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 12,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "For she was sent from God, she knew,",
+      "key": "SENT FROM GOD",
+      "imageDescription": "Esther in prayer with divine light.",
+      "imagePrompt": "Layered paper cutout illustration. Esther kneels in prayer as soft heavenly light fills a quiet room, showing she knows God has a purpose for her. Reverent, no text, no crosses."
+    },
+    {
+      "number": 13,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "For such a time as this.",
+      "key": "TIME AS THIS",
+      "imageDescription": "Esther standing in light, ready for her moment.",
+      "imagePrompt": "Layered paper cutout illustration. Esther stands in a glowing palace doorway, ready and faithful for her appointed moment, warm symbolic light, uncluttered. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 14,
+      "type": "lyric",
+      "section": "Bridge",
+      "lyric": "Oh Esther stood before the king with bold, unshaken faith.",
+      "key": "ESTHER · KING · FAITH",
+      "imageDescription": "Esther standing before the king with bold faith.",
+      "imagePrompt": "Layered paper cutout illustration. Esther stands before the king in a respectful palace throne room, calm and courageous, light around her, no weapons or fear. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 15,
+      "type": "lyric",
+      "section": "Bridge",
+      "lyric": "And with the help of God, she saved her nation that day.",
+      "key": "HELP OF GOD · SAVED",
+      "imageDescription": "Esther and her people joyful and grateful in soft light.",
+      "imagePrompt": "Layered paper cutout illustration. Esther and families of her people stand joyful and grateful in warm heavenly light, peaceful celebration of deliverance, no conflict shown. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 16,
+      "type": "lyric",
+      "section": "Modern Verse",
+      "lyric": "And now we’ll rise and say, “We’re children of the promised day.",
+      "key": "RISE · PROMISED DAY",
+      "imageDescription": "Modern Primary children rising with faith and purpose.",
+      "imagePrompt": "Layered paper cutout illustration. Modern diverse Primary children stand together in sunrise light with faithful courage, visually echoing Esther's courage. Contemporary modest clothing, no text, no crosses."
+    },
+    {
+      "number": 17,
+      "type": "lyric",
+      "section": "Modern Verse",
+      "lyric": "Called of God to share our faith",
+      "key": "CALLED · SHARE FAITH",
+      "imageDescription": "Children sharing faith kindly with friends.",
+      "imagePrompt": "Layered paper cutout illustration. Children kindly share faith with friends through scriptures, kindness, and invitation, modern neighborhood setting, warm and simple. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 18,
+      "type": "lyric",
+      "section": "Modern Verse",
+      "lyric": "To tell the world He lives.",
+      "key": "WORLD · HE LIVES",
+      "imageDescription": "Children sharing light around a globe with Jesus represented reverently.",
+      "imagePrompt": "Layered paper cutout illustration. Diverse children share warm light around a gentle globe while Jesus Christ is represented reverently in soft light above or nearby. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 19,
+      "type": "lyric",
+      "section": "Modern Verse",
+      "lyric": "Oh we’ll speak the truth and shine His light in all we do",
+      "key": "TRUTH · LIGHT",
+      "imageDescription": "Children choosing truth and shining light through good actions.",
+      "imagePrompt": "Layered paper cutout illustration. Children speak and act with truth through honest, kind choices; warm golden light shines from their good deeds. Hand-cut paper edges, warm textured paper, soft shadows between layers. No text, no crosses."
+    },
+    {
+      "number": 20,
+      "type": "lyric",
+      "section": "Modern Verse",
+      "lyric": "for we believe He sent us, too",
+      "key": "SENT US TOO",
+      "imageDescription": "Modern children standing on a path with purpose.",
+      "imagePrompt": "Layered paper cutout illustration. Modern Primary children stand on a bright path with a sense of divine purpose, echoing Esther's courage. Hopeful, reverent, no text, no crosses."
+    },
+    {
+      "number": 21,
+      "type": "lyric",
+      "section": "Modern Verse",
+      "lyric": "For such a time as this.",
+      "key": "TIME AS THIS",
+      "imageDescription": "Esther and modern children visually connected by warm light.",
+      "imagePrompt": "Layered paper cutout illustration. Final image showing Esther in the past and modern children in the present connected by a warm beam of light and shared courage. Reverent, simple, no text, no crosses."
+    }
+  ]
+}

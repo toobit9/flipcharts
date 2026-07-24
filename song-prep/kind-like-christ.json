@@ -1,0 +1,411 @@
+{
+  "slug": "kind-like-christ",
+  "title": "Kind Like Christ",
+  "credits": "Words & Music by Angie Killian & Becky Willard. © 2025 - all rights reserved.",
+  "source": {
+    "lyricsProvidedByUser": true,
+    "officialLyricsPage": "https://www.angiekillian.com/single-post/kind-like-christ-lyrics",
+    "officialBundlePage": "https://www.angiekillian.com/product-page/kind-like-christ-group-bundle"
+  },
+  "accompaniment": {
+    "status": "Needs user-provided purchased/downloaded MP3 before app wiring.",
+    "notes": "The official Angie Killian group bundle includes MP3 with vocals and two accompaniment tracks. Do not scrape or rehost unofficial audio."
+  },
+  "visualStyle": {
+    "name": "watercolor artwork",
+    "promptStyle": "soft watercolor illustration, gentle pencil outlines, warm transparent washes, expressive child-friendly faces, airy backgrounds, reverent Primary teaching visuals, polished picture-book quality",
+    "constraints": [
+      "No words, lettering, numbers, watermarks, or labels inside images.",
+      "No crosses or cross-shaped symbols.",
+      "Modest contemporary clothing.",
+      "Diverse children across the flipchart.",
+      "Jesus Christ, when shown, should be reverent and visually consistent."
+    ]
+  },
+  "slides": [
+    {
+      "number": 1,
+      "type": "title",
+      "section": "Title",
+      "lyric": "Kind Like Christ",
+      "imageDescription": "Diverse Primary children helping one another on a warm path while Jesus Christ is represented reverently in soft light behind them.",
+      "imagePrompt": "Soft watercolor picture-book title image for Kind Like Christ. Show diverse Primary-age children helping one another on a warm golden path, with Jesus Christ represented reverently in soft light behind them. Joyful, kind, simple, child-friendly, open sky for title overlay. Gentle pencil outlines and transparent watercolor washes. No text inside image, no crosses."
+    },
+    {
+      "number": 2,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "Jesus lived a life of love",
+      "key": "JESUS · LOVE",
+      "imageDescription": "Jesus Christ walking with children in warm light, showing kindness and love.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Jesus Christ walks gently with diverse children in a sunlit hillside scene, His expression warm and loving. Reverent, simple, open space for lyric overlay. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 3,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "Showing strangers that He cared",
+      "key": "STRANGERS · CARED",
+      "imageDescription": "Jesus kindly greeting and comforting someone new while children watch.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Jesus Christ kindly greets and comforts a person who seems new or alone while children observe with soft smiles. Warm village path, reverent, uncluttered. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 4,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "Always lifting others up",
+      "key": "LIFTING · OTHERS",
+      "imageDescription": "Children helping another child stand after a stumble.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Diverse children help another child stand after a small stumble, everyone gentle and encouraging. Bright park setting, open sky, gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 5,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "When He saw a need, He shared",
+      "key": "NEED · SHARED",
+      "imageDescription": "Jesus sharing food with someone in need as children learn by watching.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Jesus Christ shares food with someone in need while children watch and learn, warm simple village setting, reverent and kind. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 6,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "I can be like Jesus",
+      "key": "LIKE JESUS",
+      "imageDescription": "A child looking toward Jesus and choosing to follow His example.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A Primary child looks toward Jesus Christ in warm light, holding scriptures and smiling with determination to follow His example. Simple, reverent, open lyric space. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 7,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "Choosing to do good",
+      "key": "CHOOSE · GOOD",
+      "imageDescription": "A child choosing a kind action on a path, helping rather than walking past.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A child pauses on a path and chooses to help another child gather dropped books instead of walking past. Warm school or neighborhood setting, simple and clear. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 8,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "I can help my neighbor",
+      "key": "HELP · NEIGHBOR",
+      "imageDescription": "Children helping a neighbor with groceries or yard work.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Diverse Primary children help a smiling neighbor carry groceries and water flowers. Warm neighborhood, modest clothing, open space for lyrics. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 9,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "As my Savior would",
+      "key": "SAVIOR",
+      "imageDescription": "A child serving while a soft image of Jesus' example is suggested by light.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A child serves a neighbor while a soft golden light suggests the Savior's example nearby, reverent and subtle. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 10,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I’ll fill the earth with kindness",
+      "key": "EARTH · KINDNESS",
+      "imageDescription": "Children around a gentle globe passing hearts or helping hands.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Children from many backgrounds stand around a soft glowing globe, passing small symbolic hearts and helping hands, showing kindness spreading around the earth. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 11,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "Through service and good deeds",
+      "key": "SERVICE · GOOD DEEDS",
+      "imageDescription": "Children doing several small service acts together.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A simple montage-like scene of children doing service: carrying food, writing a kind card without visible words, sweeping a porch, and sharing a smile. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 12,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "When I see someone lonely",
+      "key": "SOMEONE · LONELY",
+      "imageDescription": "A child sitting alone while another child notices with compassion.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A child sits alone on a playground bench while another child notices with compassion and begins walking toward them. Gentle, not sad-heavy, open lyric space. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 13,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I will be the friend they need",
+      "key": "FRIEND · NEED",
+      "imageDescription": "A child sitting beside the lonely child and becoming a friend.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A child sits beside a lonely child on a bench, offering friendship with a warm smile while others play softly in background. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 14,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I’ll sit with them in sadness",
+      "key": "SIT · SADNESS",
+      "imageDescription": "A child quietly sitting next to a sad friend.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A Primary child sits quietly beside a sad friend under a tree, close enough to comfort but gentle and respectful. Warm, tender, simple. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 15,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "And make their burdens light",
+      "key": "BURDENS · LIGHT",
+      "imageDescription": "Children helping carry a heavy-looking backpack or basket together.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Children help a friend carry a heavy backpack or basket, making the load feel lighter. Bright warm light, clear symbolic service. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 16,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "The world needs more kindness",
+      "key": "WORLD · KINDNESS",
+      "imageDescription": "Children placing small acts of kindness around a neighborhood and world-like scene.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A neighborhood scene curves gently like a small world, with children doing small acts of kindness in different places. Warm, hopeful, uncluttered. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 17,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I’ll be kind like Christ",
+      "key": "KIND · CHRIST",
+      "imageDescription": "A child helping another with Jesus' loving example represented nearby.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A child gently helps another child while Jesus Christ is represented reverently in soft light nearby, showing Christlike kindness. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 18,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "I will mourn with those who mourn",
+      "key": "MOURN",
+      "imageDescription": "A child comforting a grieving friend with quiet presence.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A child comforts a grieving friend with quiet presence, perhaps sitting together on a porch with soft evening light. Tender and reverent, not gloomy. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 19,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "Giving comfort when I can",
+      "key": "COMFORT",
+      "imageDescription": "A child offering a blanket or gentle hug to comfort someone.",
+      "imagePrompt": "Soft watercolor picture-book illustration. A Primary child offers a blanket and gentle comfort to another child who is sad. Warm interior home setting, simple and kind. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 20,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "I will spread God’s love and warmth",
+      "key": "GOD'S LOVE · WARMTH",
+      "imageDescription": "Warm light spreading from a child doing kindness.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Warm golden light spreads from a child's kind action, gently illuminating family and friends nearby as a symbol of God's love and warmth. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 21,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "Healing hearts with helping hands",
+      "key": "HEALING HEARTS · HANDS",
+      "imageDescription": "Children's helping hands forming a caring circle around someone sad.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Several children's helping hands form a caring circle around a friend, with soft heart-shaped warmth suggested by light, no literal text. Reverent, simple. Gentle pencil outlines and transparent watercolor washes. No crosses."
+    },
+    {
+      "number": 22,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "I can be like Jesus",
+      "key": "LIKE JESUS",
+      "reuseImageFrom": 6
+    },
+    {
+      "number": 23,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "Choosing to do good",
+      "key": "CHOOSE · GOOD",
+      "reuseImageFrom": 7
+    },
+    {
+      "number": 24,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "I can help my neighbor",
+      "key": "HELP · NEIGHBOR",
+      "reuseImageFrom": 8
+    },
+    {
+      "number": 25,
+      "type": "lyric",
+      "section": "Refrain",
+      "lyric": "As my Savior would",
+      "key": "SAVIOR",
+      "reuseImageFrom": 9
+    },
+    {
+      "number": 26,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I’ll fill the earth with kindness",
+      "key": "EARTH · KINDNESS",
+      "reuseImageFrom": 10
+    },
+    {
+      "number": 27,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "Through service and good deeds",
+      "key": "SERVICE · GOOD DEEDS",
+      "reuseImageFrom": 11
+    },
+    {
+      "number": 28,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "When I see someone lonely",
+      "key": "SOMEONE · LONELY",
+      "reuseImageFrom": 12
+    },
+    {
+      "number": 29,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I will be the friend they need",
+      "key": "FRIEND · NEED",
+      "reuseImageFrom": 13
+    },
+    {
+      "number": 30,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I’ll sit with them in sadness",
+      "key": "SIT · SADNESS",
+      "reuseImageFrom": 14
+    },
+    {
+      "number": 31,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "And make their burdens light",
+      "key": "BURDENS · LIGHT",
+      "reuseImageFrom": 15
+    },
+    {
+      "number": 32,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "The world needs more kindness",
+      "key": "WORLD · KINDNESS",
+      "reuseImageFrom": 16
+    },
+    {
+      "number": 33,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "I’ll be kind like Christ",
+      "key": "KIND · CHRIST",
+      "reuseImageFrom": 17
+    },
+    {
+      "number": 34,
+      "type": "lyric",
+      "section": "Bridge",
+      "lyric": "And as I lift you and you lift me",
+      "key": "LIFT YOU · LIFT ME",
+      "imageDescription": "Children helping each other climb a sunny hill together.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Children help one another climb a sunny hill, hands reaching and lifting each other, joyful teamwork and kindness. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 35,
+      "type": "lyric",
+      "section": "Bridge",
+      "lyric": "Together we will rise",
+      "key": "TOGETHER · RISE",
+      "imageDescription": "Children standing together on a hill in morning light.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Diverse children stand together at the top of a hill in warm sunrise light, joyful and united after helping one another. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 36,
+      "type": "lyric",
+      "section": "Bridge",
+      "lyric": "We will rise!",
+      "key": "RISE",
+      "imageDescription": "A joyful upward moment of children celebrating kindness together.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Children joyfully raise their hands together in a hopeful sunrise moment, celebrating kindness and unity. Reverent, simple, gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    },
+    {
+      "number": 37,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "I’ll fill the earth with kindness",
+      "key": "EARTH · KINDNESS",
+      "reuseImageFrom": 10
+    },
+    {
+      "number": 38,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "Through service and good deeds",
+      "key": "SERVICE · GOOD DEEDS",
+      "reuseImageFrom": 11
+    },
+    {
+      "number": 39,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "When I see someone lonely",
+      "key": "SOMEONE · LONELY",
+      "reuseImageFrom": 12
+    },
+    {
+      "number": 40,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "I will be the friend they need",
+      "key": "FRIEND · NEED",
+      "reuseImageFrom": 13
+    },
+    {
+      "number": 41,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "I’ll sit with them in sadness",
+      "key": "SIT · SADNESS",
+      "reuseImageFrom": 14
+    },
+    {
+      "number": 42,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "And make their burdens light",
+      "key": "BURDENS · LIGHT",
+      "reuseImageFrom": 15
+    },
+    {
+      "number": 43,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "The world needs more kindness",
+      "key": "WORLD · KINDNESS",
+      "reuseImageFrom": 16
+    },
+    {
+      "number": 44,
+      "type": "lyric",
+      "section": "Final Chorus",
+      "lyric": "I’ll be kind like Christ",
+      "key": "KIND · CHRIST",
+      "reuseImageFrom": 17
+    },
+    {
+      "number": 45,
+      "type": "lyric",
+      "section": "Ending",
+      "lyric": "Yes, I’ll be kind like Christ",
+      "key": "KIND LIKE CHRIST",
+      "imageDescription": "Final peaceful image of children serving with Jesus' example in warm light.",
+      "imagePrompt": "Soft watercolor picture-book illustration. Final peaceful scene of diverse children serving and smiling together, with Jesus Christ's loving example represented reverently in warm light. Hopeful ending, open lyric space. Gentle pencil outlines and transparent watercolor washes. No text, no crosses."
+    }
+  ]
+}

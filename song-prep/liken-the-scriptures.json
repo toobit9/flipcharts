@@ -1,0 +1,251 @@
+{
+  "slug": "liken-the-scriptures",
+  "title": "Liken the Scriptures",
+  "credits": "Words and music by Shawna Edwards © 2020 Shawna Edwards Music. All rights reserved. This song may be copied for incidental, noncommercial church or home use. This notice must be included on each copy made.",
+  "source": {
+    "officialChurchPage": "https://www.churchofjesuschrist.org/media/music/songs/liken-the-scriptures?lang=eng",
+    "pdf": "https://assets.churchofjesuschrist.org/75/81/75811bd1f5e711ee9a9beeeeac1e845bcdfc1e6f/liken_the_scriptures.pdf",
+    "mobilePdf": "https://assets.churchofjesuschrist.org/3f/ab/3fabd9a3303d11efb4caeeeeac1e3b3817b7574a/liken_the_scriptures.pdf"
+  },
+  "accompaniment": {
+    "status": "Needs user-provided purchased/downloaded MP3 before app wiring. The official Church page exposes PDF assets but no accompaniment MP3 asset.",
+    "notes": "Use Shawna Edwards Music or user upload for audio if accompaniment is desired."
+  },
+  "visualStyle": {
+    "name": "claymation / stop-motion",
+    "promptStyle": "handmade claymation / stop-motion miniature sets, tactile sculpted clay characters, warm studio lighting, rounded expressive child-friendly shapes, reverent Primary teaching visuals",
+    "constraints": [
+      "No words, lettering, numbers, watermarks, or labels inside images.",
+      "No crosses or cross-shaped symbols.",
+      "No violent battle imagery.",
+      "Modest contemporary clothing for modern children.",
+      "Scripture scenes should feel symbolic and child-friendly."
+    ]
+  },
+  "slides": [
+    {
+      "number": 1,
+      "type": "title",
+      "section": "Title",
+      "lyric": "Liken the Scriptures",
+      "imageDescription": "Claymation children reading scriptures while scripture scenes appear as soft imaginative worlds around them.",
+      "imagePrompt": "Claymation / stop-motion style title image for Liken the Scriptures. Show diverse Primary-age children reading scriptures together while soft imaginative scripture scenes appear around them like handmade clay sets. Warm studio lighting, tactile clay texture, reverent and child-friendly, open space for title overlay. No text inside image, no crosses."
+    },
+    {
+      "number": 2,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "I may not be asked to build a great, big ship",
+      "key": "ASKED · BUILD · GREAT",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 3,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "Or sail my fam’ly ’cross the ocean blue.",
+      "key": "FAM’LY · CROSS · OCEAN",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 4,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "But if I had the faith and courage Nephi did,",
+      "key": "FAITH · COURAGE · NEPHI",
+      "imageDescription": "Claymation child imagining Nephi-like courage with scriptures nearby.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation child imagining Nephi-like courage with scriptures nearby. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 5,
+      "type": "lyric",
+      "section": "Verse 1",
+      "lyric": "Imagine all the great things I could go and do. —",
+      "key": "IMAGINE · GREAT · THINGS",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 6,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "The Lord has a special message for me",
+      "key": "SPECIAL · MESSAGE",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 7,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "In ev’ry scripture story I read.",
+      "key": "EV’RY · SCRIPTURE · STORY",
+      "imageDescription": "Claymation children reading scriptures and imagining how to live them.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation children reading scriptures and imagining how to live them. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 8,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "And I can become who I’m striving to be",
+      "key": "BECOME · STRIVING",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 9,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "When I liken the scriptures to me. me.",
+      "key": "LIKEN · SCRIPTURES",
+      "imageDescription": "Claymation children reading scriptures and imagining how to live them.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation children reading scriptures and imagining how to live them. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 10,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "I may not raise a tent to hear the prophet speak,",
+      "key": "RAISE · PROPHET · SPEAK",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 11,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "But I can listen when he speaks today.",
+      "key": "LISTEN · SPEAKS · TODAY",
+      "imageDescription": "Modern claymation children applying scripture lessons in daily life.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Modern claymation children applying scripture lessons in daily life. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 12,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "And I don’t have a sword to bury ten feet deep,",
+      "key": "DON’T · SWORD",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 13,
+      "type": "lyric",
+      "section": "Verse 2",
+      "lyric": "But I can cast my selfish words and deeds away.",
+      "key": "SELFISH · WORDS · DEEDS",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 14,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "The Lord has a special message for me",
+      "key": "SPECIAL · MESSAGE",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 15,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "In ev’ry scripture story I read.",
+      "key": "EV’RY · SCRIPTURE · STORY",
+      "imageDescription": "Claymation children reading scriptures and imagining how to live them.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation children reading scriptures and imagining how to live them. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 16,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "And I can become who I’m striving to be",
+      "key": "BECOME · STRIVING",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 17,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "When I liken the scriptures to me. me.",
+      "key": "LIKEN · SCRIPTURES",
+      "imageDescription": "Claymation children reading scriptures and imagining how to live them.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation children reading scriptures and imagining how to live them. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 18,
+      "type": "lyric",
+      "section": "Verse 3",
+      "lyric": "Like Enos, I will fervently pray.",
+      "key": "FERVENTLY",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 19,
+      "type": "lyric",
+      "section": "Verse 3",
+      "lyric": "Like the stripling warriors, I will obey.",
+      "key": "STRIPLING · WARRIORS",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 20,
+      "type": "lyric",
+      "section": "Verse 3",
+      "lyric": "Like Abish, I will share what I know.",
+      "key": "ABISH · SHARE",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 21,
+      "type": "lyric",
+      "section": "Verse 3",
+      "lyric": "And like Ammon, I’ll go where I’m called to go.",
+      "key": "AMMON · WHERE · CALLED",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 22,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "The Lord has a special message for me",
+      "key": "SPECIAL · MESSAGE",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 23,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "In ev’ry scripture story I read.",
+      "key": "EV’RY · SCRIPTURE · STORY",
+      "imageDescription": "Claymation children reading scriptures and imagining how to live them.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation children reading scriptures and imagining how to live them. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 24,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "And I can become who I’m striving to be",
+      "key": "BECOME · STRIVING",
+      "imageDescription": "Claymation Primary children applying scripture lessons with faith and courage.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation Primary children applying scripture lessons with faith and courage. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    },
+    {
+      "number": 25,
+      "type": "lyric",
+      "section": "Chorus",
+      "lyric": "When I liken the scriptures to me. me.",
+      "key": "LIKEN · SCRIPTURES",
+      "imageDescription": "Claymation children reading scriptures and imagining how to live them.",
+      "imagePrompt": "Claymation / stop-motion style flipchart image for Liken the Scriptures. Claymation children reading scriptures and imagining how to live them. Use handmade clay characters, tactile sculpted textures, miniature set lighting, warm colors, simple uncluttered composition, reverent Primary teaching tone, diverse children where modern children appear. No text, no letters, no numbers, no watermarks, no crosses."
+    }
+  ]
+}
