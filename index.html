@@ -136,7 +136,7 @@
 
         .library-controls {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
             margin: -4px 0 16px;
         }
@@ -479,6 +479,18 @@
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 4px;
+        }
+
+        .song-number {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 6px;
+            color: rgba(255,211,79,0.82);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            vertical-align: 0.08em;
+            white-space: nowrap;
         }
 
         .song-artist {
@@ -1065,18 +1077,6 @@
                     <option value="alpha">A to Z</option>
                     <option value="reverse">Z to A</option>
                     <option value="number">Song number</option>
-                    <option value="source">Source</option>
-                </select>
-            </div>
-            <div class="library-filter">
-                <label for="songSourceSelect">Source</label>
-                <select id="songSourceSelect" onchange="applyLibraryFilters()">
-                    <option value="all">All sources</option>
-                    <option value="children-songbook">Children’s Songbook</option>
-                    <option value="hymns">Hymns</option>
-                    <option value="hymns-home">Hymns for Home and Church</option>
-                    <option value="official-other">Official other</option>
-                    <option value="non-official">Non-official</option>
                 </select>
             </div>
             <div class="library-filter">
@@ -1086,6 +1086,7 @@
                     <option value="jesus">Jesus Christ</option>
                     <option value="scripture">Scriptures</option>
                     <option value="faith">Faith</option>
+                    <option value="prayer">Prayer</option>
                     <option value="service">Service</option>
                     <option value="nature">Creation</option>
                     <option value="missionary">Missionary</option>
@@ -1741,13 +1742,29 @@
         return card.dataset.sortTitle || card.querySelector('.song-title')?.textContent?.trim().toLowerCase() || '';
     }
 
-    function sourceForSort(card) {
-        return card.dataset.songSource || 'zz';
-    }
-
     function numberForSort(card) {
         const number = Number.parseInt(card.dataset.songNumber || '', 10);
         return Number.isFinite(number) ? number : Number.POSITIVE_INFINITY;
+    }
+
+    function topicTokensFor(card) {
+        return (card.dataset.songTopic || '')
+            .split(/[\s,]+/)
+            .map((topic) => topic.trim())
+            .filter(Boolean);
+    }
+
+    function renderSongNumberBadges() {
+        allSongCards().forEach((card) => {
+            const title = card.querySelector('.song-title');
+            const number = card.dataset.songNumber;
+            if (!title || !number || title.querySelector('.song-number')) return;
+
+            const badge = document.createElement('span');
+            badge.className = 'song-number';
+            badge.textContent = `#${number}`;
+            title.append(' ', badge);
+        });
     }
 
     function updateLibraryCounts() {
@@ -1770,14 +1787,12 @@
         if (!grid) return;
 
         const sortMode = document.getElementById('songSortSelect')?.value || 'alpha';
-        const sourceFilter = document.getElementById('songSourceSelect')?.value || 'all';
         const topicFilter = document.getElementById('songTopicSelect')?.value || 'all';
         const cards = allSongCards();
 
         cards.forEach((card) => {
-            const sourceMatches = sourceFilter === 'all' || card.dataset.songSource === sourceFilter;
-            const topicMatches = topicFilter === 'all' || card.dataset.songTopic === topicFilter;
-            card.hidden = !(sourceMatches && topicMatches);
+            const topicMatches = topicFilter === 'all' || topicTokensFor(card).includes(topicFilter);
+            card.hidden = !topicMatches;
         });
 
         cards.sort((a, b) => {
@@ -1785,10 +1800,6 @@
             if (sortMode === 'number') {
                 const numberDiff = numberForSort(a) - numberForSort(b);
                 return numberDiff || titleForSort(a).localeCompare(titleForSort(b));
-            }
-            if (sortMode === 'source') {
-                const sourceDiff = sourceForSort(a).localeCompare(sourceForSort(b));
-                return sourceDiff || titleForSort(a).localeCompare(titleForSort(b));
             }
             return titleForSort(a).localeCompare(titleForSort(b));
         });
@@ -2597,6 +2608,7 @@
         }
     });
 
+    renderSongNumberBadges();
     initializePlaylist();
     applyLibraryFilters();
     loadPublicSongRequests();
