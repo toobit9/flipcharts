@@ -81,6 +81,16 @@
         body.gameshow-active .mode-toggle { display: none; }
         body.gameshow-active .slide-bg { filter: brightness(0.9) saturate(1.08); }
         body.gameshow-active .slide-line.guess-mode { color: #fffdf2; }
+
+        .slide[data-lyric-pos="top"] .slide-content { justify-content: flex-start; padding-top: 54px; padding-bottom: 120px; }
+        .slide[data-lyric-pos="bottom"] .slide-content { justify-content: flex-end; padding-top: 54px; padding-bottom: 118px; }
+        .slide[data-lyric-pos] .slide-line { max-width: 1120px; line-height: 1.25; }
+        .round-slide .slide-content { justify-content: flex-end; padding: 54px 64px 116px; }
+        .round-lines { width: min(1180px, 92%); display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch; }
+        .round-part { border: 1px solid rgba(255,255,255,0.18); background: rgba(0,0,0,0.34); backdrop-filter: blur(4px); padding: 16px 18px; border-radius: 14px; }
+        .round-label { display: block; margin-bottom: 7px; color: #ffd93d; font-size: clamp(0.68rem, 1.2vw, 0.86rem); letter-spacing: 2px; text-transform: uppercase; }
+        .round-text { display: block; color: #fff; font-size: clamp(1.2rem, 2.85vw, 2.35rem); font-weight: 800; line-height: 1.14; text-shadow: 0 2px 16px rgba(0,0,0,0.85); }
+        @media (max-width: 768px) { .round-slide .slide-content { padding: 42px 24px 94px; } .round-lines { grid-template-columns: 1fr; gap: 8px; } .round-part { padding: 10px 12px; } .round-text { font-size: clamp(1rem, 5vw, 1.55rem); } }
 </style>
 <link rel="stylesheet" href="/assets/accompaniment.css">
 </head>
@@ -95,75 +105,106 @@
             <div class="title-main">A Child's Prayer</div>
             <div class="title-sub">Janice Kapp Perry · Children’s Songbook #12</div>
         </div>
-    </div>
-    <div class="slide" data-section="Child" data-full="Heavenly Father, are you really there?" data-key="ARE YOU THERE?">
+    <div class="slide" data-lyric-pos="bottom" data-section="Child" data-full="Heavenly Father, are you really there?" data-key="ARE YOU THERE?">
         <div class="slide-bg" style="background-image: url('images/child1.jpg')"></div>
         <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Child" data-full="And do you hear and answer ev'ry child's prayer?" data-key="DO YOU HEAR?">
+    <div class="slide" data-lyric-pos="bottom" data-section="Child" data-full="And do you hear and answer ev&#x27;ry child&#x27;s prayer?" data-key="DO YOU HEAR?">
         <div class="slide-bg" style="background-image: url('images/child1.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Child" data-full="Some say that heaven is far away" data-key="HEAVEN IS FAR?">
+    <div class="slide" data-lyric-pos="bottom" data-section="Child" data-full="Some say that heaven is far away" data-key="HEAVEN IS FAR?">
         <div class="slide-bg" style="background-image: url('images/child2.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Child" data-full="But I feel it close around me as I pray" data-key="CLOSE AS I PRAY">
+    <div class="slide" data-lyric-pos="bottom" data-section="Child" data-full="But I feel it close around me as I pray" data-key="CLOSE AS I PRAY">
         <div class="slide-bg" style="background-image: url('images/child2.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Child" data-full="Heavenly Father, I remember now" data-key="I REMEMBER">
+    <div class="slide" data-lyric-pos="top" data-section="Child" data-full="Heavenly Father, I remember now" data-key="I REMEMBER">
         <div class="slide-bg" style="background-image: url('images/child3.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Child" data-full="Something that Jesus told disciples long ago:" data-key="JESUS SAID...">
+    <div class="slide" data-lyric-pos="top" data-section="Child" data-full="Something that Jesus told disciples long ago:" data-key="JESUS SAID...">
         <div class="slide-bg" style="background-image: url('images/child3.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Child" data-full="&ldquo;Suffer the children to come to me.&rdquo;" data-key="COME TO ME">
+    <div class="slide" data-lyric-pos="top" data-section="Child" data-full="&amp;ldquo;Suffer the children to come to me.&amp;rdquo;" data-key="COME TO ME">
         <div class="slide-bg" style="background-image: url('images/child4.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Child" data-full="Father, in prayer I'm coming now to thee." data-key="COMING TO THEE">
+    <div class="slide" data-lyric-pos="top" data-section="Child" data-full="Father, in prayer I&#x27;m coming now to thee." data-key="COMING TO THEE">
         <div class="slide-bg" style="background-image: url('images/child4.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Child</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="Pray, he is there;" data-key="PRAY">
+    <div class="slide" data-lyric-pos="top" data-section="Parent" data-full="Pray, he is there;" data-key="PRAY">
         <div class="slide-bg" style="background-image: url('images/parent1.jpg')"></div>
         <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="Speak, he is list'ning." data-key="HE IS LISTENING">
+    <div class="slide" data-lyric-pos="top" data-section="Parent" data-full="Speak, he is list&#x27;ning." data-key="HE IS LISTENING">
         <div class="slide-bg" style="background-image: url('images/parent1.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="You are his child;" data-key="YOU ARE HIS CHILD">
+    <div class="slide" data-lyric-pos="bottom" data-section="Parent" data-full="You are his child;" data-key="YOU ARE HIS CHILD">
         <div class="slide-bg" style="background-image: url('images/parent2.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="His love now surrounds you." data-key="HIS LOVE">
+    <div class="slide" data-lyric-pos="bottom" data-section="Parent" data-full="His love now surrounds you." data-key="HIS LOVE">
         <div class="slide-bg" style="background-image: url('images/parent2.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="He hears your prayer;" data-key="HE HEARS">
+    <div class="slide" data-lyric-pos="top" data-section="Parent" data-full="He hears your prayer;" data-key="HE HEARS">
         <div class="slide-bg" style="background-image: url('images/parent3.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="He loves the children." data-key="HE LOVES YOU">
+    <div class="slide" data-lyric-pos="top" data-section="Parent" data-full="He loves the children." data-key="HE LOVES YOU">
         <div class="slide-bg" style="background-image: url('images/parent3.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="Of such is the kingdom," data-key="THE KINGDOM">
+    <div class="slide" data-lyric-pos="top" data-section="Parent" data-full="Of such is the kingdom," data-key="THE KINGDOM">
         <div class="slide-bg" style="background-image: url('images/parent4.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
     </div>
-    <div class="slide" data-section="Parent" data-full="the kingdom of heav'n." data-key="KINGDOM OF HEAVEN">
+    <div class="slide" data-lyric-pos="top" data-section="Parent" data-full="the kingdom of heav&#x27;n." data-key="KINGDOM OF HEAVEN">
         <div class="slide-bg" style="background-image: url('images/parent4.jpg')"></div>
-        <div class="slide-content"><div class="slide-section"></div><div class="slide-line"></div></div>
+        <div class="slide-content"><div class="slide-section">Parent</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="Heavenly Father, are you really there?" data-parent="Pray, he is there;" data-full="Heavenly Father, are you really there? / Pray, he is there;" data-key="REALLY THERE · PRAY">
+        <div class="slide-bg" style="background-image: url('images/child1.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="And do you hear and answer ev&#x27;ry child&#x27;s prayer?" data-parent="Speak, he is list&#x27;ning." data-full="And do you hear and answer ev&#x27;ry child&#x27;s prayer? / Speak, he is list&#x27;ning." data-key="HEAR · LISTENING">
+        <div class="slide-bg" style="background-image: url('images/parent1.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="Some say that heaven is far away" data-parent="You are his child;" data-full="Some say that heaven is far away / You are his child;" data-key="HEAVEN · CHILD">
+        <div class="slide-bg" style="background-image: url('images/child2.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="But I feel it close around me as I pray" data-parent="His love now surrounds you." data-full="But I feel it close around me as I pray / His love now surrounds you." data-key="CLOSE · LOVE">
+        <div class="slide-bg" style="background-image: url('images/parent2.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="Heavenly Father, I remember now" data-parent="He hears your prayer;" data-full="Heavenly Father, I remember now / He hears your prayer;" data-key="REMEMBER · HEARS">
+        <div class="slide-bg" style="background-image: url('images/child3.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="Something that Jesus told disciples long ago:" data-parent="He loves the children." data-full="Something that Jesus told disciples long ago: / He loves the children." data-key="JESUS · LOVES">
+        <div class="slide-bg" style="background-image: url('images/parent3.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="“Suffer the children to come to me.”" data-parent="Of such is the kingdom," data-full="“Suffer the children to come to me.” / Of such is the kingdom," data-key="COME · KINGDOM">
+        <div class="slide-bg" style="background-image: url('images/child4.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
+    </div>
+    <div class="slide round-slide" data-section="Together" data-child="Father, in prayer I&#x27;m coming now to thee." data-parent="the kingdom of heav&#x27;n." data-full="Father, in prayer I&#x27;m coming now to thee. / the kingdom of heav&#x27;n." data-key="PRAYER · HEAVEN">
+        <div class="slide-bg" style="background-image: url('images/parent4.jpg')"></div>
+        <div class="slide-content"><div class="slide-section">Together</div><div class="slide-line"></div></div>
     </div>
 </div></div></div>
 <div class="nav">
     <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Back</button>
-    <span class="nav-counter" id="counter">1 / 17</span><button class="nav-btn icon-btn stop-music hidden" id="audioBtn" onclick="stopGameShowCue()" type="button" title="Stop music" aria-label="Stop music">■</button>
+    <span class="nav-counter" id="counter">1 / 25</span><button class="nav-btn icon-btn stop-music hidden" id="audioBtn" onclick="stopGameShowCue()" type="button" title="Stop music" aria-label="Stop music">■</button>
     <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
 </div>
 <script>
@@ -173,7 +214,9 @@
     const gameShow = { active: new URLSearchParams(window.location.search).get('mode') === 'gameshow', intro: false, complete: false, showingClue: false, showingAnswer: false, cursor: -1, order: [] };
     const gameShowAudioFiles = { start: '/david-and-goliath/audio/fill-it-in-david-and-goliath.mp3', clue: '/david-and-goliath/audio/fill-it-in-thinking.mp3', answer: '/david-and-goliath/audio/fill-it-in-answer.mp3', complete: '/david-and-goliath/audio/fill-it-in-answer.mp3' };
     let gameShowAudio = null;
-    function updateSlideContent() { slides.forEach(slide => { const el = slide.querySelector('.slide-line'); if (!el) return; const full = slide.dataset.full; const key = slide.dataset.key; if (!full) return; if (mode === 'full') { el.classList.remove('keywords', 'guess-mode'); el.innerHTML = full; } else if (mode === 'guess') { el.classList.remove('keywords'); el.classList.add('guess-mode'); const keyWords = new Set((key || '').toUpperCase().split(/[\s·]+/).filter(w => w.replace(/[^A-Z]/g,'').length > 2)); el.innerHTML = full.split(' ').map(w => { const clean = w.replace(/[^a-zA-Z0-9']/g, '').toUpperCase(); if (keyWords.has(clean)) { const width = Math.max(clean.length * 16, 40); return '<span style="display:inline-block;border-bottom:3px solid rgba(255,255,255,0.85);min-width:' + width + 'px;margin:0 3px;vertical-align:bottom;height:1.1em;"></span>'; } return w; }).join(' '); } else if (mode === 'keywords') { el.classList.add('keywords'); el.classList.remove('guess-mode'); el.textContent = key || full; } else { el.classList.remove('keywords', 'guess-mode'); el.innerHTML = full; } }); }
+    function renderGuessText(full, key) { const keyWords = new Set((key || '').toUpperCase().split(/[\s·]+/).filter(w => w.replace(/[^A-Z]/g,'').length > 2)); return full.split(' ').map(w => { const clean = w.replace(/[^a-zA-Z0-9']/g, '').toUpperCase(); if (keyWords.has(clean)) { const width = Math.max(clean.length * 16, 40); return '<span style="display:inline-block;border-bottom:3px solid rgba(255,255,255,0.85);min-width:' + width + 'px;margin:0 3px;vertical-align:bottom;height:1.1em;"></span>'; } return w; }).join(' '); }
+    function renderRoundSlide(slide, child, parent, key) { const childText = mode === 'guess' ? renderGuessText(child, key) : child; const parentText = mode === 'guess' ? renderGuessText(parent, key) : parent; const childKey = child.split(/[,.;:]/)[0]; const parentKey = parent.split(/[,.;:]/)[0]; if (mode === 'keywords') { return '<div class="round-lines"><div class="round-part"><span class="round-label">Child</span><span class="round-text">' + childKey + '</span></div><div class="round-part"><span class="round-label">Parent</span><span class="round-text">' + parentKey + '</span></div></div>'; } return '<div class="round-lines"><div class="round-part"><span class="round-label">Child</span><span class="round-text">' + childText + '</span></div><div class="round-part"><span class="round-label">Parent</span><span class="round-text">' + parentText + '</span></div></div>'; }
+    function updateSlideContent() { slides.forEach(slide => { const el = slide.querySelector('.slide-line'); if (!el) return; const full = slide.dataset.full; const key = slide.dataset.key; if (!full) return; const child = slide.dataset.child; const parent = slide.dataset.parent; if (child && parent) { el.classList.remove('keywords', 'guess-mode'); el.classList.toggle('guess-mode', mode === 'guess'); el.innerHTML = renderRoundSlide(slide, child, parent, key); return; } if (mode === 'full') { el.classList.remove('keywords', 'guess-mode'); el.innerHTML = full; } else if (mode === 'guess') { el.classList.remove('keywords'); el.classList.add('guess-mode'); el.innerHTML = renderGuessText(full, key); } else if (mode === 'keywords') { el.classList.add('keywords'); el.classList.remove('guess-mode'); el.textContent = key || full; } else { el.classList.remove('keywords', 'guess-mode'); el.innerHTML = full; } }); }
     function changeSlide(dir) { if (gameShow.active) { advanceGameShow(); return; } slides[current].classList.remove('active'); current = Math.max(0, Math.min(total - 1, current + dir)); slides[current].classList.add('active'); updateNav(); }
     function changeSlideAbsolute(idx) { if (gameShow.active && idx === 0) { initGameShow(); return; } slides[current].classList.remove('active'); current = idx; slides[current].classList.add('active'); updateNav(); }
     function shuffle(values) { const arr = values.slice(); for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
