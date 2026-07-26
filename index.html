@@ -1,2614 +1,408 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="theme-color" content="#ffd34f">
-    <title>Primary Digital Flipcharts</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #050508 0%, #0f0f14 100%);
-            min-height: 100vh;
-            color: #fff;
-            padding: 40px 20px;
-        }
-
-        .container { max-width: 800px; margin: 0 auto; }
-
-        .header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            background: linear-gradient(135deg, #ddf00c, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .version-label {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-        }
-
-        .site-disclaimer {
-            margin: 14px auto 0;
-            max-width: 620px;
-            color: rgba(255,255,255,0.36);
-            font-size: 0.78rem;
-            line-height: 1.45;
-        }
-
-        .request-footer {
-            margin-top: 42px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            justify-content: center;
-        }
-
-        .request-actions-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .request-btn {
-            border: 1px solid rgba(255,211,79,0.52);
-            background: rgba(255,211,79,0.13);
-            color: #ffe17a;
-            border-radius: 999px;
-            padding: 12px 18px;
-            font: inherit;
-            font-size: 0.92rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.18);
-            transition: transform 0.2s, background 0.2s, border-color 0.2s;
-        }
-
-        .request-btn:hover {
-            background: rgba(255,211,79,0.22);
-            border-color: rgba(255,211,79,0.78);
-            transform: translateY(-2px);
-        }
-
-        .feedback-btn {
-            border: 1px solid rgba(126,211,255,0.36);
-            background: rgba(126,211,255,0.08);
-            color: rgba(206,239,255,0.9);
-            border-radius: 999px;
-            padding: 10px 16px;
-            font: inherit;
-            font-size: 0.86rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s, border-color 0.2s;
-        }
-
-        .feedback-btn:hover {
-            background: rgba(126,211,255,0.16);
-            border-color: rgba(126,211,255,0.6);
-            transform: translateY(-2px);
-        }
-
-        .admin-access-btn {
-            border: 0;
-            background: transparent;
-            color: rgba(255,255,255,0.22);
-            font: inherit;
-            font-size: 0.72rem;
-            cursor: pointer;
-            padding: 4px 8px;
-            transition: color 0.2s;
-        }
-
-        .admin-access-btn:hover {
-            color: rgba(255,255,255,0.46);
-        }
-
-        .library-section { margin-top: 36px; }
-
-        .library-options {
-            display: flex;
-            justify-content: flex-end;
-            margin: -14px 0 6px;
-        }
-
-        .library-controls {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-            margin: -4px 0 16px;
-        }
-
-        .library-filter {
-            display: grid;
-            gap: 5px;
-            min-width: 0;
-        }
-
-        .library-filter label {
-            color: rgba(255,255,255,0.38);
-            font-size: 0.66rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .library-filter select {
-            width: 100%;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.86);
-            border-radius: 999px;
-            padding: 9px 12px;
-            font: inherit;
-            font-size: 0.78rem;
-            font-weight: 700;
-            outline: none;
-        }
-
-        .library-filter select:focus {
-            border-color: rgba(255,211,79,0.58);
-            box-shadow: 0 0 0 3px rgba(255,211,79,0.12);
-        }
-
-        .library-empty-filter {
-            display: none;
-            margin: 8px 0 0;
-            color: rgba(255,255,255,0.48);
-            font-size: 0.86rem;
-            text-align: center;
-        }
-
-        .library-empty-filter.is-visible {
-            display: block;
-        }
-
-        .library-toggle-btn {
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.05);
-            color: rgba(255,255,255,0.58);
-            border-radius: 999px;
-            padding: 8px 12px;
-            font: inherit;
-            font-size: 0.76rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
-        }
-
-        .library-toggle-btn:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: rgba(255,255,255,0.24);
-            color: rgba(255,255,255,0.86);
-        }
-
-        body.singing-list-disabled #playlistSection,
-        body.singing-list-disabled .favorite-btn,
-        body:not(.singing-list-editing) .favorite-btn {
-            display: none;
-        }
-
-        .tutorial-section {
-            margin: 42px 0 0;
-            border: 1px solid rgba(255,255,255,0.09);
-            border-radius: 14px;
-            background: rgba(255,255,255,0.045);
-            overflow: hidden;
-        }
-
-        .tutorial-title {
-            padding: 16px 18px;
-            cursor: pointer;
-            list-style: none;
-            user-select: none;
-            color: rgba(255,255,255,0.76);
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 0.4px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .tutorial-title::-webkit-details-marker { display: none; }
-
-        .tutorial-title::before {
-            content: '>';
-            color: rgba(255,211,79,0.78);
-            transform: rotate(0deg);
-            transition: transform 0.18s ease;
-        }
-
-        .tutorial-section[open] .tutorial-title::before {
-            transform: rotate(90deg);
-        }
-
-        .tutorial-body {
-            padding: 0 18px 18px;
-            display: grid;
-            gap: 14px;
-            color: rgba(255,255,255,0.62);
-            font-size: 0.92rem;
-            line-height: 1.55;
-        }
-
-        .tutorial-intro {
-            margin: 0;
-            color: rgba(255,255,255,0.58);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .tutorial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
-        }
-
-        .tutorial-item {
-            background: rgba(0,0,0,0.18);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 10px;
-            padding: 14px 12px;
-            display: grid;
-            justify-items: center;
-            gap: 9px;
-            text-align: center;
-        }
-
-        .tutorial-item strong {
-            display: block;
-            color: rgba(255,255,255,0.88);
-            margin-bottom: 3px;
-            font-size: 0.88rem;
-        }
-
-        .tutorial-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,255,255,0.22);
-            background: rgba(0,0,0,0.34);
-            color: #fff;
-            font-size: 1.05rem;
-            font-weight: 800;
-        }
-
-        .tutorial-icon.accent {
-            background: #ffd34f;
-            border-color: #ffd34f;
-            color: #15120a;
-        }
-
-        .tutorial-icon.label {
-            width: auto;
-            min-width: 54px;
-            height: 38px;
-            padding: 0 10px;
-            border-radius: 999px;
-            font-size: 0.68rem;
-            letter-spacing: 0.2px;
-        }
-
-        .tutorial-icon-group {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-        }
-
-        .tutorial-icon-group .tutorial-icon {
-            width: 32px;
-            height: 32px;
-            font-size: 0.86rem;
-        }
-
-        .tutorial-copy {
-            max-width: 170px;
-            min-width: 0;
-        }
-
-        .tutorial-copy span {
-            display: block;
-            color: rgba(255,255,255,0.54);
-            font-size: 0.78rem;
-            line-height: 1.35;
-        }
-
-        .change-log {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 12px;
-        }
-
-        .change-log-title {
-            cursor: pointer;
-            list-style: none;
-            color: rgba(255,255,255,0.72);
-            font-size: 0.82rem;
-            font-weight: 800;
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-        }
-
-        .change-log-title::-webkit-details-marker { display: none; }
-
-        .change-log-title::before {
-            content: '>';
-            display: inline-block;
-            margin-right: 9px;
-            color: rgba(255,211,79,0.78);
-            transition: transform 0.18s ease;
-        }
-
-        .change-log[open] .change-log-title::before {
-            transform: rotate(90deg);
-        }
-
-        .change-log-list {
-            display: grid;
-            gap: 8px;
-            margin-top: 12px;
-            color: rgba(255,255,255,0.54);
-            font-size: 0.82rem;
-            line-height: 1.45;
-        }
-
-        .change-log-list strong {
-            color: rgba(255,255,255,0.82);
-        }
-
-        .change-log-list ul {
-            margin: 0;
-            padding-left: 18px;
-        }
-
-        .change-log-list li {
-            margin: 4px 0;
-        }
-
-        .section-title {
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.42);
-            margin-bottom: 16px;
-            cursor: pointer;
-            list-style: none;
-            user-select: none;
-        }
-
-        .section-count {
-            color: rgba(255,255,255,0.28);
-            letter-spacing: 1.4px;
-        }
-
-        .section-title::-webkit-details-marker { display: none; }
-
-        .section-title::before {
-            content: '>';
-            display: inline-block;
-            margin-right: 10px;
-            color: rgba(255,255,255,0.55);
-            transform: rotate(90deg);
-            transition: transform 0.18s ease;
-        }
-
-        .library-section:not([open]) .section-title::before { transform: rotate(0deg); }
-
-        .song-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 16px;
-        }
-
-        .song-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .song-card[hidden] {
-            display: none !important;
-        }
-
-        .song-card.is-favorite {
-            border-color: rgba(255,211,79,0.48);
-            background: rgba(255,211,79,0.08);
-        }
-
-        .song-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: var(--card-color, #ddf00c);
-        }
-
-        .song-card:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-        }
-
-        .song-emoji {
-            font-size: 2.5rem;
-            flex-shrink: 0;
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .song-info { flex: 1; }
-
-        .song-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .song-number {
-            display: inline-flex;
-            align-items: center;
-            margin-left: 6px;
-            color: rgba(255,211,79,0.82);
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.4px;
-            vertical-align: 0.08em;
-            white-space: nowrap;
-        }
-
-        .song-artist {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.5);
-            margin-bottom: 8px;
-        }
-
-        .song-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.5);
-        }
-
-        .tag.ready { background: rgba(81,207,102,0.15); color: #51cf66; }
-        .tag.in-progress { background: rgba(255,217,61,0.14); color: #ffd93d; }
-        .tag.holiday { background: rgba(78,205,196,0.15); color: #4ecdc4; }
-        .tag.mothers-day { background: rgba(240,101,149,0.15); color: #f06595; }
-
-        .arrow {
-            color: rgba(255,255,255,0.2);
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .song-card:hover .arrow { color: rgba(255,255,255,0.6); }
-
-        .song-card.with-actions {
-            align-items: stretch;
-            gap: 18px;
-            flex-direction: column;
-        }
-
-        .song-card.with-actions .song-main {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            color: inherit;
-            text-decoration: none;
-            min-width: 0;
-            padding-right: 36px;
-        }
-
-        .favorite-btn {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            z-index: 2;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.16);
-            background: rgba(0,0,0,0.32);
-            color: rgba(255,255,255,0.58);
-            font: inherit;
-            font-size: 1.1rem;
-            line-height: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
-        }
-
-        .favorite-btn:hover {
-            transform: scale(1.06);
-            color: #ffd34f;
-            border-color: rgba(255,211,79,0.52);
-        }
-
-        .favorite-btn.is-active {
-            background: #ffd34f;
-            border-color: #ffd34f;
-            color: #15120a;
-        }
-
-        .song-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .flipchart-link,
-        .game-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255,217,61,0.45);
-            min-height: 42px;
-            color: #ffd93d;
-            border-radius: 999px;
-            padding: 10px 12px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-            text-decoration: none;
-            text-align: center;
-            white-space: nowrap;
-            transition: background 0.2s, border-color 0.2s;
-        }
-
-        .flipchart-link {
-            background: #ffd34f;
-            color: #15120a;
-            border-color: #ffd34f;
-        }
-
-        .flipchart-link:hover {
-            background: #ffe17a;
-            border-color: #ffe17a;
-        }
-
-        .game-link {
-            background: rgba(255,217,61,0.12);
-        }
-
-        .game-link:hover {
-            background: rgba(255,217,61,0.22);
-            border-color: rgba(255,217,61,0.72);
-        }
-
-        .pending-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 42px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,217,61,0.26);
-            background: rgba(255,217,61,0.08);
-            color: rgba(255,217,61,0.7);
-            font: inherit;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.3px;
-            cursor: default;
-        }
-
-        .admin-only {
-            display: none;
-        }
-
-        body.admin-mode .admin-only {
-            display: grid;
-        }
-
-        body.admin-mode .public-pending {
-            display: none;
-        }
-
-        .admin-badge {
-            display: none;
-            margin: -18px 0 20px;
-            border: 1px solid rgba(255,211,79,0.32);
-            background: rgba(255,211,79,0.08);
-            color: rgba(255,225,122,0.88);
-            border-radius: 12px;
-            padding: 10px 14px;
-            font-size: 0.86rem;
-            line-height: 1.45;
-        }
-
-        body.admin-mode .admin-badge {
-            display: block;
-        }
-
-        .admin-panel {
-            display: none;
-            margin: 0 0 34px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            background: rgba(255,255,255,0.045);
-            padding: 18px;
-        }
-
-        body.admin-mode .admin-panel {
-            display: block;
-        }
-
-        .admin-panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
-        }
-
-        .admin-panel h2 {
-            font-size: 1rem;
-        }
-
-        .admin-panel-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
-        }
-
-        .admin-list-panel {
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 12px;
-            background: rgba(0,0,0,0.12);
-            padding: 14px;
-        }
-
-        .admin-list-panel h3 {
-            font-size: 0.86rem;
-            margin-bottom: 10px;
-            color: rgba(255,255,255,0.76);
-        }
-
-        .admin-list {
-            display: grid;
-            gap: 10px;
-            max-height: 360px;
-            overflow: auto;
-            padding-right: 4px;
-        }
-
-        .admin-entry {
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 10px;
-            padding: 10px;
-            background: rgba(255,255,255,0.04);
-        }
-
-        .admin-entry strong {
-            display: block;
-            margin-bottom: 4px;
-            font-size: 0.9rem;
-        }
-
-        .admin-entry p {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.82rem;
-            line-height: 1.4;
-            margin-bottom: 6px;
-            white-space: pre-wrap;
-        }
-
-        .admin-entry span {
-            color: rgba(255,255,255,0.36);
-            font-size: 0.74rem;
-        }
-
-        .admin-entry-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .admin-resolve-btn {
-            border: 1px solid rgba(109,214,166,0.34);
-            background: rgba(109,214,166,0.1);
-            color: rgba(197,255,226,0.9);
-            border-radius: 999px;
-            padding: 6px 9px;
-            font: inherit;
-            font-size: 0.74rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .admin-resolve-btn:hover {
-            background: rgba(109,214,166,0.18);
-        }
-
-        .admin-empty {
-            color: rgba(255,255,255,0.38);
-            font-size: 0.82rem;
-            line-height: 1.4;
-        }
-
-        @media (max-width: 700px) {
-            .admin-panel-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .approval-note {
-            color: rgba(255,255,255,0.42);
-            font-size: 0.86rem;
-            line-height: 1.45;
-            margin: -6px 0 16px;
-        }
-
-        .playlist-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 10px;
-            margin: -4px 0 16px;
-        }
-
-        .playlist-note {
-            flex: 1 1 220px;
-            color: rgba(255,255,255,0.42);
-            font-size: 0.86rem;
-            line-height: 1.45;
-        }
-
-        .playlist-tools {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .playlist-tool-btn {
-            border: 1px solid rgba(255,255,255,0.13);
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.78);
-            border-radius: 999px;
-            padding: 9px 13px;
-            font: inherit;
-            font-size: 0.78rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
-        }
-
-        .playlist-tool-btn:hover:not(:disabled) {
-            background: rgba(255,255,255,0.12);
-            border-color: rgba(255,255,255,0.26);
-            color: white;
-        }
-
-        .playlist-tool-btn:disabled {
-            opacity: 0.42;
-            cursor: default;
-        }
-
-        .playlist-tool-btn.is-success {
-            border-color: rgba(81,207,102,0.5);
-            background: rgba(81,207,102,0.16);
-            color: #8ff0a4;
-        }
-
-        .playlist-tool-btn.icon-only {
-            width: 38px;
-            height: 38px;
-            padding: 0;
-            font-size: 1rem;
-            flex: 0 0 auto;
-        }
-
-        .playlist-status {
-            min-height: 18px;
-            margin-top: 10px;
-            color: rgba(255,211,79,0.8);
-            font-size: 0.8rem;
-        }
-
-        .request-card {
-            opacity: 1;
-        }
-
-        .request-card .song-artist {
-            line-height: 1.35;
-        }
-
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255,255,255,0.4);
-            text-decoration: none;
-            font-size: 0.85rem;
-            margin-bottom: 32px;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover { color: rgba(255,255,255,0.8); }
-
-        .coming-soon {
-            opacity: 0.4;
-            cursor: default;
-            pointer-events: none;
-        }
-
-        .coming-soon .tag { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
-
-        .empty-section {
-            border: 1px dashed rgba(255,255,255,0.12);
-            border-radius: 12px;
-            padding: 22px 24px;
-            color: rgba(255,255,255,0.42);
-            font-size: 0.92rem;
-            background: rgba(255,255,255,0.035);
-        }
-
-        .request-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 22px;
-            background: rgba(0,0,0,0.72);
-            backdrop-filter: blur(10px);
-        }
-
-        .request-modal[hidden] { display: none; }
-
-        .request-panel {
-            width: min(100%, 460px);
-            background: #15151b;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.55);
-        }
-
-        .request-panel h2 {
-            font-size: 1.35rem;
-            margin-bottom: 8px;
-        }
-
-        .request-panel p {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-            line-height: 1.45;
-            margin-bottom: 18px;
-        }
-
-        .request-field {
-            display: grid;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .request-field label {
-            color: rgba(255,255,255,0.68);
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-        }
-
-        .request-field input,
-        .request-field select,
-        .request-field textarea {
-            width: 100%;
-            border: 1px solid rgba(255,255,255,0.13);
-            background: rgba(255,255,255,0.06);
-            color: white;
-            border-radius: 12px;
-            padding: 12px 14px;
-            font: inherit;
-            outline: none;
-        }
-
-        .request-field textarea {
-            min-height: 92px;
-            resize: vertical;
-        }
-
-        .request-field.is-hidden {
-            display: none;
-        }
-
-        .admin-error {
-            min-height: 20px;
-            color: #ff9f9f;
-            font-size: 0.82rem;
-            line-height: 1.4;
-        }
-
-        .request-field input:focus,
-        .request-field select:focus,
-        .request-field textarea:focus {
-            border-color: rgba(255,211,79,0.68);
-            box-shadow: 0 0 0 3px rgba(255,211,79,0.12);
-        }
-
-        .request-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .secondary-btn,
-        .submit-request {
-            border-radius: 999px;
-            padding: 10px 15px;
-            font: inherit;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .secondary-btn {
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.06);
-            color: rgba(255,255,255,0.7);
-        }
-
-        .submit-request {
-            border: 1px solid rgba(255,211,79,0.55);
-            background: #ffd34f;
-            color: #15120a;
-        }
-
-        @media (max-width: 600px) {
-            .header h1 { font-size: 1.6rem; }
-            .song-grid { grid-template-columns: 1fr; }
-            .song-actions { grid-template-columns: 1fr; }
-            .request-actions-row { width: 100%; }
-            .request-actions-row .request-btn,
-            .request-actions-row .feedback-btn {
-                flex: 1 1 150px;
-            }
-            .playlist-tools { width: 100%; }
-            .playlist-tool-btn:not(.icon-only) { flex: 1 1 140px; }
-            .library-options { justify-content: center; }
-            .library-controls { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3ea">
+  <meta name="description" content="Primary Flipcharts has moved into Primary Toolbox. Open the complete digital flipchart library in its new home.">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>Primary Flipcharts has moved to Primary Toolbox</title>
+  <script>
+    const PRIMARY_TOOLBOX_URL = 'https://primarytoolbox.app/teach';
+    const LEGACY_ENABLED = true;
+    const LEGACY_BYPASS_KEY = 'primaryFlipchartsLegacyBypassUntil';
+    const LEGACY_BYPASS_MS = 24 * 60 * 60 * 1000;
+    const RETIREMENT_REDIRECT_SECONDS = 4;
+
+    if (LEGACY_ENABLED) {
+      try {
+        const bypassUntil = Number(localStorage.getItem(LEGACY_BYPASS_KEY));
+        if (Number.isFinite(bypassUntil) && Date.now() < bypassUntil) {
+          window.location.replace('/legacy.html');
+        } else if (bypassUntil) {
+          localStorage.removeItem(LEGACY_BYPASS_KEY);
+        }
+      } catch (error) {
+        // The migration page remains usable when browser storage is unavailable.
+      }
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #24302a;
+      background: #f7f3ea;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-width: 320px; background: #f7f3ea; }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(229, 204, 130, .26), transparent 29rem),
+        radial-gradient(circle at 92% 84%, rgba(79, 154, 112, .16), transparent 31rem),
+        linear-gradient(180deg, #fbf8f2 0%, #f3eee4 100%);
+    }
+
+    button, a { font: inherit; }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, 100%);
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: clamp(18px, 3vw, 34px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      width: max-content;
+      color: #173047;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: #2d805c;
+      color: white;
+      box-shadow: 0 8px 20px rgba(45, 128, 92, .18);
+      font-size: 1.15rem;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: clamp(26px, 5vh, 62px) 0;
+    }
+
+    .migration-card {
+      width: 100%;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(370px, .95fr);
+      border: 1px solid #ded8ce;
+      border-radius: 24px;
+      background: rgba(255, 253, 249, .96);
+      box-shadow: 0 24px 70px rgba(64, 50, 30, .11);
+    }
+
+    .welcome {
+      padding: clamp(32px, 5vw, 66px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      width: max-content;
+      margin: 0 0 20px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: #edf6ed;
+      color: #2d805c;
+      font-size: .74rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      color: #173047;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.75rem, 6vw, 5.7rem);
+      font-weight: 700;
+      letter-spacing: -.052em;
+      line-height: .96;
+    }
+
+    .lede {
+      max-width: 660px;
+      margin: 24px 0 0;
+      color: #59656a;
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.65;
+    }
+
+    .actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 20px;
+    }
+
+    .primary-cta {
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 15px 21px;
+      border-radius: 12px;
+      background: #2d805c;
+      color: white;
+      text-decoration: none;
+      font-weight: 850;
+      box-shadow: 0 12px 26px rgba(45, 128, 92, .22);
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .primary-cta:hover {
+      transform: translateY(-2px);
+      background: #236c4d;
+      box-shadow: 0 16px 32px rgba(45, 128, 92, .26);
+    }
+
+    .primary-cta:focus-visible,
+    .legacy-link:focus-visible {
+      outline: 3px solid rgba(184, 92, 56, .45);
+      outline-offset: 4px;
+    }
+
+    .arrow { font-size: 1.22rem; line-height: 1; }
+
+    .access-note {
+      max-width: 360px;
+      margin: 18px 0 0;
+      color: #7d776d;
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .features {
+      padding: clamp(30px, 4.5vw, 54px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 1px solid #ded8ce;
+      background: linear-gradient(145deg, #edf6ed 0%, #e8f2e9 100%);
+    }
+
+    .features h2 {
+      margin: 0 0 22px;
+      color: #173047;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.75rem, 3vw, 2.3rem);
+      letter-spacing: -.03em;
+    }
+
+    .features ul {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 14px;
+      list-style: none;
+    }
+
+    .features li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 11px;
+      color: #45534d;
+      font-size: .95rem;
+      line-height: 1.45;
+    }
+
+    .check {
+      width: 23px;
+      height: 23px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #2d805c;
+      color: white;
+      font-size: .76rem;
+      font-weight: 900;
+    }
+
+    .retirement {
+      padding: 18px 0 2px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: #81796d;
+      font-size: .82rem;
+      line-height: 1.5;
+    }
+
+    .retirement p { margin: 0; }
+
+    .legacy-link {
+      flex: none;
+      padding: 7px 3px;
+      border: 0;
+      border-bottom: 1px solid #b7afa2;
+      background: transparent;
+      color: #6b6254;
+      cursor: pointer;
+      font-size: .8rem;
+      font-weight: 750;
+    }
+
+    .legacy-link:hover {
+      border-color: #6b6254;
+      color: #35423d;
+    }
+
+    .retired-message { display: none; }
+
+    body.is-retired .active-message,
+    body.is-retired .features,
+    body.is-retired .legacy-link { display: none; }
+
+    body.is-retired .retired-message { display: block; }
+
+    body.is-retired .migration-card { grid-template-columns: 1fr; }
+
+    body.is-retired .welcome {
+      min-height: min(650px, 68vh);
+      text-align: center;
+      align-items: center;
+    }
+
+    body.is-retired .lede { max-width: 580px; }
+
+    .countdown {
+      margin: 16px 0 0;
+      color: #7d776d;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 820px) {
+      .migration-card { grid-template-columns: 1fr; }
+      .features { border-top: 1px solid #ded8ce; border-left: 0; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { padding: 14px; }
+      main { padding: 22px 0; place-items: start center; }
+      .migration-card { border-radius: 18px; }
+      .welcome, .features { padding: 28px 22px; }
+      .actions, .primary-cta { width: 100%; }
+      .primary-cta { min-height: 56px; }
+      .retirement { align-items: flex-start; flex-direction: column; gap: 6px; }
+      h1 { font-size: clamp(2.55rem, 13vw, 4rem); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+  <div class="shell">
+    <header>
+      <a class="brand" data-toolbox-link href="https://primarytoolbox.app/teach" aria-label="Primary Toolbox Teach section">
+        <span class="brand-mark" aria-hidden="true">♪</span>
+        <span>Primary Toolbox</span>
+      </a>
+    </header>
 
-    <div class="header">
-        <h1>🎵 Primary Digital Flipcharts</h1>
-        <div class="version-label">v0.5 beta</div>
-    </div>
+    <main>
+      <section class="migration-card" aria-labelledby="page-title">
+        <div class="welcome">
+          <div class="active-message">
+            <p class="eyebrow">The library has moved</p>
+            <h1 id="page-title">🎉 Welcome to the new home of Primary Flipcharts</h1>
+            <p class="lede">Thank you for using Primary Flipcharts. The complete flipchart library has moved into Primary Toolbox, where you’ll find a faster, more modern experience designed for Primary music leaders.</p>
+          </div>
 
-    <div class="admin-badge">Admin mode is on. Coming Soon flipcharts, song requests, and feedback are visible here for review.</div>
+          <div class="retired-message">
+            <p class="eyebrow">Our new home is ready</p>
+            <h1 id="retired-title">Primary Flipcharts has retired.</h1>
+            <p class="lede">The flipchart library now lives inside Primary Toolbox.</p>
+          </div>
 
-    <section class="admin-panel" id="adminPanel">
-        <div class="admin-panel-header">
-            <h2>Admin Panel</h2>
-            <button class="secondary-btn" type="button" onclick="loadAdminPanel()">Refresh</button>
-        </div>
-        <div class="admin-panel-grid">
-            <div class="admin-list-panel">
-                <h3>Song Requests</h3>
-                <div class="admin-list" id="adminRequestsList">
-                    <div class="admin-empty">Unlock admin mode to load song requests.</div>
-                </div>
-            </div>
-            <div class="admin-list-panel">
-                <h3>Feedback and Bugs</h3>
-                <div class="admin-list" id="adminFeedbackList">
-                    <div class="admin-empty">Unlock admin mode to load feedback.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="library-options">
-        <button class="library-toggle-btn" id="singingListToggleButton" type="button" onclick="toggleSingingListVisibility()">Hide singing list</button>
-    </div>
-
-    <details class="library-section" id="playlistSection" open>
-        <summary class="section-title">My Singing List <span class="section-count" id="playlistCount">(0)</span></summary>
-        <div class="playlist-toolbar">
-            <div class="playlist-note">Tap Edit singing list when you want to choose songs. Save singing list hides the full library so only your set stays front and center.</div>
-            <div class="playlist-tools">
-                <button class="playlist-tool-btn" id="editPlaylistButton" type="button" onclick="togglePlaylistEditing()">Edit singing list</button>
-                <button class="playlist-tool-btn" id="clearPlaylistButton" type="button" onclick="clearPlaylist()" disabled>Clear singing list</button>
-                <button class="playlist-tool-btn icon-only" id="copyPlaylistButton" type="button" onclick="copyPlaylistLink()" aria-label="Copy singing list link" title="Copy singing list link" disabled>⧉</button>
-            </div>
-        </div>
-        <div class="song-grid" id="playlistGrid"></div>
-        <div class="empty-section" id="playlistEmpty">Your singing list is empty. Tap Edit singing list to choose songs.</div>
-        <div class="playlist-status" id="playlistStatus" aria-live="polite"></div>
-    </details>
-
-    <details class="library-section" id="allSongsSection" open>
-        <summary class="section-title">All Songs <span class="section-count" id="allSongsCount">(0)</span></summary>
-        <div class="library-controls" aria-label="Song sorting and filtering controls">
-            <div class="library-filter">
-                <label for="songSortSelect">Sort</label>
-                <select id="songSortSelect" onchange="applyLibraryFilters()">
-                    <option value="alpha">A to Z</option>
-                    <option value="reverse">Z to A</option>
-                    <option value="number">Song number</option>
-                </select>
-            </div>
-            <div class="library-filter">
-                <label for="songTopicSelect">Topic</label>
-                <select id="songTopicSelect" onchange="applyLibraryFilters()">
-                    <option value="all">All topics</option>
-                    <option value="jesus">Jesus Christ</option>
-                    <option value="scripture">Scriptures</option>
-                    <option value="faith">Faith</option>
-                    <option value="prayer">Prayer</option>
-                    <option value="service">Service</option>
-                    <option value="nature">Creation</option>
-                    <option value="missionary">Missionary</option>
-                    <option value="temple">Temple</option>
-                </select>
-            </div>
-        </div>
-        <div class="library-empty-filter" id="libraryEmptyFilter">No songs match those filters.</div>
-        <div class="song-grid" id="allSongsGrid">
-
-        <div class="song-card with-actions" data-song-id="a-childs-prayer" data-sort-title="childs prayer" style="--card-color: #a78bfa;" data-song-number="12" data-song-source="children-songbook" data-song-topic="prayer">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add A Child's Prayer to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🙏</div>
-                <div class="song-info">
-                    <div class="song-title">A Child&#x27;s Prayer</div>
-                    <div class="song-artist">Janice Kapp Perry</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/a-childs-prayer/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/a-childs-prayer/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
+          <div class="actions">
+            <a class="primary-cta" data-toolbox-link href="https://primarytoolbox.app/teach">
+              <span>Open Primary Toolbox</span>
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+          <p class="access-note active-message">Sign in for free beta access, or continue as a guest to explore the Teach section.</p>
+          <p class="countdown retired-message" aria-live="polite">Taking you to Primary Toolbox in <span id="countdown">4</span> seconds…</p>
         </div>
 
-        <div class="song-card with-actions" data-song-id="build-an-ark" data-sort-title="build an ark" style="--card-color: #4ecdc4;" data-song-number="" data-song-source="non-official" data-song-topic="faith">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Build an Ark to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🛶</div>
-                <div class="song-info">
-                    <div class="song-title">Build an Ark</div>
-                    <div class="song-artist">Marianne Porter</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">19 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/build-an-ark/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/build-an-ark/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="the-church-of-jesus-christ" data-sort-title="church of jesus christ" style="--card-color: #8bc34a;" data-song-number="77" data-song-source="children-songbook" data-song-topic="jesus">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add The Church of Jesus Christ to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">⛪</div>
-                <div class="song-info">
-                    <div class="song-title">The Church of Jesus Christ</div>
-                    <div class="song-artist">Janice Kapp Perry</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">10 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/the-church-of-jesus-christ/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/the-church-of-jesus-christ/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="choose-him-again" data-sort-title="choose him again" style="--card-color: #ffd166;" data-song-number="" data-song-source="non-official" data-song-topic="jesus">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Choose Him Again to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">✨</div>
-                <div class="song-info">
-                    <div class="song-title">Choose Him Again</div>
-                    <div class="song-artist">Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">23 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/choose-him-again/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/choose-him-again/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="the-creation" data-sort-title="creation" style="--card-color: #ffd166;" data-song-number="" data-song-source="non-official" data-song-topic="nature">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add The Creation to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🌎</div>
-                <div class="song-info">
-                    <div class="song-title">The Creation</div>
-                    <div class="song-artist">Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">27 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/the-creation/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/the-creation/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="david-and-goliath" data-sort-title="david goliath" style="--card-color: #ffd93d;" data-song-number="" data-song-source="non-official" data-song-topic="faith">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add David &amp; Goliath to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🪨</div>
-                <div class="song-info">
-                    <div class="song-title">David &amp; Goliath</div>
-                    <div class="song-artist">Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">18 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/david-and-goliath/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/david-and-goliath/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="faith-in-every-footstep" data-sort-title="faith in every footstep" style="--card-color: #4ecdc4;" data-song-number="301" data-song-source="hymns" data-song-topic="faith">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Faith in Every Footstep to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🦶</div>
-                <div class="song-info">
-                    <div class="song-title">Faith in Every Footstep</div>
-                    <div class="song-artist">K. Newell Dayley</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">37 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/faith-in-every-footstep/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/faith-in-every-footstep/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="for-such-a-time-as-this" data-sort-title="for such a time as this" style="--card-color: #f6c85f;" data-song-number="" data-song-source="non-official" data-song-topic="faith">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add For Such a Time As This to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">👑</div>
-                <div class="song-info">
-                    <div class="song-title">For Such a Time As This</div>
-                    <div class="song-artist">Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">21 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/for-such-a-time-as-this/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/for-such-a-time-as-this/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="gods-love" data-sort-title="gods love" style="--card-color: #8ed4a8;" data-song-number="" data-song-source="hymns-home" data-song-topic="jesus">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add God’s Love to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">💛</div>
-                <div class="song-info">
-                    <div class="song-title">God’s Love</div>
-                    <div class="song-artist">Linda Urquhart · Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">29 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/gods-love/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/gods-love/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="holding-hands-around-the-world" data-sort-title="holding hands around the world" style="--card-color: #58d6c9;" data-song-number="" data-song-source="official-other" data-song-topic="missionary">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Holding Hands Around the World to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🌍</div>
-                <div class="song-info">
-                    <div class="song-title">Holding Hands Around the World</div>
-                    <div class="song-artist">Janice Kapp Perry</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">27 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/holding-hands-around-the-world/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/holding-hands-around-the-world/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="holy-places" data-sort-title="holy places" style="--card-color: #f7b267;" data-song-number="" data-song-source="non-official" data-song-topic="temple">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Holy Places to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🏛️</div>
-                <div class="song-info">
-                    <div class="song-title">Holy Places</div>
-                    <div class="song-artist">Sherrie Manwill Boren</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">22 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/holy-places/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/holy-places/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="i-want-to-be-a-missionary-now" data-sort-title="i want to be a missionary now" style="--card-color: #6dd6a6;" data-song-number="168" data-song-source="children-songbook" data-song-topic="missionary">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Want to Be a Missionary Now to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🧳</div>
-                <div class="song-info">
-                    <div class="song-title">I Want to Be a Missionary Now</div>
-                    <div class="song-artist">B. Jackman · D. O. McKay</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">14 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/i-want-to-be-a-missionary-now/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/i-want-to-be-a-missionary-now/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="i-will-be-valiant" data-sort-title="i will be valiant" style="--card-color: #ffd166;" data-song-number="162" data-song-source="children-songbook" data-song-topic="faith">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Will Be Valiant to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🛡️</div>
-                <div class="song-info">
-                    <div class="song-title">I Will Be Valiant</div>
-                    <div class="song-artist">Vanja Y. Watkins</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">9 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/i-will-be-valiant/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/i-will-be-valiant/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="i-will-follow-gods-plan" data-sort-title="i will follow gods plan" style="--card-color: #6dd6a6;" data-song-number="164" data-song-source="children-songbook" data-song-topic="faith">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Will Follow God's Plan to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🗺️</div>
-                <div class="song-info">
-                    <div class="song-title">I Will Follow God&#x27;s Plan</div>
-                    <div class="song-artist">Vanja Y. Watkins</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">11 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/i-will-follow-gods-plan/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/i-will-follow-gods-plan/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="i-will-walk-with-jesus" data-sort-title="i will walk with jesus" style="--card-color: #c7a6ff;" data-song-number="" data-song-source="official-other" data-song-topic="jesus">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add I Will Walk with Jesus to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">👣</div>
-                <div class="song-info">
-                    <div class="song-title">I Will Walk with Jesus</div>
-                    <div class="song-artist">Stephen P. Schank</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/i-will-walk-with-jesus/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/i-will-walk-with-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="kind-like-christ" data-sort-title="kind like christ" style="--card-color: #8ed4a8;" data-song-number="" data-song-source="non-official" data-song-topic="service">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Kind Like Christ to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🤝</div>
-                <div class="song-info">
-                    <div class="song-title">Kind Like Christ</div>
-                    <div class="song-artist">Angie Killian · Becky Willard</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">45 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/kind-like-christ/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/kind-like-christ/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="liken-the-scriptures" data-sort-title="liken the scriptures" style="--card-color: #f7b267;" data-song-number="" data-song-source="official-other" data-song-topic="scripture">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Liken the Scriptures to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">📚</div>
-                <div class="song-info">
-                    <div class="song-title">Liken the Scriptures</div>
-                    <div class="song-artist">Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/liken-the-scriptures/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/liken-the-scriptures/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="more-than-enough" data-sort-title="more than enough" style="--card-color: #f06595;" data-song-number="" data-song-source="non-official" data-song-topic="jesus">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add More Than Enough to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">💝</div>
-                <div class="song-info">
-                    <div class="song-title">More Than Enough</div>
-                    <div class="song-artist">Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag mothers-day">Mother's Day</span><span class="tag">34 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/more-than-enough/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/more-than-enough/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="my-heavenly-father-loves-me" data-sort-title="my heavenly father loves me" style="--card-color: #7bdff2;" data-song-number="228" data-song-source="children-songbook" data-song-topic="nature">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add My Heavenly Father Loves Me to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">🌿</div>
-                <div class="song-info">
-                    <div class="song-title">My Heavenly Father Loves Me</div>
-                    <div class="song-artist">Clara W. McMaster</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">25 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/my-heavenly-father-loves-me/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/my-heavenly-father-loves-me/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="scripture-power" data-sort-title="scripture power" style="--card-color: #8ed4ff;" data-song-number="" data-song-source="official-other" data-song-topic="scripture">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add Scripture Power to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">📖</div>
-                <div class="song-info">
-                    <div class="song-title">Scripture Power</div>
-                    <div class="song-artist">Clive Romney</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">17 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/scripture-power/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/scripture-power/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="there-is-sunshine-in-my-soul-today" data-sort-title="there is sunshine in my soul today" style="--card-color: #ffd34f;" data-song-number="227" data-song-source="hymns" data-song-topic="jesus">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add There Is Sunshine in My Soul Today to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">☀️</div>
-                <div class="song-info">
-                    <div class="song-title">There Is Sunshine in My Soul Today</div>
-                    <div class="song-artist">Eliza E. Hewitt · John R. Sweney</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">33 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/there-is-sunshine-in-my-soul-today/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/there-is-sunshine-in-my-soul-today/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions" data-song-id="this-is-jesus" data-sort-title="this is jesus" style="--card-color: #ffd166;" data-song-number="" data-song-source="non-official" data-song-topic="jesus">
-            <button class="favorite-btn" type="button" data-favorite-button aria-label="Add This Is Jesus to singing list" title="Add to singing list">☆</button>
-            <div class="song-main">
-                <div class="song-emoji">✨</div>
-                <div class="song-info">
-                    <div class="song-title">This Is Jesus</div>
-                    <div class="song-artist">Shawna Edwards · Gary Edwards</div>
-                    <div class="song-tags"><span class="tag ready">✅ Ready</span><span class="tag">37 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions">
-                <a href="/this-is-jesus/flipchart.html" class="flipchart-link">Sing</a>
-                <a href="/this-is-jesus/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        </div>
-    </details>
-
-    <details class="library-section" id="comingSoonSection">
-        <summary class="section-title">Coming Soon <span class="section-count" id="comingSoonCount">(2)</span></summary>
-        <p class="approval-note">These flipcharts are parked here until their images are approved and moved into production. New requests appear here after they are submitted.</p>
-        <div class="song-grid" id="comingSoonGrid">
-
-        <div class="song-card with-actions coming-soon" style="--card-color: #f6c85f;">
-            <div class="song-main">
-                <div class="song-emoji">✨</div>
-                <div class="song-info">
-                    <div class="song-title">The Miracle</div>
-                    <div class="song-artist">Shawna Edwards</div>
-                    <div class="song-tags"><span class="tag in-progress">Images coming soon</span><span class="tag">24 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions public-pending"><button class="pending-link" type="button" disabled>Images coming soon</button></div>
-            <div class="song-actions admin-only">
-                <a href="/the-miracle/flipchart.html" class="flipchart-link">Open Preview</a>
-                <a href="/the-miracle/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        <div class="song-card with-actions coming-soon" style="--card-color: #8ed4ff;">
-            <div class="song-main">
-                <div class="song-emoji">🧭</div>
-                <div class="song-info">
-                    <div class="song-title">The Liahona</div>
-                    <div class="song-artist">Angie Killian</div>
-                    <div class="song-tags"><span class="tag in-progress">Images coming soon</span><span class="tag">29 slides</span></div>
-                </div>
-            </div>
-            <div class="song-actions public-pending"><button class="pending-link" type="button" disabled>Images coming soon</button></div>
-            <div class="song-actions admin-only">
-                <a href="/the-liahona/flipchart.html" class="flipchart-link">Open Preview</a>
-                <a href="/the-liahona/flipchart.html?mode=gameshow" class="game-link">FILL IT IN!</a>
-            </div>
-        </div>
-
-        </div>
-    </details>
-
-    <details class="tutorial-section">
-        <summary class="tutorial-title">Info</summary>
-        <div class="tutorial-body">
-            <p class="tutorial-intro">Primary Flipcharts is a beta educational tool for teaching children Primary songs with large lyrics, memorable pictures, practice modes, custom singing lists, and simple games.</p>
-            <div class="tutorial-grid">
-                <div class="tutorial-item">
-                    <div class="tutorial-icon accent label">Open</div>
-                    <div class="tutorial-copy">
-                        <strong>Sing</strong>
-                        <span>Sing through slides.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon label">FILL IT IN!</div>
-                    <div class="tutorial-copy">
-                        <strong>FILL IT IN!</strong>
-                        <span>Interactive gameshow. Kids guess missing words with music and sound effects.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon-group" aria-hidden="true">
-                        <div class="tutorial-icon">📝</div>
-                        <div class="tutorial-icon">❓</div>
-                        <div class="tutorial-icon">🔑</div>
-                        <div class="tutorial-icon">📷</div>
-                    </div>
-                    <div class="tutorial-copy">
-                        <strong>Top-Right Mode Button</strong>
-                        <span>Tap the same button to switch: lyrics, blanks, keywords, pictures only.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">☆</div>
-                    <div class="tutorial-copy">
-                        <strong>My Singing List</strong>
-                        <span>Edit opens All Songs. Star songs, save to collapse the library, then copy the share link.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">◐</div>
-                    <div class="tutorial-copy">
-                        <strong>Hide List</strong>
-                        <span>Turn off the singing list panel to use the app as a simple song library.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">⧉</div>
-                    <div class="tutorial-copy">
-                        <strong>Copy Link</strong>
-                        <span>Copies a shareable link for your current singing list.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">☑</div>
-                    <div class="tutorial-copy">
-                        <strong>Prepare</strong>
-                        <span>Build a singing list before Sunday. Use picture modes to reveal images for teaching or printing ideas.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">↺</div>
-                    <div class="tutorial-copy">
-                        <strong>Restart</strong>
-                        <span>Back to slide one.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">🎵</div>
-                    <div class="tutorial-copy">
-                        <strong>Library</strong>
-                        <span>Return to songs.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon">▶</div>
-                    <div class="tutorial-copy">
-                        <strong>Music</strong>
-                        <span>Play accompaniment.</span>
-                    </div>
-                </div>
-                <div class="tutorial-item">
-                    <div class="tutorial-icon accent">?</div>
-                    <div class="tutorial-copy">
-                        <strong>Request Song</strong>
-                        <span>Add a future song.</span>
-                    </div>
-                </div>
-            </div>
-            <details class="change-log">
-                <summary class="change-log-title">Change Log</summary>
-                <div class="change-log-list">
-                    <div><strong>Updated July 23, 2026</strong></div>
-                    <div><strong>v0.5 beta</strong></div>
-                    <ul>
-                        <li>Added shareable singing lists.</li>
-                        <li>Added edit/save list mode.</li>
-                        <li>Added a hide/show singing list option.</li>
-                        <li>Added public song requests and feedback.</li>
-                        <li>Added accompaniment controls.</li>
-                        <li>Added Fill It In game support.</li>
-                        <li>Added song sorting and filtering.</li>
-                    </ul>
-                </div>
-            </details>
-        </div>
-    </details>
-
-    <div class="request-footer">
-        <div class="request-actions-row">
-            <button class="request-btn" type="button" onclick="openRequestModal()">Request Song</button>
-            <button class="feedback-btn" type="button" onclick="openFeedbackModal()">Feedback / Bug</button>
-        </div>
-        <button class="admin-access-btn" id="adminAccessButton" type="button" onclick="handleAdminAccess()">Admin access</button>
-    </div>
-
-    <div class="site-disclaimer">This is a work-in-progress beta flipchart app for educational teaching use. It is not officially associated with The Church of Jesus Christ of Latter-day Saints. Please report feedback or bugs with the button above.</div>
-
-
-</div>
-<div class="request-modal" id="requestModal" hidden>
-    <form class="request-panel" id="requestForm">
-        <h2>Request a Song</h2>
-        <p>Add a song title to the Coming Soon list. Requested flipcharts are usually built within 7-10 days.</p>
-        <div class="request-field">
-            <label for="requestTitle">Song Title</label>
-            <input id="requestTitle" name="title" type="text" autocomplete="off" required>
-        </div>
-        <div class="request-field">
-            <label for="requestArtStyle">Preferred Art Style</label>
-            <select id="requestArtStyle" name="artStyle">
-                <option value="You choose">You choose</option>
-                <option value="Watercolor">Watercolor</option>
-                <option value="Painterly">Painterly</option>
-                <option value="3D animated">3D animated</option>
-                <option value="Claymation">Claymation</option>
-                <option value="Paper cutout">Paper cutout</option>
-                <option value="Cartoon">Cartoon</option>
-                <option value="Crayon / child drawings">Crayon / child drawings</option>
-                <option value="Realistic">Realistic</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        <div class="request-field is-hidden" id="requestOtherArtStyleField">
-            <label for="requestOtherArtStyle">Other Style</label>
-            <input id="requestOtherArtStyle" name="otherArtStyle" type="text" autocomplete="off" placeholder="Example: claymation, paper cutout, stained glass">
-        </div>
-        <div class="request-field">
-            <label for="requestNotes">Notes</label>
-            <textarea id="requestNotes" name="notes" placeholder="Optional: program date, artist, link, or lyrics source"></textarea>
-        </div>
-        <div class="request-actions">
-            <button class="secondary-btn" type="button" onclick="closeRequestModal()">Cancel</button>
-            <button class="submit-request" type="submit">Add Request</button>
-        </div>
-        <div class="admin-error" id="requestStatus" aria-live="polite"></div>
-    </form>
-</div>
-<div class="request-modal" id="feedbackModal" hidden>
-    <form class="request-panel" id="feedbackForm">
-        <h2>Feedback / Bug</h2>
-        <p>Report a bug, confusing button, typo, image issue, or idea for the app.</p>
-        <div class="request-field">
-            <label for="feedbackKind">Type</label>
-            <select id="feedbackKind" name="kind">
-                <option value="bug">Bug</option>
-                <option value="feedback">Feedback</option>
-                <option value="idea">Idea</option>
-            </select>
-        </div>
-        <div class="request-field">
-            <label for="feedbackMessage">Details</label>
-            <textarea id="feedbackMessage" name="message" placeholder="What happened? What would you change?" required></textarea>
-        </div>
-        <div class="request-field">
-            <label for="feedbackContact">Contact</label>
-            <input id="feedbackContact" name="contact" type="text" autocomplete="off" placeholder="Optional">
-        </div>
-        <div class="request-actions">
-            <button class="secondary-btn" type="button" onclick="closeFeedbackModal()">Cancel</button>
-            <button class="submit-request" id="feedbackSubmit" type="submit">Send Feedback</button>
-        </div>
-        <div class="admin-error" id="feedbackStatus" aria-live="polite"></div>
-    </form>
-</div>
-<div class="request-modal" id="adminModal" hidden>
-    <form class="request-panel" id="adminForm">
-        <h2>Admin Access</h2>
-        <p>Enter the admin password to preview Coming Soon flipcharts.</p>
-        <div class="request-field">
-            <label for="adminPassword">Password</label>
-            <input id="adminPassword" name="password" type="password" autocomplete="current-password" required>
-        </div>
-        <div class="admin-error" id="adminError" aria-live="polite"></div>
-        <div class="request-actions">
-            <button class="secondary-btn" type="button" onclick="closeAdminModal()">Cancel</button>
-            <button class="submit-request" id="adminSubmit" type="submit">Unlock</button>
-        </div>
-    </form>
-</div>
-<script>
-    const REQUESTS_KEY = 'flipchartsSongRequests';
-    const FEEDBACK_KEY = 'flipchartsFeedbackReports';
-    const ADMIN_KEY = 'flipchartsAdminPreview';
-    const ADMIN_TOKEN_KEY = 'flipchartsAdminToken';
-    const PLAYLIST_KEY = 'flipchartsPlaylist';
-    const PLAYLIST_PARAM = 'playlist';
-    const SINGING_LIST_ENABLED_KEY = 'flipchartsSingingListEnabled';
-    const params = new URLSearchParams(window.location.search);
-    let publicSongRequests = [];
-    let playlistEditing = false;
-    let singingListEnabled = localStorage.getItem(SINGING_LIST_ENABLED_KEY) !== '0';
-
-    if (params.get('admin') === '0') {
-        localStorage.removeItem(ADMIN_KEY);
-        sessionStorage.removeItem(ADMIN_TOKEN_KEY);
-    }
-
-    function setAdminMode(enabled) {
-        document.body.classList.toggle('admin-mode', enabled);
-        if (enabled) {
-            localStorage.setItem(ADMIN_KEY, '1');
-        } else {
-            localStorage.removeItem(ADMIN_KEY);
-            sessionStorage.removeItem(ADMIN_TOKEN_KEY);
-        }
-
-        const adminButton = document.getElementById('adminAccessButton');
-        if (adminButton) {
-            adminButton.textContent = enabled ? 'Exit admin' : 'Admin access';
-        }
-    }
-
-    setAdminMode(localStorage.getItem(ADMIN_KEY) === '1' && Boolean(sessionStorage.getItem(ADMIN_TOKEN_KEY)));
-
-    function allSongCards() {
-        return Array.from(document.querySelectorAll('#allSongsGrid .song-card[data-song-id]'));
-    }
-
-    function titleForSort(card) {
-        return card.dataset.sortTitle || card.querySelector('.song-title')?.textContent?.trim().toLowerCase() || '';
-    }
-
-    function numberForSort(card) {
-        const number = Number.parseInt(card.dataset.songNumber || '', 10);
-        return Number.isFinite(number) ? number : Number.POSITIVE_INFINITY;
-    }
-
-    function topicTokensFor(card) {
-        return (card.dataset.songTopic || '')
-            .split(/[\s,]+/)
-            .map((topic) => topic.trim())
-            .filter(Boolean);
-    }
-
-    function renderSongNumberBadges() {
-        allSongCards().forEach((card) => {
-            const title = card.querySelector('.song-title');
-            const number = card.dataset.songNumber;
-            if (!title || !number || title.querySelector('.song-number')) return;
-
-            const badge = document.createElement('span');
-            badge.className = 'song-number';
-            badge.textContent = `#${number}`;
-            title.append(' ', badge);
-        });
-    }
-
-    function updateLibraryCounts() {
-        const totalCards = allSongCards();
-        const visibleCards = totalCards.filter((card) => !card.hidden);
-        const allSongsCount = document.getElementById('allSongsCount');
-        const playlistCount = document.getElementById('playlistCount');
-        if (allSongsCount) {
-            allSongsCount.textContent = visibleCards.length === totalCards.length
-                ? `(${totalCards.length})`
-                : `(${visibleCards.length}/${totalCards.length})`;
-        }
-        if (playlistCount) {
-            playlistCount.textContent = `(${getPlaylistIds().length})`;
-        }
-    }
-
-    function applyLibraryFilters() {
-        const grid = document.getElementById('allSongsGrid');
-        if (!grid) return;
-
-        const sortMode = document.getElementById('songSortSelect')?.value || 'alpha';
-        const topicFilter = document.getElementById('songTopicSelect')?.value || 'all';
-        const cards = allSongCards();
-
-        cards.forEach((card) => {
-            const topicMatches = topicFilter === 'all' || topicTokensFor(card).includes(topicFilter);
-            card.hidden = !topicMatches;
-        });
-
-        cards.sort((a, b) => {
-            if (sortMode === 'reverse') return titleForSort(b).localeCompare(titleForSort(a));
-            if (sortMode === 'number') {
-                const numberDiff = numberForSort(a) - numberForSort(b);
-                return numberDiff || titleForSort(a).localeCompare(titleForSort(b));
-            }
-            return titleForSort(a).localeCompare(titleForSort(b));
-        });
-
-        cards.forEach((card) => grid.append(card));
-        const emptyFilter = document.getElementById('libraryEmptyFilter');
-        if (emptyFilter) emptyFilter.classList.toggle('is-visible', cards.every((card) => card.hidden));
-        updateLibraryCounts();
-    }
-
-    function knownSongIds() {
-        return new Set(allSongCards().map((card) => card.dataset.songId));
-    }
-
-    function normalizedPlaylistIds(ids) {
-        const validIds = knownSongIds();
-        const seen = new Set();
-        return ids.filter((id) => {
-            if (!validIds.has(id) || seen.has(id)) return false;
-            seen.add(id);
-            return true;
-        });
-    }
-
-    function playlistIdsFromUrl() {
-        const raw = params.get(PLAYLIST_PARAM);
-        if (!raw) return null;
-        return normalizedPlaylistIds(raw.split(',').map((id) => id.trim()).filter(Boolean));
-    }
-
-    function getPlaylistIds() {
-        try {
-            const ids = JSON.parse(localStorage.getItem(PLAYLIST_KEY) || '[]');
-            return normalizedPlaylistIds(Array.isArray(ids) ? ids : []);
-        } catch (error) {
-            return [];
-        }
-    }
-
-    function savePlaylistIds(ids) {
-        localStorage.setItem(PLAYLIST_KEY, JSON.stringify(normalizedPlaylistIds(ids)));
-    }
-
-    function setAllSongsOpen(open) {
-        const allSongsSection = document.getElementById('allSongsSection');
-        if (!allSongsSection) return;
-        if (open) {
-            allSongsSection.setAttribute('open', '');
-        } else {
-            allSongsSection.removeAttribute('open');
-        }
-    }
-
-    function updateSingingListVisibility() {
-        document.body.classList.toggle('singing-list-disabled', !singingListEnabled);
-        const button = document.getElementById('singingListToggleButton');
-        if (button) {
-            button.textContent = singingListEnabled ? 'Hide singing list' : 'Show singing list';
-            button.setAttribute('aria-pressed', String(singingListEnabled));
-        }
-        if (!singingListEnabled) {
-            playlistEditing = false;
-            setAllSongsOpen(true);
-        }
-    }
-
-    function toggleSingingListVisibility() {
-        singingListEnabled = !singingListEnabled;
-        localStorage.setItem(SINGING_LIST_ENABLED_KEY, singingListEnabled ? '1' : '0');
-        updateSingingListVisibility();
-        updatePlaylistEditingState();
-        setPlaylistStatus(singingListEnabled ? 'Singing list shown.' : 'Singing list hidden.');
-    }
-
-    function setPlaylistStatus(message) {
-        const status = document.getElementById('playlistStatus');
-        if (!status) return;
-        status.textContent = message;
-        if (message) {
-            window.setTimeout(() => {
-                if (status.textContent === message) status.textContent = '';
-            }, 2600);
-        }
-    }
-
-    function setCopyButtonSuccess(active) {
-        const button = document.getElementById('copyPlaylistButton');
-        if (!button) return;
-
-        button.classList.toggle('is-success', active);
-        button.textContent = active ? '✓' : '⧉';
-        button.setAttribute('aria-label', active ? 'Singing list link copied' : 'Copy singing list link');
-        button.title = active ? 'Copied!' : 'Copy singing list link';
-    }
-
-    function updatePlaylistEditingState() {
-        const editButton = document.getElementById('editPlaylistButton');
-        document.body.classList.toggle('singing-list-editing', singingListEnabled && playlistEditing);
-        if (!singingListEnabled) {
-            setAllSongsOpen(true);
-        } else if (playlistEditing || getPlaylistIds().length === 0) {
-            setAllSongsOpen(true);
-        } else {
-            setAllSongsOpen(false);
-        }
-        if (editButton) {
-            editButton.textContent = playlistEditing ? 'Save singing list' : 'Edit singing list';
-            editButton.classList.toggle('is-success', playlistEditing);
-            editButton.setAttribute('aria-pressed', String(playlistEditing));
-        }
-    }
-
-    function togglePlaylistEditing() {
-        if (!singingListEnabled) {
-            singingListEnabled = true;
-            localStorage.setItem(SINGING_LIST_ENABLED_KEY, '1');
-            updateSingingListVisibility();
-        }
-        playlistEditing = !playlistEditing;
-        updatePlaylistEditingState();
-        setPlaylistStatus(playlistEditing ? 'Choose songs from All Songs.' : 'Singing list saved.');
-    }
-
-    function playlistLinkFor(ids) {
-        const url = new URL(window.location.href);
-        url.searchParams.delete('admin');
-        url.searchParams.delete(PLAYLIST_PARAM);
-        if (ids.length) {
-            url.searchParams.set(PLAYLIST_PARAM, ids.join(','));
-        }
-        url.hash = '';
-        return url.toString();
-    }
-
-    function syncPlaylistUrl(ids) {
-        const url = playlistLinkFor(ids);
-        window.history.replaceState({}, '', url);
-        setCopyButtonSuccess(false);
-    }
-
-    function renderPlaylist() {
-        const ids = getPlaylistIds();
-        const grid = document.getElementById('playlistGrid');
-        const empty = document.getElementById('playlistEmpty');
-        const copyButton = document.getElementById('copyPlaylistButton');
-        const clearButton = document.getElementById('clearPlaylistButton');
-        if (!grid || !empty) return;
-
-        grid.replaceChildren();
-        ids.forEach((id) => {
-            const source = allSongCards().find((card) => card.dataset.songId === id);
-            if (!source) return;
-            const clone = source.cloneNode(true);
-            clone.classList.add('is-favorite');
-            grid.append(clone);
-        });
-
-        bindFavoriteButtons(grid);
-        updateFavoriteButtons();
-
-        empty.hidden = ids.length > 0;
-        if (copyButton) copyButton.disabled = ids.length === 0;
-        if (clearButton) clearButton.disabled = ids.length === 0;
-        updateLibraryCounts();
-    }
-
-    function updateFavoriteButtons() {
-        const ids = new Set(getPlaylistIds());
-        document.querySelectorAll('.song-card[data-song-id]').forEach((card) => {
-            const isFavorite = ids.has(card.dataset.songId);
-            card.classList.toggle('is-favorite', isFavorite);
-            const button = card.querySelector('[data-favorite-button]');
-            if (!button) return;
-
-            const title = card.querySelector('.song-title')?.textContent || 'this song';
-            button.classList.toggle('is-active', isFavorite);
-            button.textContent = isFavorite ? '★' : '☆';
-            button.setAttribute('aria-pressed', String(isFavorite));
-            button.setAttribute('aria-label', `${isFavorite ? 'Remove' : 'Add'} ${title} ${isFavorite ? 'from' : 'to'} singing list`);
-            button.title = isFavorite ? 'Remove from singing list' : 'Add to singing list';
-        });
-    }
-
-    function toggleFavorite(songId) {
-        const ids = getPlaylistIds();
-        const nextIds = ids.includes(songId)
-            ? ids.filter((id) => id !== songId)
-            : [...ids, songId];
-        savePlaylistIds(nextIds);
-        syncPlaylistUrl(nextIds);
-        renderPlaylist();
-    }
-
-    function bindFavoriteButtons(scope = document) {
-        scope.querySelectorAll('[data-favorite-button]').forEach((button) => {
-            if (button.dataset.boundFavorite === '1') return;
-            button.dataset.boundFavorite = '1';
-            button.addEventListener('click', (event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                const card = button.closest('.song-card[data-song-id]');
-                if (card) toggleFavorite(card.dataset.songId);
-            });
-        });
-    }
-
-    async function copyPlaylistLink() {
-        const ids = getPlaylistIds();
-        if (!ids.length) return;
-
-        const link = playlistLinkFor(ids);
-        try {
-            await navigator.clipboard.writeText(link);
-            setCopyButtonSuccess(true);
-            setPlaylistStatus('Singing list link copied.');
-            window.setTimeout(() => setCopyButtonSuccess(false), 2600);
-        } catch (error) {
-            window.prompt('Copy this singing list link:', link);
-            setCopyButtonSuccess(true);
-            setPlaylistStatus('Singing list link ready.');
-            window.setTimeout(() => setCopyButtonSuccess(false), 2600);
-        }
-    }
-
-    function clearPlaylist() {
-        savePlaylistIds([]);
-        syncPlaylistUrl([]);
-        renderPlaylist();
-        playlistEditing = false;
-        updatePlaylistEditingState();
-        setPlaylistStatus('Singing list cleared.');
-    }
-
-    function initializePlaylist() {
-        bindFavoriteButtons(document);
-        const urlIds = playlistIdsFromUrl();
-        if (urlIds) {
-            savePlaylistIds(urlIds);
-            singingListEnabled = true;
-            localStorage.setItem(SINGING_LIST_ENABLED_KEY, '1');
-        }
-        renderPlaylist();
-        const ids = getPlaylistIds();
-        const hasSharedOrSavedList = ids.length > 0;
-        playlistEditing = false;
-        updateSingingListVisibility();
-        if (singingListEnabled && hasSharedOrSavedList) {
-            document.getElementById('playlistSection')?.setAttribute('open', '');
-        }
-        updatePlaylistEditingState();
-    }
-
-    function openRequestModal() {
-        const modal = document.getElementById('requestModal');
-        modal.hidden = false;
-        setTimeout(() => document.getElementById('requestTitle').focus(), 0);
-    }
-
-    function closeRequestModal() {
-        document.getElementById('requestModal').hidden = true;
-        document.getElementById('requestForm').reset();
-        document.getElementById('requestStatus').textContent = '';
-        updateOtherArtStyleField();
-    }
-
-    function openFeedbackModal() {
-        const modal = document.getElementById('feedbackModal');
-        modal.hidden = false;
-        setTimeout(() => document.getElementById('feedbackMessage').focus(), 0);
-    }
-
-    function closeFeedbackModal() {
-        document.getElementById('feedbackModal').hidden = true;
-        document.getElementById('feedbackForm').reset();
-        document.getElementById('feedbackStatus').textContent = '';
-    }
-
-    function handleAdminAccess() {
-        if (document.body.classList.contains('admin-mode')) {
-            setAdminMode(false);
-            return;
-        }
-
-        openAdminModal();
-    }
-
-    function openAdminModal() {
-        const modal = document.getElementById('adminModal');
-        document.getElementById('adminError').textContent = '';
-        modal.hidden = false;
-        setTimeout(() => document.getElementById('adminPassword').focus(), 0);
-    }
-
-    function closeAdminModal() {
-        document.getElementById('adminModal').hidden = true;
-        document.getElementById('adminForm').reset();
-        document.getElementById('adminError').textContent = '';
-    }
-
-    function getSongRequests() {
-        try {
-            const requests = JSON.parse(localStorage.getItem(REQUESTS_KEY) || '[]');
-            return Array.isArray(requests)
-                ? requests.filter((request) => request && request.title && request.createdAt)
-                : [];
-        } catch (error) {
-            return [];
-        }
-    }
-
-    function saveSongRequests(requests) {
-        localStorage.setItem(REQUESTS_KEY, JSON.stringify(requests));
-    }
-
-    function removeLocalSongRequest(requestToRemove) {
-        const requests = getSongRequests().filter((request) => (
-            request.id !== requestToRemove.id ||
-            request.title !== requestToRemove.title ||
-            createdAtFor(request) !== createdAtFor(requestToRemove)
-        ));
-        saveSongRequests(requests);
-        renderSongRequests();
-    }
-
-    function getFeedbackReports() {
-        try {
-            const reports = JSON.parse(localStorage.getItem(FEEDBACK_KEY) || '[]');
-            return Array.isArray(reports)
-                ? reports.filter((report) => report && report.message && (report.createdAt || report.created_at))
-                : [];
-        } catch (error) {
-            return [];
-        }
-    }
-
-    function saveFeedbackReports(reports) {
-        localStorage.setItem(FEEDBACK_KEY, JSON.stringify(reports));
-    }
-
-    function removeLocalFeedbackReport(reportToRemove) {
-        const reports = getFeedbackReports().filter((report) => (
-            report.id !== reportToRemove.id ||
-            report.message !== reportToRemove.message ||
-            createdAtFor(report) !== createdAtFor(reportToRemove)
-        ));
-        saveFeedbackReports(reports);
-    }
-
-    function createdAtFor(item) {
-        return item.createdAt || item.created_at || new Date().toISOString();
-    }
-
-    function artStyleFor(request) {
-        return request.artStyle || request.art_style || 'You choose';
-    }
-
-    function updateOtherArtStyleField() {
-        const artStyle = document.getElementById('requestArtStyle');
-        const otherField = document.getElementById('requestOtherArtStyleField');
-        if (!artStyle || !otherField) return;
-
-        const isOther = artStyle.value === 'Other';
-        otherField.classList.toggle('is-hidden', !isOther);
-        if (!isOther) document.getElementById('requestOtherArtStyle').value = '';
-    }
-
-    function requestAgeLabel(createdAt) {
-        const requestedTime = new Date(createdAt).getTime();
-        const ageMs = Date.now() - requestedTime;
-        const ageDays = Math.max(0, Math.floor(ageMs / (24 * 60 * 60 * 1000)));
-
-        if (ageDays === 0) return 'Requested today';
-        if (ageDays === 1) return 'Requested 1 day ago';
-        return `Requested ${ageDays} days ago`;
-    }
-
-    function makeRequestCard(request) {
-        const card = document.createElement('div');
-        card.className = 'song-card with-actions request-card';
-        card.style.setProperty('--card-color', '#ffd34f');
-
-        const main = document.createElement('div');
-        main.className = 'song-main';
-
-        const icon = document.createElement('div');
-        icon.className = 'song-emoji';
-        icon.textContent = '📝';
-
-        const info = document.createElement('div');
-        info.className = 'song-info';
-
-        const title = document.createElement('div');
-        title.className = 'song-title';
-        title.textContent = request.title;
-
-        const detail = document.createElement('div');
-        detail.className = 'song-artist';
-        detail.textContent = request.notes || (request.localOnly ? 'Requested song, saved on this device' : 'Requested song');
-
-        const tags = document.createElement('div');
-        tags.className = 'song-tags';
-
-        const styleTag = document.createElement('span');
-        styleTag.className = 'tag';
-        styleTag.textContent = artStyleFor(request);
-
-        const statusTag = document.createElement('span');
-        statusTag.className = 'tag in-progress';
-        statusTag.textContent = requestAgeLabel(createdAtFor(request));
-
-        tags.append(styleTag, statusTag);
-        info.append(title, detail, tags);
-        main.append(icon, info);
-
-        const actions = document.createElement('div');
-        actions.className = 'song-actions';
-
-        const received = document.createElement('button');
-        received.className = 'pending-link';
-        received.type = 'button';
-        received.disabled = true;
-        received.textContent = 'Request received';
-
-        actions.append(received);
-        card.append(main, actions);
-        return card;
-    }
-
-    function updateComingSoonCount() {
-        const count = document.querySelectorAll('#comingSoonGrid .song-card').length;
-        const countLabel = document.getElementById('comingSoonCount');
-        if (countLabel) countLabel.textContent = `(${count})`;
-    }
-
-    function renderSongRequests() {
-        const grid = document.getElementById('comingSoonGrid');
-        if (!grid) return;
-
-        grid.querySelectorAll('.request-card').forEach((card) => card.remove());
-
-        visibleSongRequests().forEach((request) => {
-            grid.append(makeRequestCard(request));
-        });
-        updateComingSoonCount();
-    }
-
-    function addSongRequest(request) {
-        if (request.localOnly) {
-            const requests = getSongRequests();
-            requests.push(request);
-            saveSongRequests(requests);
-        } else {
-            publicSongRequests = [request, ...publicSongRequests];
-        }
-        renderSongRequests();
-        document.getElementById('comingSoonSection')?.setAttribute('open', '');
-    }
-
-    function songRequestKey(request) {
-        return `${request.title || ''}|${createdAtFor(request)}`;
-    }
-
-    function visibleSongRequests() {
-        const seen = new Set();
-        return [...publicSongRequests, ...getSongRequests()]
-            .filter((request) => {
-                const key = songRequestKey(request);
-                if (seen.has(key)) return false;
-                seen.add(key);
-                return true;
-            })
-            .sort((a, b) => new Date(createdAtFor(b)).getTime() - new Date(createdAtFor(a)).getTime());
-    }
-
-    async function loadPublicSongRequests() {
-        try {
-            const response = await fetch('/api/song-requests');
-            const result = await response.json().catch(() => ({}));
-            if (!response.ok) throw new Error(result.error || 'Song requests could not be loaded.');
-            publicSongRequests = Array.isArray(result.items) ? result.items : [];
-        } catch (error) {
-            publicSongRequests = [];
-        }
-        renderSongRequests();
-    }
-
-    function addFeedbackReport(report) {
-        const reports = getFeedbackReports();
-        reports.push(report);
-        saveFeedbackReports(reports);
-    }
-
-    async function postJson(url, payload) {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) {
-            throw new Error(result.error || 'Submission could not be saved.');
-        }
-        return result;
-    }
-
-    function formatAdminDate(value) {
-        return new Date(value).toLocaleString([], {
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: '2-digit'
-        });
-    }
-
-    function renderAdminList(listId, items, emptyText, renderItem) {
-        const list = document.getElementById(listId);
-        list.replaceChildren();
-
-        if (!items.length) {
-            const empty = document.createElement('div');
-            empty.className = 'admin-empty';
-            empty.textContent = emptyText;
-            list.append(empty);
-            return;
-        }
-
-        items.forEach((item) => list.append(renderItem(item)));
-    }
-
-    function makeAdminEntry(title, body, meta, onResolve) {
-        const entry = document.createElement('div');
-        entry.className = 'admin-entry';
-
-        const heading = document.createElement('strong');
-        heading.textContent = title;
-
-        const content = document.createElement('p');
-        content.textContent = body || 'No notes added.';
-
-        const detail = document.createElement('span');
-        detail.textContent = meta;
-
-        const footer = document.createElement('div');
-        footer.className = 'admin-entry-footer';
-        footer.append(detail);
-
-        if (onResolve) {
-            const button = document.createElement('button');
-            button.className = 'admin-resolve-btn';
-            button.type = 'button';
-            button.textContent = '✓ Done';
-            button.addEventListener('click', onResolve);
-            footer.append(button);
-        }
-
-        entry.append(heading, content, footer);
-        return entry;
-    }
-
-    async function deleteAdminItem(url) {
-        const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
-        if (!token) throw new Error('Admin session is not unlocked.');
-
-        const response = await fetch(url, {
-            method: 'DELETE',
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) {
-            throw new Error(result.error || 'Item could not be removed.');
-        }
-    }
-
-    async function resolveSongRequest(request) {
-        if (!window.confirm(`Remove "${request.title}" from song requests?`)) return;
-
-        try {
-            if (request.localOnly || !request.id) {
-                removeLocalSongRequest(request);
-            } else {
-                await deleteAdminItem(`/api/song-requests?id=${encodeURIComponent(request.id)}`);
-                await loadPublicSongRequests();
-            }
-            loadAdminPanel();
-        } catch (error) {
-            window.alert(error.message);
-        }
-    }
-
-    async function resolveFeedbackReport(report) {
-        if (!window.confirm('Remove this feedback item?')) return;
-
-        try {
-            if (report.localOnly || !report.id) {
-                removeLocalFeedbackReport(report);
-            } else {
-                await deleteAdminItem(`/api/feedback?id=${encodeURIComponent(report.id)}`);
-            }
-            loadAdminPanel();
-        } catch (error) {
-            window.alert(error.message);
-        }
-    }
-
-    async function getAdminItems(url) {
-        const token = sessionStorage.getItem(ADMIN_TOKEN_KEY);
-        if (!token) throw new Error('Admin session is not unlocked.');
-
-        const response = await fetch(url, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) {
-            throw new Error(result.error || 'Admin items could not be loaded.');
-        }
-        return result.items || [];
-    }
-
-    async function loadAdminPanel() {
-        if (!document.body.classList.contains('admin-mode')) return;
-
-        renderAdminList('adminRequestsList', [], 'Loading song requests...', () => document.createElement('div'));
-        renderAdminList('adminFeedbackList', [], 'Loading feedback...', () => document.createElement('div'));
-
-        try {
-            const serverRequests = await getAdminItems('/api/song-requests');
-            const localRequests = getSongRequests().filter((request) => request.localOnly);
-            renderAdminList(
-                'adminRequestsList',
-                [...localRequests, ...serverRequests],
-                'No song requests yet.',
-                (request) => makeAdminEntry(
-                    request.title,
-                    request.notes,
-                    `${artStyleFor(request)} · ${request.localOnly ? 'Saved on this device' : 'Database'} · ${requestAgeLabel(createdAtFor(request))}`,
-                    () => resolveSongRequest(request)
-                )
-            );
-        } catch (error) {
-            renderAdminList('adminRequestsList', getSongRequests(), error.message, (request) => makeAdminEntry(
-                request.title,
-                request.notes,
-                `${artStyleFor(request)} · Local only · ${requestAgeLabel(createdAtFor(request))}`,
-                () => resolveSongRequest(request)
-            ));
-        }
-
-        try {
-            const serverFeedback = await getAdminItems('/api/feedback');
-            const localFeedback = getFeedbackReports().filter((report) => report.localOnly);
-            renderAdminList(
-                'adminFeedbackList',
-                [...localFeedback, ...serverFeedback],
-                'No feedback or bugs yet.',
-                (report) => makeAdminEntry(
-                    `${report.kind || 'feedback'}${report.contact ? ` · ${report.contact}` : ''}`,
-                    report.message,
-                    `${report.localOnly ? 'Saved on this device' : 'Database'} · ${formatAdminDate(createdAtFor(report))}${report.page ? ` · ${report.page}` : ''}`,
-                    () => resolveFeedbackReport(report)
-                )
-            );
-        } catch (error) {
-            renderAdminList('adminFeedbackList', getFeedbackReports(), error.message, (report) => makeAdminEntry(
-                `${report.kind || 'feedback'}${report.contact ? ` · ${report.contact}` : ''}`,
-                report.message,
-                `Local only · ${formatAdminDate(createdAtFor(report))}`,
-                () => resolveFeedbackReport(report)
-            ));
-        }
-    }
-
-    document.getElementById('requestArtStyle').addEventListener('change', updateOtherArtStyleField);
-
-    document.getElementById('requestForm').addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const title = document.getElementById('requestTitle').value.trim();
-        const selectedArtStyle = document.getElementById('requestArtStyle').value;
-        const otherArtStyle = document.getElementById('requestOtherArtStyle').value.trim();
-        const artStyle = selectedArtStyle === 'Other' ? (otherArtStyle || 'Other') : selectedArtStyle;
-        const notes = document.getElementById('requestNotes').value.trim();
-        const status = document.getElementById('requestStatus');
-        const submit = event.submitter;
-        if (!title) return;
-
-        const request = { title, artStyle, notes, createdAt: new Date().toISOString() };
-
-        status.textContent = '';
-        if (submit) {
-            submit.disabled = true;
-            submit.textContent = 'Saving...';
-        }
-
-        try {
-            const result = await postJson('/api/song-requests', request);
-            addSongRequest({
-                title: result.item.title,
-                artStyle: result.item.art_style,
-                notes: result.item.notes,
-                createdAt: result.item.created_at
-            });
-            closeRequestModal();
-        } catch (error) {
-            addSongRequest({ ...request, localOnly: true });
-            status.textContent = `${error.message} Saved on this device for now.`;
-            window.setTimeout(closeRequestModal, 1600);
-        } finally {
-            if (submit) {
-                submit.disabled = false;
-                submit.textContent = 'Add Request';
-            }
-        }
+        <aside class="features active-message" aria-labelledby="included-title">
+          <h2 id="included-title">What’s included</h2>
+          <ul>
+            <li><span class="check" aria-hidden="true">✓</span><span>All existing digital flipcharts</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>22 songs available today, with more being added regularly</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Works beautifully on phones, tablets, and computers</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Easy screen sharing to a TV or projector during singing time</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>Song requests and feedback sent directly through the app</span></li>
+            <li><span class="check" aria-hidden="true">✓</span><span>The future home of games, lesson planning, and teaching tools</span></li>
+          </ul>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="retirement">
+      <p class="active-message">Primary Flipcharts will be retired soon. Please update your bookmarks to Primary Toolbox.</p>
+      <p class="retired-message">Primary Toolbox is the home of all future flipcharts and teaching tools.</p>
+      <button class="legacy-link active-message" id="legacy-link" type="button">Continue to Legacy Flipcharts</button>
+    </footer>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-toolbox-link]').forEach((link) => {
+      link.href = PRIMARY_TOOLBOX_URL;
     });
 
-    document.getElementById('requestModal').addEventListener('click', (event) => {
-        if (event.target.id === 'requestModal') closeRequestModal();
-    });
-
-    document.getElementById('feedbackForm').addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const kind = document.getElementById('feedbackKind').value;
-        const message = document.getElementById('feedbackMessage').value.trim();
-        const contact = document.getElementById('feedbackContact').value.trim();
-        const status = document.getElementById('feedbackStatus');
-        const submit = document.getElementById('feedbackSubmit');
-        if (!message) return;
-
-        const report = {
-            kind,
-            message,
-            contact,
-            page: window.location.pathname,
-            createdAt: new Date().toISOString()
-        };
-
-        status.textContent = '';
-        submit.disabled = true;
-        submit.textContent = 'Sending...';
-
+    if (LEGACY_ENABLED) {
+      document.getElementById('legacy-link').addEventListener('click', () => {
         try {
-            await postJson('/api/feedback', report);
-            closeFeedbackModal();
+          localStorage.setItem(LEGACY_BYPASS_KEY, String(Date.now() + LEGACY_BYPASS_MS));
         } catch (error) {
-            addFeedbackReport({ ...report, localOnly: true });
-            status.textContent = `${error.message} Saved on this device for now.`;
-            window.setTimeout(closeFeedbackModal, 1600);
-        } finally {
-            submit.disabled = false;
-            submit.textContent = 'Send Feedback';
+          // Continue to the legacy library even if storage is unavailable.
         }
-    });
+        window.location.assign('/legacy.html');
+      });
+    } else {
+      document.body.classList.add('is-retired');
+      document.querySelector('.migration-card').setAttribute('aria-labelledby', 'retired-title');
 
-    document.getElementById('feedbackModal').addEventListener('click', (event) => {
-        if (event.target.id === 'feedbackModal') closeFeedbackModal();
-    });
+      let secondsRemaining = RETIREMENT_REDIRECT_SECONDS;
+      const countdown = document.getElementById('countdown');
+      countdown.textContent = secondsRemaining;
 
-    document.getElementById('adminForm').addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const password = document.getElementById('adminPassword').value;
-        const error = document.getElementById('adminError');
-        const submit = document.getElementById('adminSubmit');
-
-        error.textContent = '';
-        submit.disabled = true;
-        submit.textContent = 'Checking...';
-
-        try {
-            const response = await fetch('/api/admin-login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password })
-            });
-            const result = await response.json().catch(() => ({}));
-
-            if (!response.ok) {
-                throw new Error(result.error || 'That password did not work.');
-            }
-
-            if (!result.token) {
-                throw new Error('Admin session could not be started.');
-            }
-
-            sessionStorage.setItem(ADMIN_TOKEN_KEY, result.token);
-            setAdminMode(true);
-            closeAdminModal();
-            loadAdminPanel();
-        } catch (loginError) {
-            error.textContent = loginError.message;
-        } finally {
-            submit.disabled = false;
-            submit.textContent = 'Unlock';
+      const timer = window.setInterval(() => {
+        secondsRemaining -= 1;
+        countdown.textContent = Math.max(secondsRemaining, 0);
+        if (secondsRemaining <= 0) {
+          window.clearInterval(timer);
+          window.location.replace(PRIMARY_TOOLBOX_URL);
         }
-    });
-
-    document.getElementById('adminModal').addEventListener('click', (event) => {
-        if (event.target.id === 'adminModal') closeAdminModal();
-    });
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            if (!document.getElementById('requestModal').hidden) closeRequestModal();
-            if (!document.getElementById('feedbackModal').hidden) closeFeedbackModal();
-            if (!document.getElementById('adminModal').hidden) closeAdminModal();
-        }
-    });
-
-    renderSongNumberBadges();
-    initializePlaylist();
-    applyLibraryFilters();
-    loadPublicSongRequests();
-    loadAdminPanel();
-</script>
+      }, 1000);
+    }
+  </script>
 </body>
 </html>
